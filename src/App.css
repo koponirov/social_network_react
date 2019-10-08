@@ -4,15 +4,20 @@
   width:1920px;
 
   grid-template-rows:60px 1fr;
-  grid-template-columns: 2fr 10fr; 
+  grid-template-columns: 2fr 10fr;
+  grid-gap: 20px; 
 
   grid-template-areas: 
   "h h"
   "n c"
-
-  
-
 }
+
+.app-wrapper-content {
+  grid-area: c;
+  background-color: burlywood;
+}  
+
+
 
 
 
