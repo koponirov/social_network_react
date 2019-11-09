@@ -1,3 +1,29 @@
 .dialogs {
-  color: red;
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+
+}
+
+.dialogsBar {
+
+
+}
+
+.dialogWith {
+  display: block;
+  text-decoration: none;
+  color: honeydew;
+
+}
+
+.dialogWith .activeLink {
+  color: rosybrown;
+}
+
+.messages {
+
+}
+
+.messageContent {
+
 }

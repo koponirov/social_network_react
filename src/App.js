@@ -12,6 +12,7 @@ import {BrowserRouter,Route} from 'react-router-dom';
 
 
 
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -19,14 +20,12 @@ const App = () => {
       <Header/>
       <Navbar/>
       <div class='app-wrapper-content'>
-        <Route component={Profile} path='/Profile' />
-        <Route component={Dialogs} path='/Dialogs' />
-        <Route component={News} path='/News' />
-        <Route component={Music} path='/Music' />
-        <Route component={Settings} path='/Settings' />
-
+        <Route path='/Profile' component={Profile}  />
+        <Route exact path='/Dialogs' component={Dialogs}  />
+        <Route path='/News' component={News}  />
+        <Route path='/Music' component={Music}  />
+        <Route path='/Settings' component={Settings}  />
       </div>
-      
 
     </div>
     </BrowserRouter>
