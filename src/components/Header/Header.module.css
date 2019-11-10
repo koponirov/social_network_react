@@ -1,7 +1,7 @@
 
 .header {
   grid-area: header;
-  background-color: blueviolet;
+  background-color: darkslategrey;
   padding: 5px;
 }
 

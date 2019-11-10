@@ -2,23 +2,24 @@
   display: grid;
   grid-template-columns: 2fr 10fr;
 
+
 }
 
 .dialogsBar {
 
 
+
 }
 
-.dialogWith {
-  display: block;
+.dialogWith a{
+
   text-decoration: none;
-  color: honeydew;
+  color: papayawhip;
 
 }
 
-.dialogWith .activeLink {
-  color: rosybrown;
-}
+
+
 
 .messages {
 
