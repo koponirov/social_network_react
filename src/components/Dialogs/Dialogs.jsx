@@ -6,31 +6,18 @@ import DialogWithUser from './DialogWithUser/DialogWithUser'
 
 const Dialogs = (props) => {
 
-    let dialogsData=[
-        {userId:1, userName:'Sasha'},
-        {userId:2, userName:'Olga'},
-        {userId:3, userName:'Nelli'},
-        {userId:4, userName:'Igor'},
-        {userId:5, userName:'Sergey'},
-    ]
 
-    let dialogs= dialogsData.map ((dialog) => {
+    let dialogs = props.state.dialogs.map((dialog) => {
         return (
-            <DialogWithUser userName={dialog.userName} userId={dialog.userId} />
+            <DialogWithUser userName={dialog.userName} userId={dialog.userId}/>
         )
     })
 
-    let messagesData=[
-        {messageText: 'Hi!'},
-        {messageText: 'How are u?'},
-        {messageText: "I'm OK"},
-        {messageText: 'What u want to do tomorrow?'},
-        {messageText: 'Goodbye!'},
-    ]
 
-    let messages=messagesData.map ((message)=> {
+
+    let messages = props.state.messages.map((message) => {
         return (
-            <Message messageText={message.messageText} />
+            <Message messageText={message.messageText}/>
         )
     })
 
@@ -44,6 +31,6 @@ const Dialogs = (props) => {
             </div>
         </div>
     )
-            }
+}
 
 export default Dialogs;
