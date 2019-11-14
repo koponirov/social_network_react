@@ -18,7 +18,18 @@
 
 }
 
+.right {
+  text-align: right;
+  margin-top: 10px;
+}
 
+.right textarea {
+  display: block;
+}
+
+.right button {
+  display: block;
+}
 
 
 .messages {
