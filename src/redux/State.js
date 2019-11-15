@@ -1,9 +1,9 @@
 import React from 'react';
+import {rerenderEntireTree} from "../render";
 
 
 let state = {
-    dialogsPage:
-        {
+    dialogsPage: {
             dialogs: [
                 {userId: 1, userName: 'Sasha'},
                 {userId: 2, userName: 'Olga'},
@@ -19,8 +19,7 @@ let state = {
                 {messageText: 'Goodbye!'},
             ]
         },
-    profilePage:
-        {
+    profilePage: {
             posts:[
                 {userId: 1, messageText: 'How r u?', likeCounter: 1},
                 {userId: 2, messageText: 'Huston, we have a problem...', likeCounter: 25},
@@ -29,6 +28,17 @@ let state = {
                 {userId: 5, messageText: 'dsgdgsde!', likeCounter: 0},
             ]
         }
+}
+
+export let addPost=(postMessage)=>{
+
+    let newPost={
+        userId:6,
+        messageText:postMessage,
+        likeCounter:0
+    };
+    state.profilePage.posts.push(newPost);
+    rerenderEntireTree(state);
 }
 
 
