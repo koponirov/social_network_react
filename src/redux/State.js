@@ -26,7 +26,9 @@ let state = {
                 {userId: 3, messageText: 'Hi!', likeCounter: 0},
                 {userId: 4, messageText: 'What?', likeCounter: 5},
                 {userId: 5, messageText: 'dsgdgsde!', likeCounter: 0},
-            ]
+            ],
+            newTextInPost:'I\'m a new text!'
+
         }
 }
 
@@ -39,7 +41,13 @@ export let addPost=(postMessage)=>{
     };
     state.profilePage.posts.push(newPost);
     rerenderEntireTree(state);
-}
+};
+
+export let updateText= (newText) => {
+
+    state.profilePage.newTextInPost=newText;
+    rerenderEntireTree(state);
+};
 
 
 export default state;
