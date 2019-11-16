@@ -17,7 +17,8 @@ let state = {
                 {messageText: "I'm OK"},
                 {messageText: 'What u want to do tomorrow?'},
                 {messageText: 'Goodbye!'},
-            ]
+            ],
+            newMessageText:'...'
         },
     profilePage: {
             posts:[
@@ -32,14 +33,15 @@ let state = {
         }
 }
 
-export let addPost=(postMessage)=>{
+export let addPost=()=>{
 
     let newPost={
         userId:6,
-        messageText:postMessage,
+        messageText:state.profilePage.newTextInPost,
         likeCounter:0
     };
     state.profilePage.posts.push(newPost);
+    state.profilePage.newTextInPost='';
     rerenderEntireTree(state);
 };
 
@@ -48,6 +50,26 @@ export let updateText= (newText) => {
     state.profilePage.newTextInPost=newText;
     rerenderEntireTree(state);
 };
+
+
+export let sendMessage=()=>{
+
+    let newMessage= {
+        messageText: state.dialogsPage.newMessageText
+    };
+
+    state.dialogsPage.messages.push(newMessage);
+    state.dialogsPage.newMessageText='';
+    rerenderEntireTree(state);
+
+    };
+
+export let writeMessage= (newText) => {
+
+    state.dialogsPage.newMessageText=newText;
+    rerenderEntireTree(state);
+};
+
 
 
 export default state;
