@@ -1,6 +1,9 @@
 import React from 'react';
-import {rerenderEntireTree} from "../render";
 
+
+let rerenderEntireTree=()=>{
+    console.log ('State changed')
+}
 
 let state = {
     dialogsPage: {
@@ -33,7 +36,7 @@ let state = {
         }
 }
 
-export let addPost=()=>{
+export const addPost=()=>{
 
     let newPost={
         userId:6,
@@ -45,14 +48,13 @@ export let addPost=()=>{
     rerenderEntireTree(state);
 };
 
-export let updateText= (newText) => {
+export const updateText= (newText) => {
 
     state.profilePage.newTextInPost=newText;
     rerenderEntireTree(state);
 };
 
-
-export let sendMessage=()=>{
+export const sendMessage=()=>{
 
     let newMessage= {
         messageText: state.dialogsPage.newMessageText
@@ -64,11 +66,15 @@ export let sendMessage=()=>{
 
     };
 
-export let writeMessage= (newText) => {
+export const writeMessage= (newText) => {
 
     state.dialogsPage.newMessageText=newText;
     rerenderEntireTree(state);
 };
+
+export const subscribe=(observer)=>{
+    rerenderEntireTree=observer;
+}
 
 
 
