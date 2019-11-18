@@ -1,12 +1,8 @@
 import React from 'react';
 
-
-let rerenderEntireTree=()=>{
-    console.log ('State changed')
-}
-
-let state = {
-    dialogsPage: {
+let store = {
+    _state : {
+        dialogsPage: {
             dialogs: [
                 {userId: 1, userName: 'Sasha'},
                 {userId: 2, userName: 'Olga'},
@@ -23,7 +19,7 @@ let state = {
             ],
             newMessageText:'...'
         },
-    profilePage: {
+        profilePage: {
             posts:[
                 {userId: 1, messageText: 'How r u?', likeCounter: 1},
                 {userId: 2, messageText: 'Huston, we have a problem...', likeCounter: 25},
@@ -34,48 +30,51 @@ let state = {
             newTextInPost:'I\'m a new text!'
 
         }
-}
+    },
+    getState() {
+        return this._state;
+    },
+    _callSubscriber() {
+        console.log ('State changed');
+    },
+    addPost() {
 
-export const addPost=()=>{
+        let newPost={
+            userId:6,
+            messageText:this._state.profilePage.newTextInPost,
+            likeCounter:0
+        };
+        this._state.profilePage.posts.push(newPost);
+        this._state.profilePage.newTextInPost='';
+        this._callSubscriber(this._state);
+    },
+    updateText(newText)  {
 
-    let newPost={
-        userId:6,
-        messageText:state.profilePage.newTextInPost,
-        likeCounter:0
-    };
-    state.profilePage.posts.push(newPost);
-    state.profilePage.newTextInPost='';
-    rerenderEntireTree(state);
+        this._state.profilePage.newTextInPost=newText;
+        this._callSubscriber(this._state);
+    },
+    sendMessage() {
+
+        let newMessage= {
+            messageText: this._state.dialogsPage.newMessageText
+        };
+
+        this._state.dialogsPage.messages.push(newMessage);
+        this._state.dialogsPage.newMessageText='';
+        this._callSubscriber(this._state);
+
+    },
+    writeMessage(newText) {
+debugger;
+        this._state.dialogsPage.newMessageText=newText;
+        this._callSubscriber(this._state);
+    },
+    subscribe(observer) {
+        this._callSubscriber=observer;
+    }
 };
 
-export const updateText= (newText) => {
 
-    state.profilePage.newTextInPost=newText;
-    rerenderEntireTree(state);
-};
+export default store;
 
-export const sendMessage=()=>{
-
-    let newMessage= {
-        messageText: state.dialogsPage.newMessageText
-    };
-
-    state.dialogsPage.messages.push(newMessage);
-    state.dialogsPage.newMessageText='';
-    rerenderEntireTree(state);
-
-    };
-
-export const writeMessage= (newText) => {
-
-    state.dialogsPage.newMessageText=newText;
-    rerenderEntireTree(state);
-};
-
-export const subscribe=(observer)=>{
-    rerenderEntireTree=observer;
-}
-
-
-
-export default state;
+window.store=store;
