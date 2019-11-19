@@ -5,14 +5,10 @@ import './index.css';
 import App from "./App";
 
 
-
 export let rerenderEntireTree = () => {
 
     ReactDOM.render(<App state={store.getState()}
-                         addPost={store.addPost}
-                         updateText={store.updateText}
-                         sendMessage={store.sendMessage}
-                         writeMessage={store.writeMessage}
+                         dispatch={store.dispatch.bind(store)}
     />, document.getElementById('root'));
 
 };

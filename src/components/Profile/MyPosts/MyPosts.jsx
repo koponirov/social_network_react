@@ -14,15 +14,14 @@ const MyPosts = (props) => {
     let newPostText=React.createRef();
 
     let addPost= ()=>{
-
-        let text=newPostText.current.value;
-        props.addPost(text);
-
+        
+        props.dispatch({type: 'addPost'});
         }
 
     let changeTextValue= ()=> {
+
         let text=newPostText.current.value;
-        props.updateText(text);
+        props.dispatch( {type:'updateText',newText:text});
 
 
     }
