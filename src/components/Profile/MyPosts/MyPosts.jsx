@@ -1,9 +1,11 @@
 import React from 'react';
 import style from './MyPosts.module.css';
 import Post from '../MyPosts/Post/Post';
+import {addPostActiveCreator, changeTextValueActiveCreator} from "../../../redux/State";
+
+
 
 const MyPosts = (props) => {
-
 
     let postsOnWall = props.state.posts.map((post) => {
         return (
@@ -14,14 +16,15 @@ const MyPosts = (props) => {
     let newPostText=React.createRef();
 
     let addPost= ()=>{
-        
-        props.dispatch({type: 'addPost'});
+
+        props.dispatch(addPostActiveCreator());
         }
 
     let changeTextValue= ()=> {
 
         let text=newPostText.current.value;
-        props.dispatch( {type:'updateText',newText:text});
+        let action=changeTextValueActiveCreator(text)
+        props.dispatch(action );
 
 
     }
