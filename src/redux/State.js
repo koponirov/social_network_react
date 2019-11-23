@@ -1,13 +1,7 @@
 import React from 'react';
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
 
-
-const ADD_POST = 'ADD_POST';
-
-const UPDATE_TEXT = 'UPDATE_TEXT';
-
-const SEND_MESSAGE = 'SEND_MESSAGE';
-
-const WRITE_MESSAGE = 'WRITE_MESSAGE';
 
 let store = {
     _state : {
@@ -43,63 +37,25 @@ let store = {
     getState() {
         return this._state;
     },
-    _callSubscriber() {
-        console.log ('State changed');
-    },
+    /*_callSubscriber() {
+            console.log ('State changed');
+    },*/
     subscribe(observer) {
         this._callSubscriber=observer;
     },
     dispatch(action) {
-        if (action.type===UPDATE_TEXT) {
-            this._state.profilePage.newTextInPost=action.newText;
-            this._callSubscriber(this._state);
-        } else if (action.type===ADD_POST){
-            let newPost={
-                userId:6,
-                messageText:this._state.profilePage.newTextInPost,
-                likeCounter:0
-            };
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newTextInPost='';
-            this._callSubscriber(this._state);
-        } else if (action.type===SEND_MESSAGE) {
-            let newMessage= {
-                messageText: this._state.dialogsPage.newMessageText
-            };
 
-            this._state.dialogsPage.messages.push(newMessage);
-            this._state.dialogsPage.newMessageText='';
-            this._callSubscriber(this._state);
-        } else if (action.type===WRITE_MESSAGE) {
-            this._state.dialogsPage.newMessageText=action.newText;
-            this._callSubscriber(this._state);
-        }
+        this._state.profilePage=profileReducer(this._state.profilePage,action);
+        this._state.dialogsPage=dialogsReducer(this._state.dialogsPage,action);
+
+        this._callSubscriber(this._state);
     }
     ,
 };
 
-export const addPostActiveCreator=()=>({type:ADD_POST});
 
-export const changeTextValueActiveCreator=(text)=>{
 
-    return (
-        {type:UPDATE_TEXT,newText:text}
-    )
-};
 
-export const sendMessageActionCreator=()=>{
-
-    return (
-        {type:SEND_MESSAGE}
-    )
-};
-
-export const onMessageChangeActionCreator=(text)=>{
-
-    return (
-        {type:WRITE_MESSAGE,newText: text}
-    )
-}
 
 
 
