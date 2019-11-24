@@ -10,13 +10,13 @@ import {onMessageChangeActionCreator, sendMessageActionCreator} from "../../redu
 const Dialogs = (props) => {
 
 
-    let dialogs = props.state.dialogs.map((dialog) => {
+    let dialogs = props.dialogs.map((dialog) => {
         return (
             <DialogWithUser userName={dialog.userName} userId={dialog.userId}/>
         )
     })
 
-    let messages = props.state.messages.map((message) => {
+    let messages = props.messages.map((message) => {
         return (
             <Message messageText={message.messageText}/>
         )
@@ -24,15 +24,15 @@ const Dialogs = (props) => {
 
     //let newMessage=React.createRef();
 
-    let sendMessage=()=>{
+    let onSendMessage=()=>{
 
-        props.dispatch(sendMessageActionCreator());
+        props.sendMessage();
     }
 
-    let onMessageChange= (e) => {
-        let text=e.target.value;
-        let action=onMessageChangeActionCreator(text);
-        props.dispatch(action);
+    let onMessageChange= (newText) => {
+        let text=newText.target.value;
+        props.changeMessageText(text);
+
 
     }
     return (
@@ -44,8 +44,12 @@ const Dialogs = (props) => {
                 {messages}
                 <div className={style.right}>
 
-                    <textarea /*ref={newMessage}*/ value={props.state.newMessageText} onChange={onMessageChange}></textarea>
-                    <button onClick={sendMessage}>send message</button>
+                    <textarea
+                        /*ref={newMessage}*/
+                        value={props.newMessageText}
+                        onChange={onMessageChange}
+                    ></textarea>
+                    <button onClick={onSendMessage}>send message</button>
 
                 </div>
             </div>
