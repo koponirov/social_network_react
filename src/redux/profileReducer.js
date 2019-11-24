@@ -2,7 +2,19 @@ const ADD_POST = 'ADD_POST';
 
 const UPDATE_TEXT = 'UPDATE_TEXT';
 
-const profileReducer=(state,action) => {
+let initialState = {
+    posts: [
+        {userId: 1, messageText: 'How r u?', likeCounter: 1},
+        {userId: 2, messageText: 'Huston, we have a problem...', likeCounter: 25},
+        {userId: 3, messageText: 'Hi!', likeCounter: 0},
+        {userId: 4, messageText: 'What?', likeCounter: 5},
+        {userId: 5, messageText: 'dsgdgsde!', likeCounter: 0},
+    ],
+    newTextInPost: 'I\'m a new text!'
+
+};
+
+const profileReducer = (state=initialState, action) => {
 
     switch (action.type) {
 
@@ -28,12 +40,12 @@ const profileReducer=(state,action) => {
     }
 };
 
-export const addPostActiveCreator=()=>({type:ADD_POST});
+export const addPostActiveCreator = () => ({type: ADD_POST});
 
-export const changeTextValueActiveCreator=(text)=>{
+export const changeTextValueActiveCreator = (text) => {
 
     return (
-        {type:UPDATE_TEXT,newText:text}
+        {type: UPDATE_TEXT, newText: text}
     )
 };
 

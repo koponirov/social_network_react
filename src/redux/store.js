@@ -37,9 +37,9 @@ let store = {
     getState() {
         return this._state;
     },
-    /*_callSubscriber() {
+    _callSubscriber() {
             console.log ('State changed');
-    },*/
+    },
     subscribe(observer) {
         this._callSubscriber=observer;
     },
