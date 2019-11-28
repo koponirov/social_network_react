@@ -17,16 +17,18 @@ let mapStateToProps=(state)=> {
 
 let mapDispatchToProps=(dispatch)=>{
     return {
-        changeMessageText:()=>{
-            dispatch(sendMessageActionCreator())
-        },
-        sendMessage:(text)=>{
+        changeMessageText:(text)=>{
+
             dispatch(onMessageChangeActionCreator(text))
+        },
+        sendMessage:()=>{
+
+            dispatch(sendMessageActionCreator())
         }
     }
 
 }
 
-const DialogsContainer= ()=> connect (mapStateToProps,mapDispatchToProps) (Dialogs);
+const DialogsContainer=  connect (mapStateToProps,mapDispatchToProps) (Dialogs);
 
 export default DialogsContainer;

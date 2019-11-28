@@ -2,7 +2,7 @@ const SEND_MESSAGE = 'SEND_MESSAGE';
 
 const WRITE_MESSAGE = 'WRITE_MESSAGE';
 
-let initialState={
+let initialState = {
     dialogs: [
         {userId: 1, userName: 'Sasha'},
         {userId: 2, userName: 'Olga'},
@@ -17,26 +17,34 @@ let initialState={
         {messageText: 'What u want to do tomorrow?'},
         {messageText: 'Goodbye!'},
     ],
-    newMessageText:'...'
+    newMessageText: '...'
 };
 
-const dialogsReducer = (state=initialState, action) => {
+const dialogsReducer = (state = initialState, action) => {
+
+    let stateCopy={
+        ...state
+    };
 
     switch (action.type) {
         case SEND_MESSAGE :
             let newMessage = {
                 messageText: state.newMessageText
             };
+            
+            stateCopy.messages=[...state.messages];
+            stateCopy.messages.push(newMessage);
+            stateCopy.newMessageText = '';
 
-            state.messages.push(newMessage);
-            state.newMessageText = '';
-
-            return state;
+            return stateCopy;
 
         case WRITE_MESSAGE:
-            state.newMessageText = action.newText;
 
-            return state;
+            stateCopy.newMessageText = action.newText;
+
+            return stateCopy;
+
+
 
         default:
 
@@ -46,17 +54,17 @@ const dialogsReducer = (state=initialState, action) => {
 };
 
 
-export const sendMessageActionCreator=()=>{
+export const sendMessageActionCreator = () => {
 
     return (
-        {type:SEND_MESSAGE}
+        {type: SEND_MESSAGE}
     )
 };
 
-export const onMessageChangeActionCreator=(text)=>{
+export const onMessageChangeActionCreator = (text) => {
 
     return (
-        {type:WRITE_MESSAGE,newText: text}
+        {type: WRITE_MESSAGE, newText: text}
     )
 }
 
