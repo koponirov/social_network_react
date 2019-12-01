@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './MyPosts.module.css';
 import Post from '../MyPosts/Post/Post';
-import {addPostActiveCreator, changeTextValueActiveCreator} from "../../../redux/profileReducer";
+
 
 
 const MyPosts = (props) => {
@@ -12,10 +12,10 @@ const MyPosts = (props) => {
         )
     })
 
-    let newPostText=React.createRef();
+    
 
     let onAddPost= ()=>{
-
+        debugger;
         props.addPost();
         }
 
@@ -23,8 +23,6 @@ const MyPosts = (props) => {
 
         let text=newPostText.target.value;
         props.changeText(text);
-
-
     }
 
     return (

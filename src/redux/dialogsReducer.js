@@ -11,40 +11,35 @@ let initialState = {
         {userId: 5, userName: 'Sergey'},
     ],
     messages: [
-        {messageText: 'Hi!'},
-        {messageText: 'How are u?'},
-        {messageText: "I'm OK"},
-        {messageText: 'What u want to do tomorrow?'},
-        {messageText: 'Goodbye!'},
+        {Id: 1, messageText: 'Hi!'},
+        {Id: 2, messageText: 'How are u?'},
+        {Id: 3, messageText: "I'm OK"},
+        {Id: 4, messageText: 'What u want to do tomorrow?'},
+        {Id: 5, messageText: 'Goodbye!'},
     ],
     newMessageText: '...'
 };
 
 const dialogsReducer = (state = initialState, action) => {
 
-    let stateCopy={
-        ...state
-    };
+
 
     switch (action.type) {
         case SEND_MESSAGE :
-            let newMessage = {
-                messageText: state.newMessageText
-            };
-            
-            stateCopy.messages=[...state.messages];
-            stateCopy.messages.push(newMessage);
-            stateCopy.newMessageText = '';
 
-            return stateCopy;
+            let newMessage = state.newMessageText//how???we need to copy state,not allow to change current state!
+            return {
+                ...state,
+                newMessageText: '',
+                messages: [...state.messages, {id: 6, messageText: newMessage}]
+            }
+
 
         case WRITE_MESSAGE:
-
-            stateCopy.newMessageText = action.newText;
-
-            return stateCopy;
-
-
+            return {
+                ...state,
+                newMessageText: action.newText
+            }
 
         default:
 
