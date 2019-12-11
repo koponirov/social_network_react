@@ -1,0 +1,25 @@
+.wrapper {
+
+    padding: 10px;
+    vertical-align: top;
+
+}
+
+.leftBlock {
+    margin-top: 10px;
+    background-color:yellow ;
+    display: inline-block;
+    vertical-align: top;
+
+}
+
+.rightBlock {
+    margin-top: 10px;
+    background-color:green ;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.avatar img {
+    width: 50px;
+}

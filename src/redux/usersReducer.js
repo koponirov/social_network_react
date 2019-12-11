@@ -3,13 +3,9 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 
 let initialState = {
-    users: [/*
-        {id: 1, userName: 'Sasha', followed:true},
-        {id: 2, userName: 'Olga',followed:true},
-        {id: 3, userName: 'Nelli',followed:true},
-        {id: 4, userName: 'Igor',followed:false},
-        {id: 5, userName: 'Sergey',followed:false},
-    */],
+    users: [
+
+    ],
 
 };
 
