@@ -23,3 +23,7 @@
 .avatar img {
     width: 50px;
 }
+
+.selected {
+    font-weight: bold;
+}
