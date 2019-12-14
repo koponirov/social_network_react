@@ -35,7 +35,7 @@ class UsersContainer extends React.Component {
     render() {
 
         return (<>
-                {this.props.isLoading? <Preloader />:null}
+                {this.props.isLoading ? <Preloader/> : null}
                 <Users
                     onPageChanged={this.onPageChanged}
                     currentPage={this.props.currentPage}
@@ -86,5 +86,5 @@ let mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps,
-    {follow,unfollow,setUsers,setCurrentPage,setTotalUsersAmount,setIsLoading})(UsersContainer);
+    {follow, unfollow, setUsers, setCurrentPage, setTotalUsersAmount, setIsLoading})(UsersContainer);
 

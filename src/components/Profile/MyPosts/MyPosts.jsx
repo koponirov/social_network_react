@@ -15,7 +15,7 @@ const MyPosts = (props) => {
     
 
     let onAddPost= ()=>{
-        debugger;
+
         props.addPost();
         }
 
