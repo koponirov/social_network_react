@@ -1,12 +1,12 @@
 import {connect} from 'react-redux'
 import React from 'react'
 import {
-    followAC,
-    setCurrentPageAC,
-    setIsLoadingAC,
-    setTotalUsersAmountAC,
-    setUsersAC,
-    unFollowAC
+    follow,
+    setCurrentPage,
+    setIsLoading,
+    setTotalUsersAmount,
+    setUsers,
+    unfollow
 } from "../../redux/usersReducer";
 import * as axios from "axios";
 import Users from "./Users";
@@ -61,7 +61,7 @@ let mapStateToProps = (state) => {
     }
 };
 
-let mapDispatchToProps = (dispatch) => {
+/*let mapDispatchToProps = (dispatch) => {
     return {
         follow: (userId) => {
             dispatch(followAC(userId));
@@ -82,8 +82,9 @@ let mapDispatchToProps = (dispatch) => {
             dispatch(setIsLoadingAC(isLoading))
         }
     }
-}
+}*/
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps,
+    {follow,unfollow,setUsers,setCurrentPage,setTotalUsersAmount,setIsLoading})(UsersContainer);
 
