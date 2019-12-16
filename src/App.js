@@ -21,12 +21,15 @@ const App = (props) => {
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/Profile' render={() => <ProfileContainer store={props.store} />}/>
-                    <Route path='/Dialogs' render={() => <DialogsContainer store={props.store} />}/>
-                    <Route path='/Users' render={()=><UsersContainer store={props.store}/>}/>
-                    <Route path='/News' component={News}/>
-                    <Route path='/Music' component={Music}/>
-                    <Route path='/Settings' component={Settings}/>
+                    <Route path='/profile/:userId?'
+                           render={() => <ProfileContainer  />}/>
+                    <Route path='/dialogs'
+                           render={() => <DialogsContainer store={props.store} />}/>
+                    <Route path='/users'
+                           render={()=><UsersContainer store={props.store}/>}/>
+                    <Route path='/news' component={News}/>
+                    <Route path='/music' component={Music}/>
+                    <Route path='/settings' component={Settings}/>
                 </div>
 
             </div>
