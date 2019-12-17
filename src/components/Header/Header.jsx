@@ -1,9 +1,13 @@
 import React from 'react';
-import s from './Header.module.css';
+import style from './Header.module.css';
+import {NavLink} from "react-router-dom";
 
-const Header = () => {
-    return <header className={s.header}>
+const Header = (props) => {
+    return <header className={style.header}>
         <img src='https://image.flaticon.com/icons/png/512/68/68637.png' alt='logo'></img>
+        <div className={style.loginBlock}>
+            {props.isAuth? props.login: <NavLink to={'/login'}>Login</NavLink>}
+        </div>
     </header>
 }
 
