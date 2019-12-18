@@ -22,7 +22,9 @@ const Users = (props) => {
                     return (
                         <span
                             onClick={() => props.onPageChanged(p)}
-                            className={props.currentPage === p && style.selected}>{p}</span>
+                            className={props.currentPage === p && style.selected}>
+                            {p}
+                        </span>
                     )
                 })}
 

@@ -15,7 +15,7 @@ const ProfileInfo = (props) => {
                      alt='space'></img>
             </div>
             <div className={style.description}>
-                <img src={props.profile.photos.large} />
+                <img src={props.profile.photos.large} alt='no photo' />
                 <div>about me: {props.profile.aboutMe}</div>
                 <div>looking for a job: {props.profile.lookingForAJob? 'yes': 'not'}</div>
             </div>

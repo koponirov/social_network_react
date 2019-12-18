@@ -11,24 +11,26 @@ import {
 import * as axios from "axios";
 import Users from "./Users";
 import Preloader from "../../common/Preloader/Preloader";
+import {getUsers} from "../../api/api";
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.setIsLoading(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageUsersAmount}`,{withCredentials:true}).then(response => {
+        getUsers(this.props.currentPage,this.props.pageUsersAmount)
+        .then(data => {
             this.props.setIsLoading(false);
-            this.props.setUsers(response.data.items);
-            this.props.setTotalUsersAmount(response.data.totalCount)
+            this.props.setUsers(data.items);
+            this.props.setTotalUsersAmount(data.totalCount)
         })
     }
 
     onPageChanged = (currentPageNumber) => {
         this.props.setIsLoading(true);
         this.props.setCurrentPage(currentPageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPageNumber}&count=${this.props.pageUsersAmount}`,{withCredentials:true}).then(response => {
+        getUsers(currentPageNumber,this.props.pageUsersAmount).then(data => {
             this.props.setIsLoading(false);
-            this.props.setUsers(response.data.items);
+            this.props.setUsers(data.items);
         })
     }
 
