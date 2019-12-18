@@ -1,48 +1,55 @@
 import * as axios from "axios";
 
+const instance = axios.create({
+    withCredentials: true,
+    baseURL: "https://social-network.samuraijs.com/api/1.0/",
+    headers: {"API-KEY": "ed6168aa-083c-4712-91d3-afe70566eba2"},
 
-export const getUsers=(currentPage,pageUsersAmount)=>{
-    return axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageUsersAmount}`,
-        {withCredentials:true})
-        .then(response => {
-            debugger;
-            return response.data})
-};
+})
 
-export const getUserData=()=>{
-    return axios.get('https://social-network.samuraijs.com/api/1.0/auth/me',
-        {withCredentials:true})
-        .then(response=>{
-            return response.data
-        })
+export const usersAPI = {
+    getUsers(currentPage, pageUsersAmount) {
+        return instance.get(`users?page=${currentPage}&count=${pageUsersAmount}`)
+            .then(response => {
+                debugger;
+                return response.data
+            })
+    }
 }
 
-export const getUserPhoto=(id)=>{
-    return axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
-        .then(response=>{
-            return response.data
-        })
+export const authAPI = {
+
+    getUserData () {
+        return instance.get('auth/me')
+            .then(response => {
+                return response.data
+            })
+    }
 }
 
-export const followToUser=(userId)=> {
-    return axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
-        {
-            withCredentials: true,
-            headers: {"API-KEY": "ed6168aa-083c-4712-91d3-afe70566eba2"}
-        })
-        .then(response => {
-            return response.data
-        })
+
+export const profileAPI = {
+
+    getUserPhoto (id) {
+        return instance.get(`profile/${id}`)
+            .then(response => {
+                return response.data
+            })
+    }
 }
 
-export const unfollowToUser=(userId)=>{
-    return axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {},
-        {
-            withCredentials: true,
-            headers: {"API-KEY": "ed6168aa-083c-4712-91d3-afe70566eba2"}
-        })
-        .then(response => {
-            return response.data
-        })
-
+export const followAPI= {
+    followToUser(userId) {
+        return instance.delete(`follow/${userId}`)
+            .then(response => {
+                return response.data
+            })
+    },
+    unfollowToUser(userId) {
+        return instance.post(`follow/${userId}`)
+            .then(response => {
+                return response.data
+            })
+    }
 }
+
