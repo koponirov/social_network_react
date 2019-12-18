@@ -1,10 +1,13 @@
 const SET_USER_DATA = 'SET_USER_DATA';
+const SHOW_USER_PHOTO = 'SHOW_USER_PHOTO';
+
 
 let initialState = {
     id:null,
     email:null,
     login:null,
-    isAuth:false
+    isAuth:false,
+    photo: null
 
 };
 
@@ -18,6 +21,12 @@ const authReducer = (state=initialState, action) => {
                 ...action.data,
                 isAuth: true
             }
+        case SHOW_USER_PHOTO:
+            return {
+                ...state,
+                photo:action.smallUserPhoto,
+                isAuth: true
+            }
 
 
         default:
@@ -26,6 +35,8 @@ const authReducer = (state=initialState, action) => {
 };
 
 export const setUserData = (email,id,login) =>  ({type: SET_USER_DATA,data:{email,id,login}});
+export const showUserPhoto = (smallUserPhoto) =>  ({type: SHOW_USER_PHOTO,smallUserPhoto});
+
 
 
 export default authReducer;

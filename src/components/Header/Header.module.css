@@ -16,3 +16,12 @@
 .header .loginBlock a{
   color: whitesmoke;
 }
+
+.header .loginBlock .userBlock {
+  color: whitesmoke;
+}
+
+.header .loginBlock .userBlock img{
+  width: 50px;
+  border-radius: 50%;
+}
