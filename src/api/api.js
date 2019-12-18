@@ -24,3 +24,25 @@ export const getUserPhoto=(id)=>{
         })
 }
 
+export const followToUser=(userId)=> {
+    return axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
+        {
+            withCredentials: true,
+            headers: {"API-KEY": "ed6168aa-083c-4712-91d3-afe70566eba2"}
+        })
+        .then(response => {
+            return response.data
+        })
+}
+
+export const unfollowToUser=(userId)=>{
+    return axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {},
+        {
+            withCredentials: true,
+            headers: {"API-KEY": "ed6168aa-083c-4712-91d3-afe70566eba2"}
+        })
+        .then(response => {
+            return response.data
+        })
+
+}

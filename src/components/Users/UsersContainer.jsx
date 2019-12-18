@@ -7,11 +7,10 @@ import {
     setTotalUsersAmount,
     setUsers,
     unfollow
-} from "../../redux/usersReducer";
-import * as axios from "axios";
+} from '../../redux/usersReducer';
 import Users from "./Users";
-import Preloader from "../../common/Preloader/Preloader";
-import {getUsers} from "../../api/api";
+import Preloader from '../../common/Preloader/Preloader';
+import {getUsers} from '../../api/api';
 
 class UsersContainer extends React.Component {
 
