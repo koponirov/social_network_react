@@ -2,7 +2,7 @@ import {connect} from 'react-redux'
 import React from 'react'
 import {
     follow,
-    setCurrentPage,
+    setCurrentPage, setInProgress,
     setIsLoading,
     setTotalUsersAmount,
     setUsers,
@@ -44,7 +44,10 @@ class UsersContainer extends React.Component {
                     totalUsersAmount={this.props.totalUsersAmount}
                     pageUsersAmount={this.props.pageUsersAmount}
                     follow={this.props.follow}
-                    unfollow={this.props.unfollow}/>
+                    unfollow={this.props.unfollow}
+                    setInProgress={this.props.setInProgress}
+                    followingInProgress={this.props.followingInProgress}
+                />
             </>
         )
     }
@@ -58,7 +61,8 @@ let mapStateToProps = (state) => {
         pageUsersAmount: state.usersPage.pageUsersAmount,
         totalUsersAmount: state.usersPage.totalUsersAmount,
         currentPage: state.usersPage.currentPage,
-        isLoading: state.usersPage.isLoading
+        isLoading: state.usersPage.isLoading,
+        followingInProgress: state.usersPage.followingInProgress
     }
 };
 
@@ -87,5 +91,5 @@ let mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps,
-    {follow, unfollow, setUsers, setCurrentPage, setTotalUsersAmount, setIsLoading})(UsersContainer);
+    {follow, unfollow, setUsers, setCurrentPage, setTotalUsersAmount, setIsLoading,setInProgress})(UsersContainer);
 

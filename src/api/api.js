@@ -11,7 +11,7 @@ export const usersAPI = {
     getUsers(currentPage, pageUsersAmount) {
         return instance.get(`users?page=${currentPage}&count=${pageUsersAmount}`)
             .then(response => {
-                debugger;
+
                 return response.data
             })
     }
