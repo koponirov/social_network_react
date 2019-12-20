@@ -1,3 +1,5 @@
+import {authAPI, profileAPI} from "../api/api";
+
 const SET_USER_DATA = 'SET_USER_DATA';
 const SHOW_USER_PHOTO = 'SHOW_USER_PHOTO';
 
@@ -36,6 +38,23 @@ const authReducer = (state=initialState, action) => {
 
 export const setUserData = (email,id,login) =>  ({type: SET_USER_DATA,data:{email,id,login}});
 export const showUserPhoto = (smallUserPhoto) =>  ({type: SHOW_USER_PHOTO,smallUserPhoto});
+
+export const getUserData=()=>{
+    return (dispatch)=>{
+        authAPI.getUserData()
+            .then(data=>{
+                if (data.resultCode===0){
+                    let {email,id,login}=data.data;
+                    dispatch(setUserData(email,id,login));
+                    profileAPI.getUserPhoto(id)
+                        .then(data=>{
+                            let smallUserPhoto=data.photos.small;
+                            dispatch(showUserPhoto(smallUserPhoto))
+                        })
+                }
+            })
+    }
+}
 
 
 
