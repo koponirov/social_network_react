@@ -1,22 +1,17 @@
 import {connect} from 'react-redux'
 import React from 'react'
 import {
-    follow,
-    setCurrentPage, setInProgress,
-    setIsLoading,
-    setTotalUsersAmount,
-    setUsers, getUsersThunkCreator,
-    unfollow, onPageChangedThunkCreator
+    setInProgress, getUsers, onPageChanged, follow, unfollow
 } from '../../redux/usersReducer';
 import Users from "./Users";
 import Preloader from '../../common/Preloader/Preloader';
-import {usersAPI} from '../../api/api';
+
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
 
-        this.props.getUsers(this.props.currentPage,this.props.pageUsersAmount)
+        this.props.getUsers(this.props.currentPage, this.props.pageUsersAmount)
 
         /*this.props.setIsLoading(true);
         usersAPI.getUsers(this.props.currentPage,this.props.pageUsersAmount)
@@ -37,11 +32,11 @@ class UsersContainer extends React.Component {
     }*/
 
     render() {
-debugger;
+        debugger;
         return (<>
                 {this.props.isLoading ? <Preloader/> : null}
                 <Users
-                    onPageChanged={this.props.onPageChangedThunkCreator}
+                    onPageChanged={this.props.onPageChanged}
                     currentPage={this.props.currentPage}
                     users={this.props.users}
                     totalUsersAmount={this.props.totalUsersAmount}
@@ -54,8 +49,6 @@ debugger;
             </>
         )
     }
-
-
 };
 
 let mapStateToProps = (state) => {
@@ -92,9 +85,6 @@ let mapStateToProps = (state) => {
     }
 }*/
 
-
 export default connect(mapStateToProps,
-    {follow, unfollow, setUsers,
-        setCurrentPage, setTotalUsersAmount, setIsLoading,
-        setInProgress, getUsers:getUsersThunkCreator,onPageChangedThunkCreator})(UsersContainer);
+    {follow, unfollow, setInProgress, getUsers, onPageChanged})(UsersContainer);
 

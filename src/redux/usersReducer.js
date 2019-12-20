@@ -1,4 +1,4 @@
-import {usersAPI} from "../api/api";
+import {followAPI, usersAPI} from "../api/api";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -73,9 +73,9 @@ const usersReducer = (state = initialState, action) => {
     }
 };
 
-export const follow = (userId) => ({type: FOLLOW, userId});
+export const followUser = (userId) => ({type: FOLLOW, userId});
 
-export const unfollow = (userId) => ({type: UNFOLLOW, userId});
+export const unfollowUser = (userId) => ({type: UNFOLLOW, userId});
 
 export const setUsers = (users) => ({type: SET_USERS, users});
 
@@ -90,7 +90,7 @@ export const setInProgress = (inProgress, userId) => {
     return {type: TOGGLE_IS_FOLLOWING_PROGRESS, inProgress, userId}
 }
 
-export const getUsersThunkCreator = (currentPage, pageUsersAmount) => {
+export const getUsers = (currentPage, pageUsersAmount) => {
 
     return (dispatch) => {
 
@@ -104,7 +104,7 @@ export const getUsersThunkCreator = (currentPage, pageUsersAmount) => {
     }
 }
 
-export const onPageChangedThunkCreator = (currentPageNumber,pageUsersAmount) => {
+export const onPageChanged = (currentPageNumber,pageUsersAmount) => {
     return (dispatch)=>{
         dispatch(setIsLoading(true));
         dispatch(setCurrentPage(currentPageNumber));
@@ -115,6 +115,38 @@ export const onPageChangedThunkCreator = (currentPageNumber,pageUsersAmount) => 
     }
 
 }
+
+export const follow = (userId) => {
+    return (dispatch)=>{
+        dispatch(setInProgress(true,userId));
+        followAPI.followToUser(userId)
+            .then(data => {
+
+                if (data.resultCode == 0) {
+                    dispatch(unfollowUser(userId))
+                }
+                dispatch(setInProgress(false,userId));
+            });
+    }
+}
+
+export const unfollow=(userId)=>{
+    return (dispatch)=>{
+        dispatch(setInProgress(true,userId));
+        followAPI.unfollowToUser(userId)
+            .then(data => {
+
+                if (data.resultCode == 0) {
+                    dispatch(followUser(userId))
+                }
+                dispatch(setInProgress(false,userId));
+            });
+    }
+}
+
+
+
+
 
 
 export default usersReducer;
