@@ -12,7 +12,7 @@ let initialState = {
     users: [],
     pageUsersAmount: 5,
     totalUsersAmount: 20,
-    currentPage: 4,
+    currentPage: 1,
     followingInProgress: [2]
 };
 
@@ -102,6 +102,18 @@ export const getUsersThunkCreator = (currentPage, pageUsersAmount) => {
             dispatch(setTotalUsersAmount(data.totalCount))
         })
     }
+}
+
+export const onPageChangedThunkCreator = (currentPageNumber,pageUsersAmount) => {
+    return (dispatch)=>{
+        dispatch(setIsLoading(true));
+        dispatch(setCurrentPage(currentPageNumber));
+        usersAPI.getUsers(currentPageNumber,pageUsersAmount).then(data => {
+            dispatch(setIsLoading(false));
+            dispatch(setUsers(data.items));
+        })
+    }
+
 }
 
 
