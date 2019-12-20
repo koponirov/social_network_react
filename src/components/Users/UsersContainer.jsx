@@ -5,7 +5,7 @@ import {
     setCurrentPage, setInProgress,
     setIsLoading,
     setTotalUsersAmount,
-    setUsers,
+    setUsers, getUsersThunkCreator,
     unfollow
 } from '../../redux/usersReducer';
 import Users from "./Users";
@@ -15,13 +15,16 @@ import {usersAPI} from '../../api/api';
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.setIsLoading(true);
+
+        this.props.getUsers(this.props.currentPage,this.props.pageUsersAmount)
+
+        /*this.props.setIsLoading(true);
         usersAPI.getUsers(this.props.currentPage,this.props.pageUsersAmount)
         .then(data => {
             this.props.setIsLoading(false);
             this.props.setUsers(data.items);
             this.props.setTotalUsersAmount(data.totalCount)
-        })
+        })*/
     }
 
     onPageChanged = (currentPageNumber) => {
@@ -34,7 +37,7 @@ class UsersContainer extends React.Component {
     }
 
     render() {
-
+debugger;
         return (<>
                 {this.props.isLoading ? <Preloader/> : null}
                 <Users
@@ -91,5 +94,7 @@ let mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps,
-    {follow, unfollow, setUsers, setCurrentPage, setTotalUsersAmount, setIsLoading,setInProgress})(UsersContainer);
+    {follow, unfollow, setUsers,
+        setCurrentPage, setTotalUsersAmount, setIsLoading,
+        setInProgress, getUsers:getUsersThunkCreator})(UsersContainer);
 

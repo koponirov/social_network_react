@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -7,11 +9,11 @@ const TOGGLE_IS_LOADING = 'TOGGLE_IS_LOADING';
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 
 let initialState = {
-    users: [ ],
-    pageUsersAmount:5,
-    totalUsersAmount:20,
-    currentPage:4,
-    followingInProgress:[2]
+    users: [],
+    pageUsersAmount: 5,
+    totalUsersAmount: 20,
+    currentPage: 4,
+    followingInProgress: [2]
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -60,9 +62,9 @@ const usersReducer = (state = initialState, action) => {
         case TOGGLE_IS_FOLLOWING_PROGRESS:
             return {
                 ...state,
-                followingInProgress:action.inProgress
+                followingInProgress: action.inProgress
                     ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id=>id != action.userId)
+                    : state.followingInProgress.filter(id => id != action.userId)
             }
 
 
@@ -83,8 +85,24 @@ export const setTotalUsersAmount = (totalUsers) => ({type: SET_TOTAL_USERS, tota
 
 export const setIsLoading = (isLoading) => ({type: TOGGLE_IS_LOADING, isLoading});
 
-export const setInProgress = (inProgress,userId)=>{
+export const setInProgress = (inProgress, userId) => {
 
-    return {type:TOGGLE_IS_FOLLOWING_PROGRESS,inProgress,userId}}
+    return {type: TOGGLE_IS_FOLLOWING_PROGRESS, inProgress, userId}
+}
+
+export const getUsersThunkCreator = (currentPage, pageUsersAmount) => {
+
+    return (dispatch) => {
+
+        dispatch(setIsLoading(true));
+
+        usersAPI.getUsers(currentPage, pageUsersAmount).then(data => {
+            dispatch(setIsLoading(false));
+            dispatch(setUsers(data.items));
+            dispatch(setTotalUsersAmount(data.totalCount))
+        })
+    }
+}
+
 
 export default usersReducer;
