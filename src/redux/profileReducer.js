@@ -1,3 +1,5 @@
+import {profileAPI} from "../api/api";
+
 const ADD_POST = 'ADD_POST';
 const UPDATE_TEXT = 'UPDATE_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -52,5 +54,16 @@ export const addPost = () =>  ({type: ADD_POST});
 export const changeText = (text) => ({type: UPDATE_TEXT, newText: text});
 export const setUserProfile = (profile) =>  ({type: SET_USER_PROFILE,profile});
 export const isLookingForAJob = (isLookingForAJob) =>  ({type: LOOKING_FOR_JOB,isLookingForAJob});
+
+export const getUserBio=(id)=>{
+    return (dispatch)=>{
+        profileAPI.getUserBio(id)
+            .then(data=>{
+                dispatch(setUserProfile(data));
+                dispatch(isLookingForAJob(data.lookingForAJob))
+            })
+
+    }
+}
 
 export default profileReducer;

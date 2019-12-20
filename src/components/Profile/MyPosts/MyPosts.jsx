@@ -2,8 +2,6 @@ import React from 'react';
 import style from './MyPosts.module.css';
 import Post from '../MyPosts/Post/Post';
 
-
-
 const MyPosts = (props) => {
 
     let postsOnWall = props.posts.map((post) => {
@@ -12,16 +10,14 @@ const MyPosts = (props) => {
         )
     })
 
-    
-
-    let onAddPost= ()=>{
+    let onAddPost = () => {
 
         props.addPost();
-        }
+    }
 
-    let onChangeText= (newPostText)=> {
+    let onChangeText = (newPostText) => {
 
-        let text=newPostText.target.value;
+        let text = newPostText.target.value;
         props.changeText(text);
     }
 
@@ -32,9 +28,9 @@ const MyPosts = (props) => {
             </h3>
             <div>
                 <div>
-                    <textarea  value={props.newTextInPost} onChange={onChangeText}></textarea>
+                    <textarea value={props.newTextInPost} onChange={onChangeText}></textarea>
                 </div>
-                <button onClick={ onAddPost} >add post</button>
+                <button onClick={onAddPost}>add post</button>
             </div>
 
             {postsOnWall}

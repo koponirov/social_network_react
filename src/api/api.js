@@ -35,6 +35,12 @@ export const profileAPI = {
             .then(response => {
                 return response.data
             })
+    },
+    getUserBio (id) {
+        return instance.get(`https://social-network.samuraijs.com/api/1.0/profile/`+id)
+            .then(response => {
+                return response.data
+            })
     }
 }
 

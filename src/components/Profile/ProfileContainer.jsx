@@ -1,8 +1,7 @@
 import React from 'react';
 import Profile from './Profile';
-import * as axios from "axios";
 import {connect} from "react-redux";
-import {addPost, changeText, isLookingForAJob, setUserProfile} from "../../redux/profileReducer";
+import {addPost, changeText, getUserBio,} from "../../redux/profileReducer";
 import {withRouter} from 'react-router-dom';
 
 class ProfileContainer extends React.Component {
@@ -13,11 +12,13 @@ class ProfileContainer extends React.Component {
         if (!userId){
             userId=2;
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+userId)
+        this.props.getUserBio(userId)
+
+        /*axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+userId)
             .then(response => {
             this.props.setUserProfile(response.data);
             this.props.isLookingForAJob(response.data.lookingForAJob)
-        })
+        })*/
     }
 
     render() {
@@ -33,4 +34,4 @@ let mapStateToProps=(state) => ({profile: state.profilePage.profile});
 let withRouterProfileContainer = withRouter(ProfileContainer);
 
 export default connect (mapStateToProps,
-    {addPost,setUserProfile,changeText,isLookingForAJob})(withRouterProfileContainer);
+    {addPost,changeText,getUserBio})(withRouterProfileContainer);
