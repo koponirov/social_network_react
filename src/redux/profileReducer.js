@@ -55,9 +55,9 @@ export const changeText = (text) => ({type: UPDATE_TEXT, newText: text});
 export const setUserProfile = (profile) =>  ({type: SET_USER_PROFILE,profile});
 export const isLookingForAJob = (isLookingForAJob) =>  ({type: LOOKING_FOR_JOB,isLookingForAJob});
 
-export const getUserBio=(id)=>{
+export const getUserProfile=(id)=>{
     return (dispatch)=>{
-        profileAPI.getUserBio(id)
+        profileAPI.getUserProfile(id)
             .then(data=>{
                 dispatch(setUserProfile(data));
                 dispatch(isLookingForAJob(data.lookingForAJob))
