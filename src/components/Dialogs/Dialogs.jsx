@@ -28,7 +28,7 @@ const Dialogs = (props) => {
         props.changeMessageText(text);
     }
 
-    if (!props.auth) {return <Redirect to={'/login'}/>}
+
     return (
         <div className={style.dialogs}>
             <div className={style.dialogsBar}>
