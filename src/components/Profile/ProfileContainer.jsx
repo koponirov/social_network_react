@@ -32,7 +32,7 @@ class ProfileContainer extends React.Component {
 //create AuthRedirectComponent(HOC) with auth logic(wrapping ProfileContainer with HOC)
 let AuthRedirectComponent=withAuthRedirect(ProfileContainer)
 
-let mapStateToProps=(state) => ({profile: state.profilePage.profile,auth: state.auth.isAuth});
+let mapStateToProps=(state) => ({profile: state.profilePage.profile});
 
 //wrapping  AuthRedirectComponent(HOC) by withRouter
 let withRouterProfileContainer = withRouter(AuthRedirectComponent);
