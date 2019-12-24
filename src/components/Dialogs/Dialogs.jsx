@@ -2,13 +2,9 @@ import React from 'react';
 import style from './Dialogs.module.css';
 import Message from "./Message/Message";
 import DialogWithUser from './DialogWithUser/DialogWithUser'
-
-
-
-
+import {Redirect} from "react-router-dom";
 
 const Dialogs = (props) => {
-
 
     let dialogs = props.dialogs.map((dialog) => {
         return (
@@ -22,8 +18,6 @@ const Dialogs = (props) => {
         )
     })
 
-    //let newMessage=React.createRef();
-
     let onSendMessage=()=>{
 
         props.sendMessage();
@@ -32,9 +26,9 @@ const Dialogs = (props) => {
     let onMessageChange= (newText) => {
         let text=newText.target.value;
         props.changeMessageText(text);
-
-
     }
+
+    if (!props.auth) {return <Redirect to={'/login'}/>}
     return (
         <div className={style.dialogs}>
             <div className={style.dialogsBar}>
