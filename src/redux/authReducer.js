@@ -46,7 +46,7 @@ export const getAuthUserData=()=>{
                 if (data.resultCode===0){
                     let {email,id,login}=data.data;
                     dispatch(setAuthUserData(email,id,login));
-                    profileAPI.getUserPhoto(id)
+                    profileAPI.getUserProfile(id)
                         .then(data=>{
                             let smallUserPhoto=data.photos.small;
                             dispatch(showUserPhoto(smallUserPhoto))

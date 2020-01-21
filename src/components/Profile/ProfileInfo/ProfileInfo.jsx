@@ -5,15 +5,17 @@ import photo from '../../../assets/images/userPhoto.png'
 import ProfileStatus from "../ProfileStatus/ProfileStatus";
 
 const ProfileInfo = (props) => {
+
     if(!props.profile){
         return <Preloader/>
     }
 
     return (
+
         <div>
             <div className={style.description}>
                 <img src={props.profile.photos.large !=null ? props.profile.photos.large : photo} alt='user photo' />
-                <ProfileStatus status='my status' />
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 <div>about me: {props.profile.aboutMe}</div>
                 <div>looking for a job: {props.profile.lookingForAJob? 'yes': 'not'}</div>
             </div>

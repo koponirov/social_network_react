@@ -4,7 +4,8 @@ const ADD_POST = 'ADD_POST';
 const UPDATE_TEXT = 'UPDATE_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const LOOKING_FOR_JOB = 'LOOKING_FOR_JOB';
-
+const SET_STATUS = 'SET_STATUS';
+const UPDATE_STATUS = 'UPDATE_STATUS';
 
 let initialState = {
     posts: [
@@ -15,11 +16,12 @@ let initialState = {
         {userId: 5, messageText: 'dsgdgsde!', likeCounter: 0},
     ],
     newTextInPost: 'I\'m a new text!',
-    profile:null,
-    lookingForAJob:false
+    profile: null,
+    lookingForAJob: false,
+    status: ''
 };
 
-const profileReducer = (state=initialState, action) => {
+const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
@@ -30,10 +32,10 @@ const profileReducer = (state=initialState, action) => {
             }
         case ADD_POST:
             let newPostText = state.newTextInPost;
-            return{
+            return {
                 ...state,
                 //newTextInPost: '',
-                posts:[...state.posts,{userId: 6,messageText:newPostText,likeCounter: 0}]
+                posts: [...state.posts, {userId: 6, messageText: newPostText, likeCounter: 0}]
             }
         case SET_USER_PROFILE:
             return {
@@ -45,24 +47,57 @@ const profileReducer = (state=initialState, action) => {
                 ...state,
                 lookingForAJob: action.isLookingForAJob
             }
+
+        case SET_STATUS:
+            return {
+                ...state,
+                status: action.status
+            }
+
+        case UPDATE_STATUS:
+            return {
+                ...state,
+                status: action.status
+            }
         default:
             return state;
     }
 };
 
-export const addPost = () =>  ({type: ADD_POST});
+export const addPost = () => ({type: ADD_POST});
 export const changeText = (text) => ({type: UPDATE_TEXT, newText: text});
-export const setUserProfile = (profile) =>  ({type: SET_USER_PROFILE,profile});
-export const isLookingForAJob = (isLookingForAJob) =>  ({type: LOOKING_FOR_JOB,isLookingForAJob});
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
+export const isLookingForAJob = (isLookingForAJob) => ({type: LOOKING_FOR_JOB, isLookingForAJob});
+export const setStatus = (status) => ({type: SET_STATUS, status});
+export const updateStatus = (status) => ({type: UPDATE_STATUS, status});
 
-export const getUserProfile=(id)=>{
-    return (dispatch)=>{
+export const getUserProfile = (id) => {
+
+    return (dispatch) => {
         profileAPI.getUserProfile(id)
-            .then(data=>{
+            .then(data => {
                 dispatch(setUserProfile(data));
                 dispatch(isLookingForAJob(data.lookingForAJob))
             })
+    }
+}
 
+export const getUserStatus = (userId) => {
+    return (dispatch) => {
+        profileAPI.getUserStatus(userId)
+            .then(data => {
+                dispatch(setStatus(data));
+            })
+    }
+}
+
+export const updateUserStatus = (status) => {
+    return (dispatch) => {
+        profileAPI.updateUserStatus(status)
+            .then(data => {
+                if (data.resultCode===0 )
+                {dispatch(updateStatus(data.data))};
+            })
     }
 }
 

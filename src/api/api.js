@@ -11,7 +11,6 @@ export const usersAPI = {
     getUsers(currentPage, pageUsersAmount) {
         return instance.get(`users?page=${currentPage}&count=${pageUsersAmount}`)
             .then(response => {
-
                 return response.data
             })
     }
@@ -19,7 +18,7 @@ export const usersAPI = {
 
 export const authAPI = {
 
-    getUserData () {
+    getUserData() {
         return instance.get('auth/me')
             .then(response => {
                 return response.data
@@ -27,24 +26,30 @@ export const authAPI = {
     }
 }
 
-
 export const profileAPI = {
 
-    getUserPhoto (id) {
+    getUserProfile(id) {
         return instance.get(`profile/${id}`)
             .then(response => {
                 return response.data
             })
     },
-    getUserProfile (id) {
-        return instance.get(`profile/${id}`)
+
+    getUserStatus(userId) {
+        return instance.get(`profile/status/${userId}`)
             .then(response => {
                 return response.data
             })
+    },
+
+    updateUserStatus(status) {
+        debugger;
+        return instance.put(`profile/status`, {status: status})
+
     }
 }
 
-export const followAPI= {
+export const followAPI = {
     followToUser(userId) {
         return instance.delete(`follow/${userId}`)
             .then(response => {
