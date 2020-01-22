@@ -54,11 +54,6 @@ const profileReducer = (state = initialState, action) => {
                 status: action.status
             }
 
-        case UPDATE_STATUS:
-            return {
-                ...state,
-                status: action.status
-            }
         default:
             return state;
     }
@@ -69,7 +64,6 @@ export const changeText = (text) => ({type: UPDATE_TEXT, newText: text});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const isLookingForAJob = (isLookingForAJob) => ({type: LOOKING_FOR_JOB, isLookingForAJob});
 export const setStatus = (status) => ({type: SET_STATUS, status});
-export const updateStatus = (status) => ({type: UPDATE_STATUS, status});
 
 export const getUserProfile = (id) => {
 
@@ -94,9 +88,9 @@ export const getUserStatus = (userId) => {
 export const updateUserStatus = (status) => {
     return (dispatch) => {
         profileAPI.updateUserStatus(status)
-            .then(data => {
-                if (data.resultCode===0 )
-                {dispatch(updateStatus(data.data))};
+            .then(response => {
+                if (response.data.resultCode===0 )
+                {dispatch(setStatus(status))};
             })
     }
 }
