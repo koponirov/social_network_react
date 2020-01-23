@@ -1,11 +1,14 @@
 import React from 'react';
 import style from './MyPosts.module.css';
 import Post from '../MyPosts/Post/Post';
+import PostReduxForm from "./Post/PostForm";
 
 const MyPosts = (props) => {
 
     let postsOnWall = props.posts.map((post) => {
         return (
+
+
             <Post message={post.messageText} likeCounter={post.likeCounter}/>
         )
     })
@@ -21,16 +24,17 @@ const MyPosts = (props) => {
         props.changeText(text);
     }
 
+    const onSubmit = (formData) => {
+        console.log(formData)
+    }
+
     return (
         <div className={style.content}>
             <h3>
                 My posts
             </h3>
             <div>
-                <div>
-                    <textarea value={props.newTextInPost} onChange={onChangeText}></textarea>
-                </div>
-                <button onClick={onAddPost}>add post</button>
+                <PostReduxForm onSubmit={onSubmit}/>
             </div>
 
             {postsOnWall}
