@@ -3,6 +3,7 @@ import style from './Dialogs.module.css';
 import Message from "./Message/Message";
 import DialogWithUser from './DialogWithUser/DialogWithUser'
 import {Redirect} from "react-router-dom";
+import MessageReduxForm from "./MessageForm";
 
 const Dialogs = (props) => {
 
@@ -28,6 +29,10 @@ const Dialogs = (props) => {
         props.changeMessageText(text);
     }
 
+    const onSubmit = (formData) => {
+        console.log(formData)
+    }
+
 
     return (
         <div className={style.dialogs}>
@@ -38,12 +43,7 @@ const Dialogs = (props) => {
                 {messages}
                 <div className={style.right}>
 
-                    <textarea
-                        /*ref={newMessage}*/
-                        value={props.newMessageText}
-                        onChange={onMessageChange}
-                    ></textarea>
-                    <button onClick={onSendMessage}>send message</button>
+                    <MessageReduxForm onSubmit={onSubmit}/>
 
                 </div>
             </div>
