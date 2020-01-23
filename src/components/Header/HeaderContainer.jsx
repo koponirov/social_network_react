@@ -6,20 +6,7 @@ import {getAuthUserData} from "../../redux/authReducer";
 class HeaderContainer extends React.Component {
 
     componentDidMount() {
-
         this.props.getAuthUserData()
-        /*authAPI.getUserData()
-            .then(data=>{
-                if (data.resultCode===0){
-                    let {email,id,login}=data.data;
-                    this.props.setUserData(email,id,login);
-                    profileAPI.getUserPhoto(id)
-                        .then(data=>{
-                            let smallUserPhoto=data.photos.small;
-                            this.props.showUserPhoto(smallUserPhoto)
-                        })
-                }
-            })*/
     }
 
     render() {
