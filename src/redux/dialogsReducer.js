@@ -1,7 +1,5 @@
 const SEND_MESSAGE = 'SEND_MESSAGE';
 
-const WRITE_MESSAGE = 'WRITE_MESSAGE';
-
 let initialState = {
     dialogs: [
         {userId: 1, userName: 'Sasha'},
@@ -16,52 +14,24 @@ let initialState = {
         {Id: 3, messageText: "I'm OK"},
         {Id: 4, messageText: 'What u want to do tomorrow?'},
         {Id: 5, messageText: 'Goodbye!'},
-    ],
-    newMessageText: '...'
+    ]
 };
 
 const dialogsReducer = (state = initialState, action) => {
 
-
-
     switch (action.type) {
+
         case SEND_MESSAGE :
-
-            let newMessage = state.newMessageText//how???we need to copy state,not allow to change current state!
             return {
                 ...state,
-                newMessageText: '',
-                messages: [...state.messages, {id: 6, messageText: newMessage}]
-            }
-
-
-        case WRITE_MESSAGE:
-            return {
-                ...state,
-                newMessageText: action.newText
-            }
+                messages: [...state.messages, {id: 6, messageText: action.message}]
+            };
 
         default:
-
             return state;
     }
-
 };
 
-
-export const sendMessageActionCreator = () => {
-
-    return (
-        {type: SEND_MESSAGE}
-    )
-};
-
-export const onMessageChangeActionCreator = (text) => {
-
-    return (
-        {type: WRITE_MESSAGE, newText: text}
-    )
-}
-
+export const sendMessage = (message) => ({type: SEND_MESSAGE, message});
 
 export default dialogsReducer;

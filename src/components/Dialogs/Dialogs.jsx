@@ -19,20 +19,9 @@ const Dialogs = (props) => {
         )
     })
 
-    let onSendMessage=()=>{
-
-        props.sendMessage();
-    }
-
-    let onMessageChange= (newText) => {
-        let text=newText.target.value;
-        props.changeMessageText(text);
-    }
-
-    const onSubmit = (formData) => {
-        console.log(formData)
-    }
-
+    const sendMessage = (values) => {
+        props.sendMessage(values.message)
+    };
 
     return (
         <div className={style.dialogs}>
@@ -43,7 +32,7 @@ const Dialogs = (props) => {
                 {messages}
                 <div className={style.right}>
 
-                    <MessageReduxForm onSubmit={onSubmit}/>
+                    <MessageReduxForm onSubmit={sendMessage}/>
 
                 </div>
             </div>
