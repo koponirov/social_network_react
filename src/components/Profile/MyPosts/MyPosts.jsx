@@ -7,26 +7,14 @@ const MyPosts = (props) => {
 
     let postsOnWall = props.posts.map((post) => {
         return (
-
-
-            <Post message={post.messageText} likeCounter={post.likeCounter}/>
+            <Post postText={post.postText} likeCounter={post.likeCounter}/>
         )
-    })
+    });
 
-    let onAddPost = () => {
+    const addPost = (values) => {
+        props.addPost(values.postText);
 
-        props.addPost();
-    }
-
-    let onChangeText = (newPostText) => {
-
-        let text = newPostText.target.value;
-        props.changeText(text);
-    }
-
-    const onSubmit = (formData) => {
-        console.log(formData)
-    }
+    };
 
     return (
         <div className={style.content}>
@@ -34,13 +22,13 @@ const MyPosts = (props) => {
                 My posts
             </h3>
             <div>
-                <PostReduxForm onSubmit={onSubmit}/>
+                <PostReduxForm onSubmit={addPost}/>
             </div>
 
             {postsOnWall}
 
         </div>
     )
-}
+};
 
 export default MyPosts;

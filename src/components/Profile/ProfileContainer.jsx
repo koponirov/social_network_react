@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from './Profile';
 import {connect} from "react-redux";
-import {addPost, changeText, getUserProfile, getUserStatus, updateUserStatus,} from "../../redux/profileReducer";
+import {addPost, getUserProfile, getUserStatus, updateUserStatus,} from "../../redux/profileReducer";
 import { withRouter} from 'react-router-dom';
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -17,11 +17,6 @@ class ProfileContainer extends React.Component {
         this.props.getUserProfile(userId)
         this.props.getUserStatus(userId)
 
-        /*axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+userId)
-            .then(response => {
-            this.props.setUserProfile(response.data);
-            this.props.isLookingForAJob(response.data.lookingForAJob)
-        })*/
     }
 
     render() {
@@ -38,7 +33,7 @@ let mapStateToProps = (state) => ({
 });
 
 export default compose(
-    connect (mapStateToProps, {addPost,changeText,getUserProfile,getUserStatus,updateUserStatus}),
+    connect (mapStateToProps, {addPost,getUserProfile,getUserStatus,updateUserStatus}),
     withRouter,
     //withAuthRedirect
 )(ProfileContainer)

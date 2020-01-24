@@ -1,21 +1,18 @@
 import {profileAPI} from "../api/api";
 
 const ADD_POST = 'ADD_POST';
-const UPDATE_TEXT = 'UPDATE_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const LOOKING_FOR_JOB = 'LOOKING_FOR_JOB';
 const SET_STATUS = 'SET_STATUS';
-const UPDATE_STATUS = 'UPDATE_STATUS';
 
 let initialState = {
     posts: [
-        {userId: 1, messageText: 'How r u?', likeCounter: 1},
-        {userId: 2, messageText: 'Huston, we have a problem...', likeCounter: 25},
-        {userId: 3, messageText: 'Hi!', likeCounter: 0},
-        {userId: 4, messageText: 'What?', likeCounter: 5},
-        {userId: 5, messageText: 'dsgdgsde!', likeCounter: 0},
+        {userId: 1, postText: 'How r u?', likeCounter: 1},
+        {userId: 2, postText: 'Huston, we have a problem...', likeCounter: 25},
+        {userId: 3, postText: 'Hi!', likeCounter: 0},
+        {userId: 4, postText: 'What?', likeCounter: 5},
+        {userId: 5, postText: 'dsgdgsde!', likeCounter: 0},
     ],
-    newTextInPost: 'I\'m a new text!',
     profile: null,
     lookingForAJob: false,
     status: ''
@@ -25,17 +22,10 @@ const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case UPDATE_TEXT:
-            return {
-                ...state,
-                newTextInPost: action.newText
-            }
         case ADD_POST:
-            let newPostText = state.newTextInPost;
             return {
                 ...state,
-                //newTextInPost: '',
-                posts: [...state.posts, {userId: 6, messageText: newPostText, likeCounter: 0}]
+                posts: [...state.posts, {userId: 6, postText: action.newPost, likeCounter: 0}]
             }
         case SET_USER_PROFILE:
             return {
@@ -59,8 +49,7 @@ const profileReducer = (state = initialState, action) => {
     }
 };
 
-export const addPost = () => ({type: ADD_POST});
-export const changeText = (text) => ({type: UPDATE_TEXT, newText: text});
+export const addPost = (newPost) => ({type: ADD_POST, newPost});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const isLookingForAJob = (isLookingForAJob) => ({type: LOOKING_FOR_JOB, isLookingForAJob});
 export const setStatus = (status) => ({type: SET_STATUS, status});

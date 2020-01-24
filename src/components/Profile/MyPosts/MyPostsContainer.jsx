@@ -11,6 +11,6 @@ let mapStateToProps=(state)=>{
     }
 };
 
-const MyPostsContainer=connect(mapStateToProps,{addPost,changeText})(MyPosts);
+const MyPostsContainer=connect(mapStateToProps,{addPost})(MyPosts);
 
 export default MyPostsContainer;
