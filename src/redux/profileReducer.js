@@ -8,10 +8,9 @@ const SET_STATUS = 'SET_STATUS';
 let initialState = {
     posts: [
         {userId: 1, postText: 'How r u?', likeCounter: 1},
-        {userId: 2, postText: 'Huston, we have a problem...', likeCounter: 25},
-        {userId: 3, postText: 'Hi!', likeCounter: 0},
-        {userId: 4, postText: 'What?', likeCounter: 5},
-        {userId: 5, postText: 'dsgdgsde!', likeCounter: 0},
+        {userId: 2, postText: 'Hi!', likeCounter: 0},
+        {userId: 3, postText: 'What?', likeCounter: 5},
+
     ],
     profile: null,
     lookingForAJob: false,
