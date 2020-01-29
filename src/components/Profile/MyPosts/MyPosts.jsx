@@ -12,6 +12,7 @@ const MyPosts = (props) => {
     });
 
     const addPost = (values) => {
+        debugger;
         props.addPost(values.postText);
 
     };
