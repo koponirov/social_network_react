@@ -30,7 +30,7 @@ const Dialogs = (props) => {
             </div>
             <div className={style.messages}>
                 {messages}
-                <div className={style.right}>
+                <div >
 
                     <MessageReduxForm onSubmit={sendMessage}/>
 

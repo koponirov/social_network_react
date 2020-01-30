@@ -1,0 +1,14 @@
+.formControls {
+
+}
+
+.formControls textarea,
+.formControls input
+{
+    border: firebrick outset 2px;
+}
+
+.formControls span {
+    color: firebrick;
+    font-size: 18px;
+}

@@ -23,13 +23,10 @@
   margin-top: 10px;
 }
 
-.right textarea {
+.right textarea,.right button {
   display: block;
 }
 
-.right button {
-  display: block;
-}
 
 
 .messages {
