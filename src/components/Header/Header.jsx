@@ -11,7 +11,9 @@ const Header = (props) => {
                 <div className={style.userBlock}>{props.login}
                     <img src={props.photo?props.photo:defaultPhoto}
                     alt='photo'/>
+                    <button onClick={props.logout}>log out</button>
                 </div>
+                
 
                 : <NavLink to={'/login'}>Login</NavLink>}
         </div>

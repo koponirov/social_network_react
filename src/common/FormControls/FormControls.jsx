@@ -2,7 +2,6 @@ import React from 'react'
 import styles from './FormControls.module.css'
 
 export const Textarea = ({input, meta, ...props}) => {
-    debugger;
 
     const hasError = (meta.touched && meta.error)
 
