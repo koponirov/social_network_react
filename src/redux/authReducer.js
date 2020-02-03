@@ -11,7 +11,6 @@ let initialState = {
     login:null,
     isAuth:false,
     photo: null
-
 };
 
 const authReducer = (state=initialState, action) => {
@@ -29,8 +28,6 @@ const authReducer = (state=initialState, action) => {
                 photo:action.smallUserPhoto,
                 isAuth: true
             }
-
-
         default:
             return state;
     }
@@ -39,9 +36,8 @@ const authReducer = (state=initialState, action) => {
 export const setAuthUserData = (email,id,login,isAuth) =>  ({type: SET_USER_DATA,payload:{email,id,login,isAuth}});
 export const showUserPhoto = (smallUserPhoto) =>  ({type: SHOW_USER_PHOTO,smallUserPhoto});
 
-export const getAuthUserData =()=>{
-    return (dispatch)=>{
-        authAPI.me()
+export const getAuthUserData = () => (dispatch) => {
+        return authAPI.me()
             .then(data=>{
                 if (data.resultCode===0){
                     let {email,id,login}=data.data;
@@ -54,10 +50,9 @@ export const getAuthUserData =()=>{
                 }
             })
     }
-}
 
-export const login=(email,password,rememberMe)=>{
-    return (dispatch)=>{
+
+export const login = (email,password,rememberMe) => (dispatch) => {
         authAPI.login(email,password,rememberMe)
             .then(response=>{
                 if (response.data.resultCode===0){
@@ -69,10 +64,8 @@ export const login=(email,password,rememberMe)=>{
                 }
             })
     }
-}
 
-export const logout=()=>{
-    return (dispatch)=>{
+export const logout = () => (dispatch) => {
         authAPI.logout()
             .then(response=>{
                 if (response.data.resultCode===0){
@@ -80,8 +73,5 @@ export const logout=()=>{
                 }
             })
     }
-}
-
-
 
 export default authReducer;
