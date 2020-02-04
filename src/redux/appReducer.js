@@ -25,11 +25,9 @@ export const initialized = () => ({type: SET_INITIALIZED});
 
 export const initializeApp = () => (dispatch) => {
     let promise = dispatch(getAuthUserData());
-    debugger;
     Promise.all([promise]).then(() => {
         dispatch(initialized())
     })
-
 }
 
 

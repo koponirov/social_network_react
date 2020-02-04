@@ -13,12 +13,19 @@ let initialState = {
     pageUsersAmount: 5,
     totalUsersAmount: 20,
     currentPage: 1,
-    followingInProgress: [2]
+    followingInProgress: [2],
+    fake:10
 };
 
 const usersReducer = (state = initialState, action) => {
 
     switch (action.type) {
+        case 'FAKE':
+            return {
+                ...state,
+                fake:state.fake+1
+            }
+
         case FOLLOW:
             return {
                 ...state,
@@ -97,6 +104,7 @@ export const requestUsers = (currentPage, pageUsersAmount) => {
         dispatch(setIsLoading(true));
 
         usersAPI.getUsers(currentPage, pageUsersAmount).then(data => {
+            debugger
             dispatch(setIsLoading(false));
             dispatch(setUsers(data.items));
             dispatch(setTotalUsersAmount(data.totalCount))

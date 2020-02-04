@@ -1,6 +1,11 @@
+
+
 export const getUsers = (state) => {
+
     return state.usersPage.users
 };
+
+
 
 export const getPageUsersAmount = (state) => {
     return state.usersPage.pageUsersAmount

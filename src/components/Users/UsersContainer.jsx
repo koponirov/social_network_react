@@ -41,6 +41,7 @@ class UsersContainer extends React.Component {
     }*/
 
     render() {
+        console.log('render Users')
         return (<>
                 {this.props.isLoading ? <Preloader/> : null}
                 <Users
@@ -71,6 +72,8 @@ class UsersContainer extends React.Component {
 };*/
 
 let mapStateToProps = (state) => {
+    console.log('mapStateToProps Users')
+
     return {
         users: getUsers(state),
         pageUsersAmount: getPageUsersAmount(state),
