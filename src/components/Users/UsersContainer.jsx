@@ -1,19 +1,26 @@
 import {connect} from 'react-redux'
 import React from 'react'
 import {
-    setInProgress, getUsers, onPageChanged, follow, unfollow
+    setInProgress, onPageChanged, follow, unfollow, requestUsers
 } from '../../redux/usersReducer';
 import Users from "./Users";
 import Preloader from '../../common/Preloader/Preloader';
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPage, getFollowingInProgress,
+    getIsLoading,
+    getPageUsersAmount,
+    getTotalUsersAmount,
+    getUsers
+} from "../../redux/usersSelectors";
 
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
 
-        this.props.getUsers(this.props.currentPage, this.props.pageUsersAmount)
+        this.props.requestUsers(this.props.currentPage, this.props.pageUsersAmount)
 
         /*this.props.setIsLoading(true);
         usersAPI.getUsers(this.props.currentPage,this.props.pageUsersAmount)
@@ -52,7 +59,7 @@ class UsersContainer extends React.Component {
     }
 };
 
-let mapStateToProps = (state) => {
+/*let mapStateToProps = (state) => {
     return {
         users: state.usersPage.users,
         pageUsersAmount: state.usersPage.pageUsersAmount,
@@ -60,6 +67,17 @@ let mapStateToProps = (state) => {
         currentPage: state.usersPage.currentPage,
         isLoading: state.usersPage.isLoading,
         followingInProgress: state.usersPage.followingInProgress
+    }
+};*/
+
+let mapStateToProps = (state) => {
+    return {
+        users: getUsers(state),
+        pageUsersAmount: getPageUsersAmount(state),
+        totalUsersAmount: getTotalUsersAmount(state),
+        currentPage: getCurrentPage(state),
+        isLoading: getIsLoading(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 };
 
@@ -88,7 +106,7 @@ let mapStateToProps = (state) => {
 
 
 export default compose (
-    connect(mapStateToProps, {follow, unfollow, setInProgress, getUsers, onPageChanged}),
+    connect(mapStateToProps, {follow, unfollow, setInProgress, requestUsers, onPageChanged}),
     //withAuthRedirect
 ) (UsersContainer)
 

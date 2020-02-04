@@ -90,7 +90,7 @@ export const setInProgress = (inProgress, userId) => {
     return {type: TOGGLE_IS_FOLLOWING_PROGRESS, inProgress, userId}
 }
 
-export const getUsers = (currentPage, pageUsersAmount) => {
+export const requestUsers = (currentPage, pageUsersAmount) => {
 
     return (dispatch) => {
 
