@@ -1,6 +1,7 @@
 import {profileAPI} from "../api/api";
 
 const ADD_POST = 'ADD_POST';
+const DELETE_POST = 'DELETE_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const LOOKING_FOR_JOB = 'LOOKING_FOR_JOB';
 const SET_STATUS = 'SET_STATUS';
@@ -26,6 +27,14 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 posts: [...state.posts, {userId: 6, postText: action.newPost, likeCounter: 0}]
             }
+
+        case DELETE_POST:
+            return {
+                ...state,
+                posts: state.posts.filter(post=>post.userId != action.id)
+
+            }
+
         case SET_USER_PROFILE:
             return {
                 ...state,
@@ -49,6 +58,7 @@ const profileReducer = (state = initialState, action) => {
 };
 
 export const addPost = (newPost) => ({type: ADD_POST, newPost});
+export const deletePost = (id) => ({type: DELETE_POST, id});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const isLookingForAJob = (isLookingForAJob) => ({type: LOOKING_FOR_JOB, isLookingForAJob});
 export const setStatus = (status) => ({type: SET_STATUS, status});
