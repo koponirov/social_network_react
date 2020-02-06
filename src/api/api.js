@@ -58,9 +58,6 @@ export const profileAPI = {
 export const followAPI = {
     followToUser(userId) {
         return instance.delete(`follow/${userId}`)
-            .then(response => {
-                return response.data
-            })
     },
     unfollowToUser(userId) {
         return instance.post(`follow/${userId}`)

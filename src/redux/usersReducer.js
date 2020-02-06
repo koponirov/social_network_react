@@ -100,27 +100,31 @@ export const onPageChanged = (currentPageNumber, pageUsersAmount) => {
     }
 }
 
-export const follow = (userId) => {
-    return (dispatch) => {
-        dispatch(setInProgress(true, userId));
-        followAPI.followToUser(userId)
-            .then(data => {
-                if (data.resultCode == 0) {
-                    dispatch(unfollowUser(userId))
-                }
-                dispatch(setInProgress(false, userId));
-            });
+const followUnfollowFlow = async (dispatch, userId,apiMethod, actionCreator) => {
+    dispatch(setInProgress(true, userId));
+    let response = await apiMethod(userId)
+    if (response.data.resultCode == 0) {
+        dispatch(actionCreator(userId))
     }
+    dispatch(setInProgress(false, userId));
 }
 
+export const follow = (userId) => {
+    return async (dispatch) => {
+        followUnfollowFlow(
+            dispatch,
+            userId,
+            followAPI.followToUser.bind(followAPI),
+            unfollowUser)
+    }
+}
 export const unfollow = (userId) => {
     return async (dispatch) => {
-        dispatch(setInProgress(true, userId));
-        let response = await followAPI.unfollowToUser(userId)
-                if (response.data.resultCode == 0) {
-                    dispatch(followUser(userId))
-                }
-                dispatch(setInProgress(false, userId));
+        followUnfollowFlow(
+            dispatch,
+            userId,
+            followAPI.unfollowToUser.bind(followAPI),
+            followUser)
     }
 }
 
