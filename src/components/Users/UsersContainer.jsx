@@ -22,8 +22,7 @@ class UsersContainer extends React.Component {
     }
 
     render() {
-        console.log('render Users')
-        return (<>
+        return (<div>
                 {this.props.isLoading ? <Preloader/> : null}
                 <Users
                     onPageChanged={this.props.onPageChanged}
@@ -36,14 +35,13 @@ class UsersContainer extends React.Component {
                     setInProgress={this.props.setInProgress}
                     followingInProgress={this.props.followingInProgress}
                 />
-            </>
+            </div>
         )
     }
 };
 
 let mapStateToProps = (state) => {
-    console.log('mapStateToProps Users')
-
+    
     return {
         users: getUsers(state),
         pageUsersAmount: getPageUsersAmount(state),
