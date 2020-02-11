@@ -27,23 +27,28 @@ class App extends React.Component {
         } else {
 
             return (
-                <div className='app-wrapper'>
+
+                <div className='app'>
                     <HeaderContainer/>
-                    <Navbar/>
-                    <div className='app-wrapper-content'>
-                        <Route path='/profile/:userId?'
-                               render={() => <ProfileContainer/>}/>
-                        <Route path='/dialogs'
-                               render={() => <DialogsContainer store={this.props.store}/>}/>
-                        <Route path='/users'
-                               render={() => <UsersContainer store={this.props.store}/>}/>
-                        <Route path='/news' component={News}/>
-                        <Route path='/music' component={Music}/>
-                        <Route path='/settings' component={Settings}/>
-                        <Route path='/login'
-                               render={() => <Login store={this.props.store}/>}/>
+                    <div className='body'>
+                        <Navbar/>
+                        <div className='app-wrapper-content'>
+
+                            <Route path='/profile/:userId?'
+                                   render={() => <ProfileContainer/>}/>
+                            <Route path='/dialogs'
+                                   render={() => <DialogsContainer store={this.props.store}/>}/>
+                            <Route path='/users'
+                                   render={() => <UsersContainer store={this.props.store}/>}/>
+                            <Route path='/news' component={News}/>
+                            <Route path='/music' component={Music}/>
+                            <Route path='/settings' component={Settings}/>
+                            <Route path='/login'
+                                   render={() => <Login store={this.props.store}/>}/>
+                        </div>
                     </div>
                 </div>
+
             )
         }
     }
@@ -54,4 +59,4 @@ const mapStateToProps = (state) => ({
     initialized: state.app.initialized
 })
 
-export default connect (mapStateToProps,{initializeApp})(App);
+export default connect(mapStateToProps, {initializeApp})(App);

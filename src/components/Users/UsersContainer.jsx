@@ -8,9 +8,8 @@ import Preloader from '../../common/Preloader/Preloader';
 import {compose} from "redux";
 import {
     getCurrentPage, getFollowingInProgress,
-    getIsLoading,
-    getPageUsersAmount,
-    getTotalUsersAmount,
+    getIsLoading, getPageSize,
+    getTotalUsersCount,
     getUsers
 } from "../../redux/usersSelectors";
 
@@ -18,7 +17,7 @@ import {
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageUsersAmount)
+        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
     }
 
     render() {
@@ -28,8 +27,8 @@ class UsersContainer extends React.Component {
                     onPageChanged={this.props.onPageChanged}
                     currentPage={this.props.currentPage}
                     users={this.props.users}
-                    totalUsersAmount={this.props.totalUsersAmount}
-                    pageUsersAmount={this.props.pageUsersAmount}
+                    totalUsersCount={this.props.totalUsersCount}
+                    pageSize={this.props.pageSize}
                     follow={this.props.follow}
                     unfollow={this.props.unfollow}
                     setInProgress={this.props.setInProgress}
@@ -44,8 +43,8 @@ let mapStateToProps = (state) => {
     
     return {
         users: getUsers(state),
-        pageUsersAmount: getPageUsersAmount(state),
-        totalUsersAmount: getTotalUsersAmount(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
         isLoading: getIsLoading(state),
         followingInProgress: getFollowingInProgress(state)

@@ -1,3 +1,43 @@
-.selected {
+
+.paginator {
+    margin: 10px;
+}
+.pageNumber {
+    padding: 3px;
+    color: papayawhip;
+    cursor: pointer;
+}
+
+.pageNumber:hover {
+    color: cornflowerblue;
+}
+
+.pageNumber.selectedPage {
     font-weight: bold;
+    color: yellow;
+}
+
+.paginator button {
+    /* по-умолчанию для <button>, но пригодится для <a> */
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    /* создаём маленькие отступы, если кнопки перенесутся на две строки */
+    margin: 2px 0;
+    /* невидимая граница (понадобится для цвета при наведении/фокусе) */
+    border: solid 1px transparent;
+    border-radius: 4px;
+    /* размер строится из текста и отступов (без width/height) */
+    padding: 0.5em 1em;
+    /* убедитесь, что достаточно контраста! */
+    color: whitesmoke;
+    background-color: #edd926;
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.paginator button:hover {
+    color: cornflowerblue;
+    
 }

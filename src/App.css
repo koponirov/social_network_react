@@ -1,22 +1,30 @@
-.app-wrapper {
-  margin:0 auto;
+.app {
+  background-color: darkgray;
+
+
+}
+
+.app .body {
+  width:1140px;
+  min-height: 100vh;
+  margin: 0 auto;
   display: grid;
-  width:1360px;
 
-  grid-template-rows:60px 1fr;
+  padding: 5px;
   grid-template-columns: 2fr 10fr;
-  grid-gap: 10px;
+  grid-gap: 5px;
 
-  grid-template-areas: 
-  "header header"
-  "navbar content"
+  grid-template-areas:
+
+          "navbar content"
 }
 
 .app-wrapper-content {
   grid-area: content;
   background-color: dimgrey;
+}
 
-}  
+
 
 
 

@@ -10,8 +10,8 @@ const TOGGLE_IS_FOLLOWING_PROGRESS = 'socialNetwork/users/TOGGLE_IS_FOLLOWING_PR
 
 let initialState = {
     users: [],
-    pageUsersAmount: 5,
-    totalUsersAmount: 20,
+    pageSize: 5,
+    totalUsersCount: 20,
     currentPage: 1,
     followingInProgress: [2],
 };
@@ -52,7 +52,7 @@ const usersReducer = (state = initialState, action) => {
         case SET_TOTAL_USERS:
             return {
                 ...state,
-                totalUsersAmount: action.totalUsers
+                totalUsersCount: action.totalUsers
             }
         case TOGGLE_IS_LOADING:
             return {
@@ -75,26 +75,26 @@ export const followUser = (userId) => ({type: FOLLOW, userId});
 export const unfollowUser = (userId) => ({type: UNFOLLOW, userId});
 export const setUsers = (users) => ({type: SET_USERS, users});
 export const setCurrentPage = (pageNumber) => ({type: SET_CURRENT_PAGE, pageNumber});
-export const setTotalUsersAmount = (totalUsers) => ({type: SET_TOTAL_USERS, totalUsers});
+export const setTotalUsersCount = (totalUsers) => ({type: SET_TOTAL_USERS, totalUsers});
 export const setIsLoading = (isLoading) => ({type: TOGGLE_IS_LOADING, isLoading});
 export const setInProgress = (inProgress, userId) => {
     return {type: TOGGLE_IS_FOLLOWING_PROGRESS, inProgress, userId}
 }
-export const requestUsers = (currentPage, pageUsersAmount) => {
+export const requestUsers = (currentPage, pageSize) => {
     return async (dispatch) => {
         dispatch(setIsLoading(true));
-        let response = await usersAPI.getUsers(currentPage, pageUsersAmount)
+        let response = await usersAPI.getUsers(currentPage, pageSize)
             dispatch(setIsLoading(false));
             dispatch(setUsers(response.data.items));
-            dispatch(setTotalUsersAmount(response.data.totalCount))
+            dispatch(setTotalUsersCount(response.data.totalCount))
     }
 }
 
-export const onPageChanged = (currentPageNumber, pageUsersAmount) => {
+export const onPageChanged = (currentPageNumber, pageSize) => {
     return async (dispatch) => {
         dispatch(setIsLoading(true));
         dispatch(setCurrentPage(currentPageNumber));
-        let response = await usersAPI.getUsers(currentPageNumber, pageUsersAmount)
+        let response = await usersAPI.getUsers(currentPageNumber, pageSize)
             dispatch(setIsLoading(false));
             dispatch(setUsers(response.data.items));
     }

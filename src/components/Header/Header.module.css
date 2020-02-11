@@ -1,27 +1,73 @@
-
 .header {
-  grid-area: header;
-  background-color: darkslategrey;
-  padding: 5px;
+    background-color: darkslategrey;
+    color: whitesmoke;
+    min-height: 60px;;
 }
 
-.header img {
-  width: 45px;
+.header .container {
+    width: 1140px;
+    margin: 0 auto;
 }
 
-.header .loginBlock{
-  float:right;
+.header .logo {
+    width: 45px;
 }
 
-.header .loginBlock a{
-  color: whitesmoke;
+.header .loginBlock_container {
+    float: right;
+    padding: 2px;
+
 }
 
-.header .loginBlock .userBlock {
-  color: whitesmoke;
+.header .loginBlock_container .loginBlock {
+    display: grid;
+
+    grid-template-rows: 35px 25px;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: "name ava" "logout ava"
+
 }
 
-.header .loginBlock .userBlock img{
-  width: 50px;
-  border-radius: 50%;
+.header .loginBlock_container .loginBlock .userName {
+    grid-area: name;
+    font-size: 23px;
+    font-weight: bolder;
+    text-align: center;
+    cursor: pointer;
+}
+
+.header .loginBlock_container .loginBlock .userAva {
+    grid-area: ava;
+    cursor: pointer;
+}
+
+.header .loginBlock_container .loginBlock .userAva img {
+    width: 49px;
+    padding: 2px;
+    border: 2px solid deepskyblue;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+.header .loginBlock_container .loginBlock .logout {
+    grid-area: logout;
+    color: darkgray;
+    text-align: center;
+}
+
+.header .loginBlock_container .loginBlock .logout span {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.header .loginBlock_container .loginBlock .login {
+    min-height: 50px;
+    padding: 2px;
+}
+
+.login a {
+    text-decoration: none;
+    cursor: pointer;
+    color: whitesmoke;
 }

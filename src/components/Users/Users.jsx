@@ -10,8 +10,8 @@ const Users = (props) => {
     return (
         <div className={style.wrapper}>
             <Pagination
-                totalUsersAmount={props.totalUsersAmount}
-                pageUsersAmount={props.pageUsersAmount}
+                totalItems={props.totalUsersCount}
+                pageSize={props.pageSize}
                 onPageChanged={props.onPageChanged}
                 currentPage={props.currentPage}
             />
