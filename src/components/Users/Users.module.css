@@ -24,3 +24,14 @@
     width: 50px;
 }
 
+.preloader_container {
+    width: 120px;
+    height: 25px;
+    margin-left:10px ;
+
+}
+
+.preloader_container img {
+    margin: 0 auto;
+
+}

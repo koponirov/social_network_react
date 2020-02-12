@@ -22,7 +22,7 @@ class UsersContainer extends React.Component {
 
     render() {
         return (<div>
-                {this.props.isLoading ? <Preloader/> : null}
+
                 <Users
                     onPageChanged={this.props.onPageChanged}
                     currentPage={this.props.currentPage}
@@ -33,6 +33,7 @@ class UsersContainer extends React.Component {
                     unfollow={this.props.unfollow}
                     setInProgress={this.props.setInProgress}
                     followingInProgress={this.props.followingInProgress}
+                    isLoading={this.props.isLoading}
                 />
             </div>
         )

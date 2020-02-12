@@ -2,6 +2,7 @@ import React from 'react'
 import style from "./Users.module.css";
 import Pagination from "../../common/Pagination/Pagination";
 import User from "./User";
+import Preloader from "../../common/Preloader/Preloader";
 
 
 const Users = (props) => {
@@ -15,7 +16,9 @@ const Users = (props) => {
                 onPageChanged={props.onPageChanged}
                 currentPage={props.currentPage}
             />
-
+<div className={style.preloader_container}>
+    {props.isLoading ? <Preloader/> : null}
+</div>
             {
                 props.users.map(u => <User
                         user={u}
