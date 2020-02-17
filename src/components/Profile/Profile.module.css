@@ -3,7 +3,7 @@
 }
 
 .content img {
-    width: 100px ;
-    padding-left: 10px;
+    width: 200px ;
     margin-top: 10px;
+    border-radius: 5%;
 }

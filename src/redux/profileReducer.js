@@ -5,6 +5,7 @@ const DELETE_POST = 'socialNetwork/profile/DELETE_POST';
 const SET_USER_PROFILE = 'socialNetwork/profile/SET_USER_PROFILE';
 const LOOKING_FOR_JOB = 'socialNetwork/profile/LOOKING_FOR_JOB';
 const SET_STATUS = 'socialNetwork/profile/SET_STATUS';
+const SAVE_PHOTO_SUCCES = 'socialNetwork/profile/SAVE_PHOTO_SUCCES';
 
 let initialState = {
     posts: [
@@ -44,6 +45,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 status: action.status
             }
+        case SAVE_PHOTO_SUCCES:
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.file}
+            }
         default:
             return state;
     }
@@ -54,6 +60,8 @@ export const deletePost = (id) => ({type: DELETE_POST, id});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const isLookingForAJob = (isLookingForAJob) => ({type: LOOKING_FOR_JOB, isLookingForAJob});
 export const setStatus = (status) => ({type: SET_STATUS, status});
+export const savePhotoSuccess = (file) => ({type: SAVE_PHOTO_SUCCES, file});
+
 
 export const getUserProfile = (id) => async (dispatch) => {
     let data = await profileAPI.getUserProfile(id);
@@ -70,6 +78,13 @@ export const updateUserStatus = (status) => async (dispatch) => {
     let response = await profileAPI.updateUserStatus(status);
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status))
+    }
+}
+
+export const savePhoto = (file) => async (dispatch) => {
+    let response = await profileAPI.savePhoto(file);
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos))
     }
 }
 
