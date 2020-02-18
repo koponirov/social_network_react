@@ -4,6 +4,7 @@ import {NavLink} from "react-router-dom";
 import defaultPhoto from '../../assets/images/ussser.svg'
 
 const Header = (props) => {
+
     return <header className={style.header}>
         <div className={style.container}>
             <img src='https://image.flaticon.com/icons/png/512/68/68637.png' alt='logo'
@@ -14,14 +15,18 @@ const Header = (props) => {
 
                         <div className={style.userName}>{props.login}</div>
 
-                        <div className={style.userAva}><img src={props.photo ? props.photo : defaultPhoto}
-                                  alt='photo'/></div>
+                        <div className={style.userAva}>
+                            <img src={props.profile !=null && props.profile.photos.small ?
+                                props.profile.photos.small : defaultPhoto} alt='photo'/>
+                        </div>
 
                         <div className={style.logout}><span onClick={props.logout}>logout</span></div>
                     </div>
 
 
-                    : <div className={style.loginBlock}><NavLink className={style.login} to={'/login'}>Login</NavLink></div>}
+                    : <div className={style.loginBlock}>
+                        <NavLink className={style.login} to={'/login'}>Login</NavLink>
+                    </div>}
             </div>
         </div>
     </header>

@@ -66,7 +66,7 @@ export const savePhotoSuccess = (file) => ({type: SAVE_PHOTO_SUCCES, file});
 export const getUserProfile = (id) => async (dispatch) => {
     let data = await profileAPI.getUserProfile(id);
     dispatch(setUserProfile(data));
-    dispatch(isLookingForAJob(data.lookingForAJob))
+
 }
 
 export const getUserStatus = (userId) => async (dispatch) => {
