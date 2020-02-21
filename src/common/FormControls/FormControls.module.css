@@ -16,4 +16,5 @@
 .error {
     padding: 5px;
     border: red outset 2px;
+    color: crimson;
 }

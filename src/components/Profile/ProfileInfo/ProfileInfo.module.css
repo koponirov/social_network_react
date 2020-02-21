@@ -2,3 +2,9 @@
      margin-top: 5px;
      padding: 10px;
  }
+
+.formWrapper input,textarea{
+    border: 1px outset cornflowerblue;
+    border-radius: 5px;
+
+}

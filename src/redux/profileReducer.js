@@ -1,4 +1,5 @@
 import {profileAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = 'socialNetwork/profile/ADD_POST';
 const DELETE_POST = 'socialNetwork/profile/DELETE_POST';
@@ -58,33 +59,49 @@ const profileReducer = (state = initialState, action) => {
 export const addPost = (newPost) => ({type: ADD_POST, newPost});
 export const deletePost = (id) => ({type: DELETE_POST, id});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
-export const isLookingForAJob = (isLookingForAJob) => ({type: LOOKING_FOR_JOB, isLookingForAJob});
+
 export const setStatus = (status) => ({type: SET_STATUS, status});
 export const savePhotoSuccess = (file) => ({type: SAVE_PHOTO_SUCCES, file});
 
 
 export const getUserProfile = (id) => async (dispatch) => {
-    let data = await profileAPI.getUserProfile(id);
+    const data = await profileAPI.getUserProfile(id);
     dispatch(setUserProfile(data));
 
 }
 
 export const getUserStatus = (userId) => async (dispatch) => {
-    let data = await profileAPI.getUserStatus(userId);
+    const data = await profileAPI.getUserStatus(userId);
     dispatch(setStatus(data));
 }
 
 export const updateUserStatus = (status) => async (dispatch) => {
-    let response = await profileAPI.updateUserStatus(status);
+    const response = await profileAPI.updateUserStatus(status);
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status))
     }
 }
 
 export const savePhoto = (file) => async (dispatch) => {
-    let response = await profileAPI.savePhoto(file);
+    const response = await profileAPI.savePhoto(file);
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))
+    }
+}
+
+export const saveProfileData = (formData) => async (dispatch,getState) => {
+    let response = await profileAPI.saveProfileData(formData);
+    if (response.data.resultCode === 0) {
+        debugger;
+        const userId=getState().auth.id
+        const data = await profileAPI.getUserProfile(userId);
+        dispatch(setUserProfile(data));
+    }
+    else {
+        let errorMessage = response.data.messages.length > 0 ? response.data.messages[0] : 'Oops';
+        console.log(errorMessage)
+        dispatch(stopSubmit('profileData', {_error: errorMessage}));
+        return Promise.reject(errorMessage)
     }
 }
 

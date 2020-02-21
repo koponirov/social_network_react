@@ -1,49 +1,73 @@
-import React from 'react';
+import React, {useState} from 'react';
 import style from './ProfileInfo.module.css';
 import Preloader from "../../../common/Preloader/Preloader";
 import photo from '../../../assets/images/ussser.svg'
 import ProfileStatusWithHooks from "../ProfileStatus/ProfileStatusWithHooks";
+import {ProfileDataFormRedux} from "../ProfileDataForm";
 
 
-const ProfileInfo = ({profile,isOwner,status,updateStatus,savePhoto}) => {
+const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto,saveProfileData}) => {
 
-    if(!profile){
+    const [editMode, setEditMode] = useState(false)
+
+    if (!profile) {
         return <Preloader/>
     }
 
-    const onMainPhotoSelected = (e)=> {
+    const onMainPhotoSelected = (e) => {
         if (e.target.files.length) {
             savePhoto(e.target.files[0])
         }
     }
 
+    const onSubmit = (formData) => {
+        saveProfileData(formData).then(
+            () => {setEditMode(false)})
+    };
+
+
     return (
+        <div className={style.description}>
 
-        <div>
-            <div className={style.description}>
-                <div><b>{profile.fullName}</b></div>
-                <img src={profile.photos.large !=null ? profile.photos.large : photo} alt='user photo' />
-                {isOwner && <input type='file' onChange={onMainPhotoSelected}/>}
-                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
-                <div><b>About me:</b> {profile.aboutMe}</div>
-                <div><b>Looking for a job:</b> {profile.lookingForAJob? 'yes': 'not'}</div>
-                <div><b>Professional skills:</b> {profile.lookingForAJob}</div>
-
-                <div>
-                    <b>Contacts:</b> {Object.keys(profile.contacts).map(key=>{
-                       return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
-                })}
-                </div>
-
-            </div>
+            <img src={profile.photos.large != null ? profile.photos.large : photo} alt='user photo'/>
+            {isOwner && <input type='file' onChange={onMainPhotoSelected}/>}
+            <ProfileStatusWithHooks status={status} isOwner={isOwner} updateStatus={updateStatus}/>
+            {editMode ?
+                <ProfileDataFormRedux initialValues={profile} onSubmit={onSubmit} profile={profile} /> :
+                <ProfileData profile={profile}
+                             isOwner={isOwner}
+                             activateEditMode={() => {
+                                 setEditMode(true)
+                             }}/>
+            }
         </div>
     )
 }
 
-const Contact = ({contactTitle,contactValue}) => {
+const Contact = ({contactTitle, contactValue}) => {
     return (
         <div><b>{contactTitle}</b> {contactValue}</div>
     )
+};
+
+const ProfileData = ({profile, isOwner, activateEditMode}) => {
+    return (
+        <div>
+            <div><b>{profile.fullName}</b></div>
+            <div><b>About me:</b> {profile.aboutMe}</div>
+            <div><b>Looking for a job:</b> {profile.lookingForAJob ? 'yes' : 'not'}</div>
+            <div><b>Professional skills:</b> {profile.lookingForAJobDescription}</div>
+            <div>
+                <b>Contacts:</b> {Object.keys(profile.contacts).map(key => {
+                return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+            })}
+            </div>
+            {isOwner && <button onClick={activateEditMode}>edit</button>}
+        </div>
+    )
 }
+
+
+
 
 export default ProfileInfo;
