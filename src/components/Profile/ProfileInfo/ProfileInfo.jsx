@@ -5,7 +5,6 @@ import photo from '../../../assets/images/ussser.svg'
 import ProfileStatusWithHooks from "../ProfileStatus/ProfileStatusWithHooks";
 import {ProfileDataFormRedux} from "../ProfileDataForm";
 
-
 const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto,saveProfileData}) => {
 
     const [editMode, setEditMode] = useState(false)
@@ -24,7 +23,6 @@ const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto,saveProf
         saveProfileData(formData).then(
             () => {setEditMode(false)})
     };
-
 
     return (
         <div className={style.description}>
@@ -66,8 +64,5 @@ const ProfileData = ({profile, isOwner, activateEditMode}) => {
         </div>
     )
 }
-
-
-
 
 export default ProfileInfo;

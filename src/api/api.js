@@ -23,8 +23,8 @@ export const authAPI = {
             })
     },
 
-    login (email,password,rememberMe = false) {
-        return instance.post('auth/login',{email,password,rememberMe})
+    login (email,password,rememberMe = false,captcha = null) {
+        return instance.post('auth/login',{email,password,rememberMe,captcha})
     },
 
     logout () {
@@ -75,6 +75,12 @@ export const followAPI = {
     },
     unfollowToUser(userId) {
         return instance.post(`follow/${userId}`)
+    }
+}
+
+export const securityAPI = {
+    getCapthaUrl() {
+        return instance.get('security/get-captcha-url')
     }
 }
 
