@@ -6,5 +6,12 @@
 .formWrapper input,textarea{
     border: 1px outset cornflowerblue;
     border-radius: 5px;
+    vertical-align:middle
+}
 
+
+
+.titleData {
+    min-width: 170px;
+    display: inline-block;
 }
