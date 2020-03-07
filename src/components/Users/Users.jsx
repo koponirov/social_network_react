@@ -7,7 +7,6 @@ import Preloader from "../../common/Preloader/Preloader";
 
 const Users = (props) => {
 
-
     return (
         <div className={style.wrapper}>
             <Pagination

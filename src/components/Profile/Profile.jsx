@@ -13,7 +13,8 @@ const Profile = (props) => {
                          savePhoto={props.savePhoto}
                          saveProfileData={props.saveProfileData}
             />
-            <MyPostsContainer/>
+            { props.isOwner ? <MyPostsContainer/> : ''}
+
         </div>
     )
 }

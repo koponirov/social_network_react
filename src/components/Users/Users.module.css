@@ -35,3 +35,39 @@
     margin: 0 auto;
 
 }
+
+.list {
+    height: 100vh;
+    padding: 10px;
+}
+
+.list .listItem {
+    border-bottom: 1px solid lavenderblush;
+    text-align: left;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+
+}
+
+.list .listItem .content,.status {
+    padding: 10px;
+    text-decoration: none;
+    color: darksalmon;
+}
+
+
+.list .listItem .status {
+    font-size: 12px;
+}
+
+.list .listItem img{
+    height: 40px;
+    border: 1px outset wheat;
+    border-radius: 50%;
+}
+
+.noScroll::-webkit-scrollbar {
+    display: none;
+
+}

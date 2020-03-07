@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import React from 'react'
 import {
-    setInProgress, onPageChanged, follow, unfollow, requestUsers
+    setInProgress, onPageChanged, follow, unfollow, requestUsers, requestMoreUsers
 } from '../../redux/usersReducer';
 import Users from "./Users";
 import Preloader from '../../common/Preloader/Preloader';
@@ -12,29 +12,25 @@ import {
     getTotalUsersCount,
     getUsers
 } from "../../redux/usersSelectors";
+import UsersList from "./UsersList";
 
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
+        this.props.requestUsers(this.props.currentPage, 2)
     }
 
     render() {
         return (<div>
-
-                <Users
-                    onPageChanged={this.props.onPageChanged}
+                { this.props.users ? <UsersList
                     currentPage={this.props.currentPage}
                     users={this.props.users}
-                    totalUsersCount={this.props.totalUsersCount}
                     pageSize={this.props.pageSize}
-                    follow={this.props.follow}
-                    unfollow={this.props.unfollow}
-                    setInProgress={this.props.setInProgress}
-                    followingInProgress={this.props.followingInProgress}
                     isLoading={this.props.isLoading}
-                />
+                    requestMoreUsers = {this.props.requestMoreUsers}
+                />: <Preloader/>}
+
             </div>
         )
     }
@@ -53,7 +49,7 @@ let mapStateToProps = (state) => {
 };
 
 export default compose (
-    connect(mapStateToProps, {follow, unfollow, setInProgress, requestUsers, onPageChanged}),
+    connect(mapStateToProps, {follow, unfollow, setInProgress, requestUsers, requestMoreUsers, onPageChanged}),
     //withAuthRedirect
 ) (UsersContainer)
 

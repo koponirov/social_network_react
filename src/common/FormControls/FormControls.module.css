@@ -6,6 +6,7 @@
 .formControls input
 {
     border: firebrick outset 2px;
+
 }
 
 .formControls span {
@@ -17,4 +18,10 @@
     padding: 5px;
     border: red outset 2px;
     color: crimson;
+}
+
+.field {
+    display: inline-block;
+
+
 }

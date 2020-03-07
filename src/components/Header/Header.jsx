@@ -16,8 +16,8 @@ const Header = (props) => {
                         <div className={style.userName}>{props.login}</div>
 
                         <div className={style.userAva}>
-                            <img src={props.profile !=null && props.profile.photos.small ?
-                                props.profile.photos.small : defaultPhoto} alt='photo'/>
+                            <img src={props.photo !=null  ?
+                                props.photo : defaultPhoto} alt='photo'/>
                         </div>
 
                         <div className={style.logout}><span onClick={props.logout}>logout</span></div>
