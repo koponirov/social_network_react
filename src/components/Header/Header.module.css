@@ -8,7 +8,6 @@
     color: whitesmoke;
     min-height: 60px;;
 }
-
 .header:before {
     content: '';
     position: absolute;
@@ -19,7 +18,6 @@
     background-color: #f54949;
     z-index: 2;
 }
-
 .header .container {
     max-width: 1180px;
     margin: 0 auto;
@@ -130,14 +128,9 @@
         margin: 0px 0px 20px 0px;
     }
 }
-
-
-
-
 .header__auth {
     padding: 3px 5px 3px 0px;
     z-index: 3;
-
 }
 .header__auth__info {
     display: flex;
@@ -149,6 +142,10 @@
     flex-direction: column;
     align-items: center;
     margin-right: 5px;
+}
+.header__auth__content a{
+    color:whitesmoke;
+    text-decoration: none;
 }
 .header__auth__name {
     font-size: 18px;
@@ -165,5 +162,15 @@
 .header__auth__logout {
     color: gainsboro;
     font-size: 14px;
+    cursor: pointer;
+}
+.header__auth__login {
+    margin-right: 30px;
+
+}
+.header__auth__login a {
+    color: whitesmoke;
+    text-decoration: none;
+    cursor: pointer;
 }
 

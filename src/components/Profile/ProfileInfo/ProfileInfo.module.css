@@ -1,16 +1,15 @@
 .description {
-     margin-top: 5px;
-     padding: 10px;
+     padding: 10px 10px 10px 30px;
+    color: whitesmoke;
  }
-
+.description img{
+    margin: 0;
+}
 .formWrapper input,textarea{
     border: 1px outset cornflowerblue;
     border-radius: 5px;
     vertical-align:middle
 }
-
-
-
 .titleData {
     min-width: 170px;
     display: inline-block;

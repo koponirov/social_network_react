@@ -38,7 +38,7 @@
 
 .list {
     height: 100vh;
-    padding: 10px;
+    padding: 10px 0px 0px 30px;
 }
 
 .list .listItem {
@@ -75,7 +75,7 @@
 
 .list .listItem img{
     height: 40px;
-    border: 1px outset #cf8f8f;
+    border: 1px solid #cf8f8f;
     border-radius: 50%;
 }
 

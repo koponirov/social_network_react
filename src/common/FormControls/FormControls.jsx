@@ -11,7 +11,7 @@ export const Textarea = ({input, meta, ...props}) => {
             <div>
                 <textarea {...input} {...props} />
             </div>
-            <div>
+            <div >
                 {hasError && <span> {meta.error} </span>}
             </div>
         </div>

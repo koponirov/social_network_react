@@ -1,0 +1,43 @@
+.login__wrapper {
+    margin-left: 20px;
+    color:whitesmoke;
+}
+.login__field {
+    padding-top: 5px ;
+}
+.login__field input{
+    border-radius: 5px;
+}
+.login__checkbox {
+    padding-top: 10px ;
+}
+.login__btn {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    text-decoration: none;
+    outline: none;
+    display: inline-block;
+    width: 80px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 35px;
+    margin-top: 5px;
+    font-size: 11px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: bold;
+    color: #524f4e;
+    background: whitesmoke;
+    box-shadow: 0 8px 15px rgba(0,0,0,.1);
+    transition: .3s;
+}
+.login__btn:hover {
+    background: #f54949;
+
+    color: white;
+
+}

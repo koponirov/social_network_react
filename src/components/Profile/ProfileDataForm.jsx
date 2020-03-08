@@ -8,6 +8,7 @@ const ProfileDataForm = (props) => {
 
     return (
         <form onSubmit={props.handleSubmit} className={style.formWrapper}>
+
             <div >
                 <div className={style.titleData}><b>FullName:</b></div>{createField('Full name','fullName',[],Input)}
             </div>

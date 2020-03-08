@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {login} from "../../redux/authReducer";
 import {Redirect} from "react-router-dom";
 import styles from '../../common/FormControls/FormControls.module.css'
+import s from './Login.module.css'
 
 
 const Login = (props) => {
@@ -20,8 +21,9 @@ const Login = (props) => {
     }
 
     return (
-        <div>
-            <h1>LOGIN</h1>
+        <div className={s.login__wrapper}>
+            <h3>LOGIN</h3>
+            <span>Please, fill your e-mail address and password to enter</span>
             <LoginReduxForm onSubmit={onSubmit} captcha={props.captcha}/>
         </div>
     )
@@ -32,16 +34,17 @@ const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
 
-            <div>
+            <div className={s.login__field}>
                 {createField('email','email',[required],Input)}
             </div>
 
-            <div>
+            <div className={s.login__field}>
                 {createField('password','password',[required],Input,{type:'password'})}
             </div>
 
-            <div>
-                {createField('','rememberMe',[],Input,{type:'checkbox'},'remember me')}
+            <div className={s.login__checkbox}>
+                {createField('','rememberMe',[],Input,{type:'checkbox'},'')}
+                <label>remember me</label>
             </div>
 
             {props.captcha && <img src={props.captcha}/>}
@@ -53,8 +56,8 @@ const LoginForm = (props) => {
                     {props.error}
                 </div>
             }
-            <div>
-                <button>Login</button>
+            <div >
+                <button className={s.login__btn}>Login</button>
             </div>
         </form>
     )

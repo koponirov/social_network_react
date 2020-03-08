@@ -10,7 +10,7 @@ const Header = (props) => {
     return <header className={s.header}>
         <div className={s.container}>
             <div className={s.header__body}>
-                <nav className={active?`${s.header__menu} ${s.active}`:s.header__menu}>
+                <nav className={active ? `${s.header__menu} ${s.active}` : s.header__menu}>
                     <ul className={s.header__list}>
                         <li>
                             <NavLink to='/profile' className={s.header__link}>Profile</NavLink>
@@ -23,7 +23,8 @@ const Header = (props) => {
                         </li>
                     </ul>
                 </nav>
-                <div onClick={()=>setActive(!active)} className={active?`${s.header__burger} ${s.active}`:s.header__burger}>
+                <div onClick={() => setActive(!active)}
+                     className={active ? `${s.header__burger} ${s.active}` : s.header__burger}>
                     <span></span>
                 </div>
                 <div className={s.header__auth}>
@@ -31,18 +32,21 @@ const Header = (props) => {
                         <div className={s.header__auth__info}>
 
                             <div className={s.header__auth__content}>
-                                <div className={s.header__auth__name}>{props.login}</div>
+                                <NavLink to='/profile'>
+                                    <div className={s.header__auth__name}>{props.login}</div>
+                                </NavLink>
                                 <div className={s.header__auth__logout}><span onClick={props.logout}>logout</span></div>
                             </div>
                             <div className={s.header__auth__ava}>
-                                <img src={props.photo != null ?
-                                    props.photo : defaultPhoto} alt='photo'/>
+                                <NavLink to='/profile'>
+                                    <img src={props.photo != null ?
+                                        props.photo : defaultPhoto} alt='photo'/>
+                                </NavLink>
                             </div>
                         </div>
 
-
-                        : <div className={s.loginBlock}>
-                            <NavLink className={s.login} to={'/login'}>Login</NavLink>
+                        : <div className={s.header__auth__login}>
+                            <NavLink className={s.header__login} to={'/login'}>Login</NavLink>
                         </div>}
                 </div>
             </div>

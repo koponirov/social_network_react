@@ -1,22 +1,24 @@
-.formControls {
+.formControls div {
+    display: inline-block;
 
 }
-
 .formControls textarea,
 .formControls input
 {
-    border: firebrick outset 2px;
-
+    border: #d63a51 solid 2px;
 }
-
 .formControls span {
-    color: firebrick;
+    margin-left: 5px;
+    color: #d63a51;
     font-size: 18px;
+}
+.formControls__error_text {
+    border: 1px red solid;
 }
 
 .error {
     padding: 5px;
-    border: red outset 2px;
+    border: #d63a51 solid 2px;
     color: crimson;
 }
 
