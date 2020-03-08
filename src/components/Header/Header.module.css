@@ -1,73 +1,169 @@
 .header {
-    background-color: darkslategrey;
+    position: fixed;
+    width:100%;
+    top:0;
+    left:0;
+    z-index: 50;
+    background-color: #f54949;
     color: whitesmoke;
     min-height: 60px;;
 }
 
-.header .container {
-    width: 1140px;
-    margin: 0 auto;
+.header:before {
+    content: '';
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: #f54949;
+    z-index: 2;
 }
 
-.header .logo {
+.header .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0px 10px;
+}
+
+.header__body {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    align-items: center;
+}
+
+.header__menu{
+}
+
+.header__burger{
+    display: none;
+}
+.header__list {
+    display: flex;
+    position: relative;
+    z-index: 2;
+}
+.header__list li {
+    list-style: none;
+    margin-left: 20px;
+}
+.header__link {
+    color: whitesmoke;
+    text-transform: uppercase;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+@media (max-width: 767px) {
+    .header__body {
+        height: 50px;
+    }
+    .header__burger {
+        display: block;
+        position: relative;
+        width: 30px;
+        height: 20px;
+        z-index: 3;
+    }
+    .header__burger span{
+        position: absolute;
+        background-color: whitesmoke;
+        width: 100%;
+        height: 2px;
+        left: 0px;
+        top: 9px;
+    }
+    .header__burger:before,
+    .header__burger:after {
+        content: '';
+        background-color: whitesmoke;
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        left: 0px;
+    }
+    .header__burger:before {
+        top:0px;
+        transition: all 0.2s ease 0s;
+    }
+    .header__burger:after {
+        bottom: 0px;
+        transition: all 0.2s ease 0s;
+    }
+    .header__burger.active:before {
+        transform: rotate(45deg);
+        top:9px;
+        transition: all 0.2s ease 0s;
+
+    }
+    .header__burger.active:after {
+        transform: rotate(-45deg);
+        bottom:9px;
+        transition: all 0.2s ease 0s;
+
+    }
+    .header__burger.active span{
+        transform: scale(0);
+    }
+    .header__menu {
+        position: fixed;
+        top: -200%;
+        left: 0px;
+        width: 30%;
+        height: 100%;
+        background-color: coral;
+        padding: 60px 10px 20px 10px;
+        transition: all 0.6s ease 0s;
+    }
+    .header__menu.active {
+        top:0px;
+        transition: all 0.3s ease 0s;
+    }
+    .header__list {
+        display: block;
+        padding: 0px ;
+    }
+    .header__list li {
+
+        margin: 0px 0px 20px 0px;
+    }
+}
+
+
+
+
+.header__auth {
+    padding: 3px 5px 3px 0px;
+    z-index: 3;
+
+}
+.header__auth__info {
+    display: flex;
+    align-items: center;
+
+}
+.header__auth__content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 5px;
+}
+.header__auth__name {
+    font-size: 18px;
+    font-weight: bold;
+}
+.header__auth__ava {
     width: 45px;
 }
-
-.header .loginBlock_container {
-    float: right;
-    padding: 2px;
-
-}
-
-.header .loginBlock_container .loginBlock {
-    display: grid;
-
-    grid-template-rows: 35px 25px;
-    grid-template-columns: 2fr 1fr;
-    grid-template-areas: "name ava" "logout ava"
-
-}
-
-.header .loginBlock_container .loginBlock .userName {
-    grid-area: name;
-    font-size: 23px;
-    font-weight: bolder;
-    text-align: center;
-    cursor: pointer;
-}
-
-.header .loginBlock_container .loginBlock .userAva {
-    grid-area: ava;
-    cursor: pointer;
-}
-
-.header .loginBlock_container .loginBlock .userAva img {
-    width: 49px;
-    padding: 2px;
-    border: 2px solid deepskyblue;
+.header__auth__ava img {
+    max-width: 100%;
     border-radius: 50%;
     display: block;
-    margin: 0 auto;
+}
+.header__auth__logout {
+    color: gainsboro;
+    font-size: 14px;
 }
 
-.header .loginBlock_container .loginBlock .logout {
-    grid-area: logout;
-    color: darkgray;
-    text-align: center;
-}
-
-.header .loginBlock_container .loginBlock .logout span {
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.header .loginBlock_container .loginBlock .login {
-    min-height: 50px;
-    padding: 2px;
-}
-
-.login a {
-    text-decoration: none;
-    cursor: pointer;
-    color: whitesmoke;
-}

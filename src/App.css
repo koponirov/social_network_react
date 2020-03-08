@@ -1,27 +1,18 @@
 .app {
-  background-color: darkgray;
-
-
+  background-color: lavender;
 }
 
-.app .body {
-  width:1140px;
-  min-height: 100vh;
+.app .container {
+  max-width: 1180px;
   margin: 0 auto;
-  display: grid;
+  padding: 0px 10px;
 
-  padding: 5px;
-  grid-template-columns: 2fr 10fr;
-  grid-gap: 5px;
-
-  grid-template-areas:
-
-          "navbar content"
 }
 
 .app-wrapper-content {
-  grid-area: content;
   background-color: dimgrey;
+  min-height: 100vh;
+  padding: 60px 0px 0px 0px;
 }
 
 

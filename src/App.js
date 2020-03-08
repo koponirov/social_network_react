@@ -30,8 +30,7 @@ class App extends React.Component {
 
                 <div className='app'>
                     <HeaderContainer/>
-                    <div className='body'>
-                        <Navbar/>
+                    <div className='container'>
                         <div className='app-wrapper-content'>
 
                             <Route path='/profile/:userId?'

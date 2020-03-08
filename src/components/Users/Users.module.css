@@ -47,23 +47,35 @@
     margin: 5px 0;
     display: flex;
     align-items: center;
+    position: relative;
 
 }
 
 .list .listItem .content,.status {
     padding: 10px;
     text-decoration: none;
-    color: darksalmon;
+
 }
 
+.list .listItem .content {
+    position: absolute;
+    top: 10px;
+    color:#e36666;
+    font-weight: bold;
+}
 
 .list .listItem .status {
     font-size: 12px;
+    position: absolute;
+    top: 30px;
+    color:#cf6161
 }
+
+
 
 .list .listItem img{
     height: 40px;
-    border: 1px outset wheat;
+    border: 1px outset #cf8f8f;
     border-radius: 50%;
 }
 

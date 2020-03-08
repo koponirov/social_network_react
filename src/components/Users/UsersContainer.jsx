@@ -18,7 +18,7 @@ import UsersList from "./UsersList";
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, 2)
+        this.props.requestUsers(this.props.currentPage, 3)
     }
 
     render() {
