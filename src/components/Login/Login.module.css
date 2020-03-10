@@ -1,43 +1,67 @@
-.login__wrapper {
-    margin-left: 20px;
-    color:whitesmoke;
+.form__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
 }
-.login__field {
-    padding-top: 5px ;
+.form {
+    width: 300px;
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px black;
+    font-family: sans-serif;
+    letter-spacing: 1px;
 }
-.login__field input{
-    border-radius: 5px;
+.form__field input,
+.form__button {
+    font-family: sans-serif;
+    letter-spacing: 1px;
+    font-size: 16px;
 }
-.login__checkbox {
-    padding-top: 10px ;
-}
-.login__btn {
-    padding: 0;
-    border: none;
-    font: inherit;
-    color: inherit;
-    background-color: transparent;
-    text-decoration: none;
-    outline: none;
-    display: inline-block;
-    width: 80px;
-    height: 35px;
-    line-height: 35px;
-    border-radius: 35px;
-    margin-top: 5px;
-    font-size: 11px;
-    text-transform: uppercase;
+.form__title{
     text-align: center;
-    letter-spacing: 3px;
-    font-weight: bold;
-    color: #524f4e;
-    background: whitesmoke;
-    box-shadow: 0 8px 15px rgba(0,0,0,.1);
-    transition: .3s;
+    margin: 0 0 32px 0;
+    font-weight: normal;
+    color: whitesmoke;
 }
-.login__btn:hover {
-    background: #f54949;
-
-    color: white;
-
+.form__group{
+    position: relative;
+    margin-bottom:32px ;
 }
+.form__label {
+    position: absolute;
+    top: 4px;
+    left: 2px;
+    color:#ffdee2;
+
+    transition: 0.3s;
+}
+.form__field input {
+    width: 100%;
+    padding: 0 0 10px 0;
+    color: whitesmoke;
+    border: none;
+    border-bottom: 1px solid #362527;
+    background-color: transparent;
+    outline: none;
+    transition: 0.3s;
+}
+.form__field input:focus {
+    border-bottom: 1px solid navajowhite;
+}
+.form__button {
+    margin-top: 30px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: whitesmoke;
+    background-color: rgba(33,27,25,0.87);
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.form__button:focus,
+.form__button:hover {
+    background-color: #f54949;
+}
+.form__field input::-webkit-input-placeholder { color: rgba(33,27,25,0.52); }

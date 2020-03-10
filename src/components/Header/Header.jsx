@@ -10,7 +10,8 @@ const Header = (props) => {
     return <header className={s.header}>
         <div className={s.container}>
             <div className={s.header__body}>
-                <nav className={active ? `${s.header__menu} ${s.active}` : s.header__menu}>
+                <nav  onTouchEnd={() => setActive(!active)}
+                    className={active ? `${s.header__menu} ${s.active}` : s.header__menu}>
                     <ul className={s.header__list}>
                         <li>
                             <NavLink to='/profile' className={s.header__link}>Profile</NavLink>
@@ -46,7 +47,7 @@ const Header = (props) => {
                         </div>
 
                         : <div className={s.header__auth__login}>
-                            <NavLink className={s.header__login} to={'/login'}>Login</NavLink>
+                            <NavLink className={s.header__login} to={'/login'}>LOGIN</NavLink>
                         </div>}
                 </div>
             </div>

@@ -1,38 +1,12 @@
 .dialogs {
-  display: grid;
-  grid-template-columns: 2fr 10fr;
-
-
-}
-
-.dialogsBar {
-
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
 
 }
-
-.dialogWith a{
-
-  text-decoration: none;
-  color: papayawhip;
-
-}
-
-.right {
-  text-align: right;
-  margin-top: 10px;
-}
-
-.right textarea,.right button {
-  display: block;
-}
-
-
-
-.messages {
-
-}
-
-.messageContent {
-
+.dialogs span {
+  font-size: 18px;
+  font-weight: bold;
+  color: whitesmoke;
 }

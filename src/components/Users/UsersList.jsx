@@ -30,8 +30,6 @@ const UsersList = (props) => {
                             {user.status}
                         </div>
                     </div>
-
-
                 </div>
             </NavLink>
 
@@ -65,7 +63,7 @@ const UsersList = (props) => {
                                 className="List"
                                 height={height}
                                 itemCount={users.length}
-                                itemSize={65}
+                                itemSize={85}
                                 width={width}
                                 ref={ref}
                                 onItemsRendered={onItemsRendered}

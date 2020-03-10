@@ -25,7 +25,16 @@ const Dialogs = (props) => {
 
     return (
         <div className={style.dialogs}>
-            <div className={style.dialogsBar}>
+            <span>Page is under construction...</span>
+        </div>
+    )
+}
+
+export default Dialogs;
+
+/*
+before :
+<div className={style.dialogsBar}>
                 {dialogs}
             </div>
             <div className={style.messages}>
@@ -36,9 +45,4 @@ const Dialogs = (props) => {
 
                 </div>
             </div>
-
-        </div>
-    )
-}
-
-export default Dialogs;
+ */

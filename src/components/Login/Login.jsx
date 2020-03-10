@@ -21,10 +21,12 @@ const Login = (props) => {
     }
 
     return (
-        <div className={s.login__wrapper}>
-            <h3>LOGIN</h3>
-            <span>Please, fill your e-mail address and password to enter</span>
-            <LoginReduxForm onSubmit={onSubmit} captcha={props.captcha}/>
+        <div className={s.form__wrapper}>
+            <div className={s.form}>
+                <h3 className={s.form__title}>LOGIN</h3>
+                <LoginReduxForm onSubmit={onSubmit} captcha={props.captcha}/>
+
+            </div>
         </div>
     )
 }
@@ -34,30 +36,31 @@ const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
 
-            <div className={s.login__field}>
-                {createField('email','email',[required],Input)}
+            <div className={s.form__group}>
+                <div className={s.form__field}>
+                    {createField('Email', 'email', [required], Input)}
+                </div>
+                <label className={s.form__label}></label>
             </div>
 
-            <div className={s.login__field}>
-                {createField('password','password',[required],Input,{type:'password'})}
-            </div>
-
-            <div className={s.login__checkbox}>
-                {createField('','rememberMe',[],Input,{type:'checkbox'},'')}
-                <label>remember me</label>
+            <div className={s.form__group}>
+                <div className={s.form__field}>
+                    {createField('Password', 'password', [required], Input, {type: 'password'})}
+                </div>
+                <label className={s.form__label}></label>
             </div>
 
             {props.captcha && <img src={props.captcha}/>}
             {props.captcha && <div>
-                {createField('captcha','captcha',[required],Input)}
+                {createField('captcha', 'captcha', [required], Input)}
             </div>}
 
             {props.error && <div className={styles.error}>
-                    {props.error}
-                </div>
+                {props.error}
+            </div>
             }
-            <div >
-                <button className={s.login__btn}>Login</button>
+            <div>
+                <button className={s.form__button}>Login</button>
             </div>
         </form>
     )
@@ -72,7 +75,7 @@ const mapStateToProps = (state) => {
     return {
         isAuth: state.auth.isAuth,
         captcha: state.auth.captcha
-        }
+    }
 }
 
 export default connect(mapStateToProps, {login})(Login);

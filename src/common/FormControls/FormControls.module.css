@@ -17,9 +17,8 @@
 }
 
 .error {
-    padding: 5px;
-    border: #d63a51 solid 2px;
-    color: crimson;
+    padding: 5px 5px 15px 0px;
+    color: #d63a51;
 }
 
 .field {
