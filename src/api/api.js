@@ -84,8 +84,8 @@ export const dialogsAPI = {
     getDialogWithUser (userId) {
         return instance.get(`dialogs/${userId}/messages`)
     },
-    //send message to your
-    senMessage(userId,message) {
+    //send message to user
+    sendMessage(userId,message) {
         return instance.post(`dialogs/${userId}/messages`,{message})
     }
 }

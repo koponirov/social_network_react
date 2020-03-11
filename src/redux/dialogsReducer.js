@@ -1,4 +1,5 @@
 const SEND_MESSAGE = 'SEND_MESSAGE';
+const CREATE_DIALOG = 'CREATE_DIALOG';
 
 let initialState = {
     dialogs: [
@@ -26,12 +27,26 @@ const dialogsReducer = (state = initialState, action) => {
                 ...state,
                 messages: [...state.messages, {id: 6, messageText: action.message}]
             };
-
+        case CREATE_DIALOG :
+            if (state.dialogs.length) {
+                return {
+                    ...state,
+                    dialogs: [...state.dialogs, ...action.user]
+                };
+            }
+            else {
+                return {
+                    ...state,
+                    dialogs: [...action.user]
+                };
+            }
         default:
             return state;
     }
 };
 
 export const sendMessage = (message) => ({type: SEND_MESSAGE, message});
+export const createDialog = (user) => ({type: CREATE_DIALOG, user});
+
 
 export default dialogsReducer;

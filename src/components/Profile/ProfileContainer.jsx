@@ -52,7 +52,6 @@ class ProfileContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-    console.log('mapStateToProps Profile')
     return (
         {   profile: state.profilePage.profile,
             status: state.profilePage.status,
@@ -60,7 +59,6 @@ let mapStateToProps = (state) => {
             isAuth: state.auth.isAuth
         }
     )
-
 };
 
 export default compose(
