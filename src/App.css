@@ -1,18 +1,21 @@
 .app {
   background-color: lavender;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100vh;
 }
-
-.app .container {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 0px 10px;
-
-}
-
-.app-wrapper-content {
+.app__content {
   background-color: dimgrey;
-  min-height: 100vh;
   padding: 60px 0px 0px 0px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.app__content__container{
+  height: 100%;
+  flex-basis: 1180px;
+  min-width: 300px;
 }
 
 

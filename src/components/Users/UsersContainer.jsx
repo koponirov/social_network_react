@@ -14,6 +14,7 @@ import {
 } from "../../redux/usersSelectors";
 import UsersList from "./UsersList";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
+import s from './Users.module.css'
 
 
 class UsersContainer extends React.Component {
@@ -30,22 +31,21 @@ class UsersContainer extends React.Component {
     }
 
     render() {
-        return (<div>
-                { this.props.users ? <UsersList
+        return (<div className={s.users__container}>
+                {this.props.users ? <UsersList
                     currentPage={this.props.currentPage}
                     users={this.props.users}
                     pageSize={this.props.pageSize}
                     isLoading={this.props.isLoading}
-                    requestMoreUsers = {this.props.requestMoreUsers}
-                />: <Preloader/>}
-
+                    requestMoreUsers={this.props.requestMoreUsers}
+                /> : <Preloader/>}
             </div>
         )
     }
 };
 
 let mapStateToProps = (state) => {
-    
+
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),
@@ -56,8 +56,17 @@ let mapStateToProps = (state) => {
     }
 };
 
-export default compose (
-    connect(mapStateToProps, {follow, unfollow, setInProgress, requestUsers, requestMoreUsers, setCurrentPage,setUsers, onPageChanged}),
+export default compose(
+    connect(mapStateToProps, {
+        follow,
+        unfollow,
+        setInProgress,
+        requestUsers,
+        requestMoreUsers,
+        setCurrentPage,
+        setUsers,
+        onPageChanged
+    }),
     withAuthRedirect
-) (UsersContainer)
+)(UsersContainer)
 

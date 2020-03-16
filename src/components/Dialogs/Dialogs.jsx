@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './Dialogs.module.css';
+import s from './Dialogs.module.css';
 import Message from "./Message/Message";
 import DialogWithUser from './DialogWithUser/DialogWithUser'
 import {Redirect} from "react-router-dom";
@@ -24,8 +24,55 @@ const Dialogs = (props) => {
     };
 
     return (
-        <div className={style.dialogs}>
-            <span>Page is under construction...</span>
+        <div className={s.dialogs_container}>
+            <div className={s.dialogs}>dialogs
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            <div>item</div>
+            </div>
+            <div className={s.messages}>messages</div>
+
         </div>
     )
 }

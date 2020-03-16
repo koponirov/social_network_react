@@ -30,9 +30,8 @@ class App extends React.Component {
 
                 <div className='app'>
                     <HeaderContainer/>
-                    <div className='container'>
-                        <div className='app-wrapper-content'>
-
+                        <div className='app__content'>
+                            <div className='app__content__container'>
                             <Route path='/profile/:userId?'
                                    render={() => <ProfileContainer/>}/>
                             <Route path='/dialogs'
@@ -45,7 +44,7 @@ class App extends React.Component {
                             <Route path='/login'
                                    render={() => <Login store={this.props.store}/>}/>
                         </div>
-                    </div>
+                        </div>
                 </div>
 
             )

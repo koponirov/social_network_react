@@ -1,12 +1,16 @@
-.dialogs {
+.dialogs_container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 90vh;
+  align-items: stretch;
+  height: 100%;
+}
+.dialogs{
+overflow-y: auto;
+  flex-grow: 1;
+  border: 1px solid yellowgreen;
+  height: 400px;
 
 }
-.dialogs span {
-  font-size: 18px;
-  font-weight: bold;
-  color: whitesmoke;
+.messages{
+  flex-grow: 2;
 }
+
