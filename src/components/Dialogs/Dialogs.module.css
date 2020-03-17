@@ -20,6 +20,14 @@
   overflow-y: auto;
   padding: 10px 5px;
   max-height: 70vh;
+  margin: 10px ;
+}
+.message__container{
+  max-width: 400px;
+  flex-basis: 240px;
+  background-color: #cf8f8f;
+  word-wrap: break-word;
+  margin-bottom: 10px;
 }
 .message__form {
 

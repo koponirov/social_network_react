@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {compose} from "redux";
 import Messages from "./Messages";
-import {requestMessages, sendMessage, sendNewMessage} from "../../../redux/dialogsReducer";
+import {requestMessages, sendMessage, sendNewMessage, setMessages} from "../../../redux/dialogsReducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {withRouter} from "react-router-dom";
 
@@ -13,7 +13,7 @@ class MessagesContainer extends React.Component {
         this.props.requestMessages(currentUser)
     }
     componentWillUnmount () {
-
+        this.props.setMessages('')
     }
 
     render() {
@@ -38,7 +38,7 @@ let mapStateToProps = (state) => {
 
 
 export default compose(
-    connect(mapStateToProps, {requestMessages,sendNewMessage}),
+    connect(mapStateToProps, {requestMessages,sendNewMessage,setMessages}),
     withRouter,
     withAuthRedirect
 )(MessagesContainer)

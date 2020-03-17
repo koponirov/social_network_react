@@ -1,13 +1,12 @@
 import React from 'react';
-import style from '../Dialogs.module.css';
+import s from '../Dialogs.module.css';
 
 const Message = ({userName,messageText,addedAt}) => {
     return (
-        <div >
+        <div className={s.message__container} >
             <div>{userName} </div>
-            <div> {messageText}</div>
-            <div> {addedAt}</div>
-
+            <div>{messageText}</div>
+            <div>{addedAt}</div>
         </div>
     )
 }

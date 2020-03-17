@@ -7,7 +7,6 @@ const SET_MESSAGES = 'SET_MESSAGES';
 const SET_CURRENT_USER = 'SET_CURRENT_USER';
 const SEND_MESSAGE = 'SEND_MESSAGE';
 const CREATE_DIALOG = 'CREATE_DIALOG';
-const CLEAR_MESSAGES = 'CLEAR_MESSAGES';
 
 let initialState = {
     dialogs: [],
@@ -61,7 +60,7 @@ export const setMessages = (messages) => ({type: SET_MESSAGES, messages});
 export const setCurrentUser = (user) => ({type: SET_CURRENT_USER, user});
 export const sendMessage = (message) => ({type: SEND_MESSAGE, message});
 export const createDialog = (user) => ({type: CREATE_DIALOG, user});
-export const clearMessages = () => ({type: CLEAR_MESSAGES});
+
 
 
 export const requestDialogs = () => async (dispatch) => {
@@ -70,7 +69,16 @@ export const requestDialogs = () => async (dispatch) => {
     dispatch(setDialogs(response.data));
 }
 
+export const startChatting= (userId) => async (dispatch) => {
+debugger
+    let response = await dialogsAPI.startChatting(userId)
+
+}
+
+
+
 export const requestMessages = (userId) => async (dispatch) => {
+
     dispatch(setCurrentUser(userId))
     let response = await dialogsAPI.getDialogWithUser(userId)
     let messages = response.data.items
@@ -87,6 +95,9 @@ export const sendNewMessage = (userId, message) => async (dispatch) => {
         dispatch(reset('message'))
     }
 }
+
+
+
 
 
 export default dialogsReducer;

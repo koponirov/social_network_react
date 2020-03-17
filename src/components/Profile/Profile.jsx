@@ -10,8 +10,10 @@ const Profile = (props) => {
                          status={props.status}
                          updateStatus={props.updateUserStatus}
                          isOwner={props.isOwner}
+                         currentUser={props.currentUser}
                          savePhoto={props.savePhoto}
                          saveProfileData={props.saveProfileData}
+                         startChatting={props.startChatting}
             />
 
 

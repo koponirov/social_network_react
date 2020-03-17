@@ -12,6 +12,7 @@ import {
 import { withRouter} from 'react-router-dom';
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {startChatting} from "../../redux/dialogsReducer";
 
 class ProfileContainer extends React.Component {
 
@@ -38,14 +39,15 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
-        console.log('render Profile')
         return (
             <Profile {...this.props}
                      profile={this.props.profile}
                      status={this.props.status}
                      isOwner={!this.props.match.params.userId}
+                     currentUser={this.props.match.params.userId}
                      savePhoto={this.props.savePhoto}
                      saveProfileData={this.props.saveProfileData}
+                     startChatting={this.props.startChatting}
             />
         )
     }
@@ -62,7 +64,8 @@ let mapStateToProps = (state) => {
 };
 
 export default compose(
-    connect (mapStateToProps, {addPost,getUserProfile,getUserStatus,updateUserStatus,savePhoto,saveProfileData}),
+    connect (mapStateToProps, {addPost,getUserProfile,
+        getUserStatus,updateUserStatus,savePhoto,saveProfileData,startChatting }),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)

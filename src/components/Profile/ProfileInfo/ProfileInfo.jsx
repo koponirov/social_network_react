@@ -4,8 +4,10 @@ import Preloader from "../../../common/Preloader/Preloader";
 import photo from '../../../assets/images/ussser.svg'
 import ProfileStatusWithHooks from "../ProfileStatus/ProfileStatusWithHooks";
 import {ProfileDataFormRedux} from "../ProfileDataForm";
+import {NavLink} from "react-router-dom";
 
-const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto,saveProfileData}) => {
+
+const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto,saveProfileData,currentUser,startChatting}) => {
 
     const [editMode, setEditMode] = useState(false)
 
@@ -30,6 +32,10 @@ const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto,saveProf
             <img src={profile.photos.large != null ? profile.photos.large : photo} alt='user photo'/>
             {editMode && <input type='file' onChange={onMainPhotoSelected}/>}
             <ProfileStatusWithHooks status={status} isOwner={isOwner} updateStatus={updateStatus}/>
+            {!isOwner&&
+            <NavLink to={`/dialogs/${currentUser}/messages`}>
+                <button onClick={()=>startChatting(currentUser)}>chat</button>
+            </NavLink>}
             {editMode ?
                 <ProfileDataFormRedux initialValues={profile} onSubmit={onSubmit} profile={profile} /> :
                 <ProfileData profile={profile}

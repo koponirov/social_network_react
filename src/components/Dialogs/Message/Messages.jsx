@@ -14,16 +14,14 @@ const Messages = (props) => {
 
     const sendMessage = (values) => {
 
-        props.sendMessage(props.currentUser,values.message)
+        props.sendMessage(props.currentUser, values.message)
     };
 
-    return  <div className={s.messages__container}>
-                <div className={s.messages}>
-                    <div>
-                        <NavLink to={'/dialogs'}>back to dialogs</NavLink>
-                    </div>
-                    <div>{messages}</div>
+    return <div className={s.messages__container}>
+                 <div>
+                    <NavLink to={'/dialogs'}>back to dialogs</NavLink>
                 </div>
+                <div className={s.messages}>{messages}</div>
                 <MessageReduxForm className={s.message__form} onSubmit={sendMessage}/>
             </div>
 

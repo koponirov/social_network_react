@@ -13,7 +13,6 @@ const MessageForm = (props)=> {
             <Field
                 name='message'
                 component={Textarea}
-                validate={[required,maxLength300]}
             />
             <button type='submit' >send message</button>
         </form>
