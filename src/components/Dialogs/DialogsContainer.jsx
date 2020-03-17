@@ -1,27 +1,23 @@
 import React from 'react';
-import {sendMessage} from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {requestDialogs} from "../../redux/dialogsReducer";
 import {dialogsAPI} from "../../api/api";
 
 class DialogsContainer extends React.Component {
 
     componentDidMount() {
-        dialogsAPI.startChatting(6348);
-        dialogsAPI.getDialogs();
-        dialogsAPI.sendMessage(6348,'hello!!');
-        dialogsAPI.getDialogWithUser (6348);
+
+        this.props.requestDialogs();
 
     }
 
     render() {
         return <Dialogs
             dialogs={this.props.dialogs}
-            messages={this.props.messages}
         />
-
     }
 }
 
@@ -29,7 +25,6 @@ class DialogsContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         dialogs: state.dialogsPage.dialogs,
-        messages: state.dialogsPage.messages,
         newMessageText: state.dialogsPage.newMessageText
     }
 };
@@ -37,5 +32,5 @@ let mapStateToProps = (state) => {
 
 export default compose(
     withAuthRedirect,
-    connect(mapStateToProps, {sendMessage})
+    connect(mapStateToProps, {requestDialogs})
 )(DialogsContainer)

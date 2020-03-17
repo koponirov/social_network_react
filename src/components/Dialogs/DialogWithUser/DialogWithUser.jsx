@@ -6,7 +6,7 @@ import {NavLink} from "react-router-dom";
 
 const DialogWithUser = (props) => {
 
-    let path = `/dialogs/${props.userId}`
+    let path = `/dialogs/${props.userId}/messages`
 
     return (
         <div className={style.dialogWith} >

@@ -4,7 +4,7 @@ import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../utilites/validators/validators";
 import {Textarea} from "../../common/FormControls/FormControls";
 
-const maxLength10 = maxLengthCreator(10)
+const maxLength300 = maxLengthCreator(300)
 
 const MessageForm = (props)=> {
 
@@ -13,7 +13,7 @@ const MessageForm = (props)=> {
             <Field
                 name='message'
                 component={Textarea}
-                validate={[required,maxLength10]}
+                validate={[required,maxLength300]}
             />
             <button type='submit' >send message</button>
         </form>

@@ -4,7 +4,7 @@ const instance = axios.create({
     withCredentials: true,
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
     headers: {"API-KEY": "ed6168aa-083c-4712-91d3-afe70566eba2"},
-//374b61b3-3684-46aa-832c-9d3f951a688f
+//ya:374b61b3-3684-46aa-832c-9d3f951a688f,klubn:9a26a650-26b0-4c4b-8aab-54c45ef378c9,gm:
 })
 
 export const usersAPI = {
@@ -78,6 +78,7 @@ export const dialogsAPI = {
     },
     //start chatting
     startChatting(userId) {
+
         return instance.put(`dialogs/${userId}`)
     },
     //get list of messages with user
@@ -86,7 +87,7 @@ export const dialogsAPI = {
     },
     //send message to user
     sendMessage(userId,message) {
-        return instance.post(`dialogs/${userId}/messages`,{message})
+        return instance.post(`dialogs/${userId}/messages`,{body: message})
     }
 }
 

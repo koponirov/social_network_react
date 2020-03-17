@@ -13,6 +13,7 @@ import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./common/Preloader/Preloader";
+import MessagesContainer from "./components/Dialogs/Message/MessagesContainer";
 
 class App extends React.Component {
 
@@ -30,12 +31,14 @@ class App extends React.Component {
 
                 <div className='app'>
                     <HeaderContainer/>
-                        <div className='app__content'>
-                            <div className='app__content__container'>
+                    <div className='app__content'>
+                        <div className='app__content__container'>
                             <Route path='/profile/:userId?'
                                    render={() => <ProfileContainer/>}/>
-                            <Route path='/dialogs'
+                            <Route exact path='/dialogs'
                                    render={() => <DialogsContainer store={this.props.store}/>}/>
+                            <Route path='/dialogs/:userId/messages'
+                                   render={() => <MessagesContainer store={this.props.store}/>}/>
                             <Route path='/users'
                                    render={() => <UsersContainer store={this.props.store}/>}/>
                             <Route path='/news' component={News}/>
@@ -44,7 +47,7 @@ class App extends React.Component {
                             <Route path='/login'
                                    render={() => <Login store={this.props.store}/>}/>
                         </div>
-                        </div>
+                    </div>
                 </div>
 
             )
