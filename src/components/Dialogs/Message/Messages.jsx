@@ -3,12 +3,18 @@ import Message from "./Message";
 import MessageReduxForm from "./../MessageForm";
 import s from './../Dialogs.module.css'
 import {NavLink} from "react-router-dom";
+import arrow from './../../../assets/images/arrow_back.svg'
+import parseIso from 'date-fns/parseISO'
 
 const Messages = (props) => {
 
     let messages = props.messages.map((m) => {
         return (
-            <Message userName={m.senderName} userId={m.senderId} messageText={m.body} key={m.id} addedAt={m.addedAt}/>
+            <Message userName={m.senderName}
+                     userId={m.senderId}
+                     messageText={m.body}
+                     key={m.id}
+                     addedAt={parseIso(m.addedAt)}/>
         )
     })
 
@@ -18,13 +24,19 @@ const Messages = (props) => {
     };
 
     return <div className={s.messages__container}>
-                 <div>
-                    <NavLink to={'/dialogs'}>back to dialogs</NavLink>
-                </div>
-                <div className={s.messages}>{messages}</div>
-                <MessageReduxForm className={s.message__form} onSubmit={sendMessage}/>
-            </div>
+        <div className={s.back__btn}>
+            <NavLink to={'/dialogs'}> <img src={arrow}/> back to dialogs</NavLink>
+        </div>
+        <div className={s.messages__box}>
+                {messages}
+        </div>
 
+
+        <div className={s.message__form}>
+            <MessageReduxForm onSubmit={sendMessage}/>
+        </div>
+
+    </div>
 }
 
 export default Messages;

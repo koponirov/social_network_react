@@ -4,42 +4,122 @@
   height: 100%;
 }
 .dialogs{
+  margin-top: 20px;
   overflow-y: auto;
   flex-grow: 1;
-  border-right: 1px solid black;
   padding: 10px 5px;
   max-height: 70vh;
+}
+.dialogWith {
+  text-align: center;
+  height: 40px;
+  border: 1px solid rgba(161, 138, 138,0.5);
+  border-radius: 12px;
+  margin: 0px 20px 12px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 6px 5px -5px rgba(235,0,39,0.32);
+
+
+}
+.dialogWith a{
+  text-decoration: none;
+  font-size: 22px;
+  color: whitesmoke;
 }
 .messages__container{
   flex-grow: 2;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+
 }
-.messages{
+.back__btn{
+  margin: 10px;
+  text-transform: uppercase;
+}
+.back__btn img{
+  height: 12px;
+}
+.back__btn a{
+  text-decoration: none;
+  color: whitesmoke;
+}
+.messages__box{
+  height: 65vh;
   overflow-y: auto;
-  padding: 10px 5px;
-  max-height: 70vh;
-  margin: 10px ;
+  background-color: #737373;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 .message__container{
   max-width: 400px;
   flex-basis: 240px;
-  background-color: #cf8f8f;
+  margin: 10px 10px 0px 10px;
+
+}
+.message__wrapper{
+  border-radius: 15px;
+  background-color: #3d3637;
+}
+.message__user__name{
+  padding-left: 10px;
   word-wrap: break-word;
-  margin-bottom: 10px;
+  color: #cf6161;
+  font-weight: normal;
 }
-.message__form {
-
+.message__text{
+  color: whitesmoke;
+  word-wrap: break-word;
+  font-weight: lighter;
+  font-size: 18px;
+  padding: 5px 10px;
+}
+.message__add__time{
+  color: gainsboro;
+  font-size: 10px;
+  opacity: 60%;
+  margin-left: 15px;
+}
+.message__form__box {
 
 }
-.dialogWith {
-  text-align: center;
-  height: 30px;
-  border-bottom: 1px solid wheat;
-
+.message__form{
+  display: flex;
+  align-items:stretch;
+  height: 60px;
 }
-.dialogWith a{
-   text-decoration: none;
-   color: black;
- }
+.message__field{
+  width: 240px;
+}
+.message__field textarea{
+  padding:0px;
+  outline: none;
+  resize: none;
+  width: 100%;
+  height: 56px;
+  overflow: hidden;
+}
+.message__send__button{
+}
+.message__send__button button{
+  height: 100%;
+  padding: 10px 20px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 5px;
+  color: whitesmoke;
+  background-color: rgba(33,27,25,0.87);
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.message__send__button button:focus,
+.message__send__button button:hover {
+  background-color: #f54949;
+}
+
+.preloder{
+ margin: auto;
+}

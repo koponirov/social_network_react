@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {compose} from "redux";
 import Messages from "./Messages";
-import {requestMessages, sendMessage, sendNewMessage, setMessages} from "../../../redux/dialogsReducer";
+import {requestMessages, sendNewMessage, setMessages} from "../../../redux/dialogsReducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {withRouter} from "react-router-dom";
 
@@ -23,10 +23,8 @@ class MessagesContainer extends React.Component {
             sendMessage={this.props.sendNewMessage}
             currentUser={this.props.currentUser}
         />
-
     }
 }
-
 
 let mapStateToProps = (state) => {
     return {
@@ -35,7 +33,6 @@ let mapStateToProps = (state) => {
         newMessageText: state.dialogsPage.newMessageText
     }
 };
-
 
 export default compose(
     connect(mapStateToProps, {requestMessages,sendNewMessage,setMessages}),

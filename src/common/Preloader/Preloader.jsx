@@ -1,9 +1,10 @@
 import React from 'react'
-import loading from '../../assets/images/loader_5.svg';
+import loading from '../../assets/images/466.svg';
+import s from './Preloader.module.css'
 
 const Preloader=()=>{
     return (
-        <div>
+        <div className={s.container}>
             <img src={loading} />
         </div>
     )

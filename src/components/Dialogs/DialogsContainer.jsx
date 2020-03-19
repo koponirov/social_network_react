@@ -4,14 +4,12 @@ import {connect} from "react-redux";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {requestDialogs} from "../../redux/dialogsReducer";
-import {dialogsAPI} from "../../api/api";
+
 
 class DialogsContainer extends React.Component {
 
     componentDidMount() {
-
         this.props.requestDialogs();
-
     }
 
     render() {
@@ -21,14 +19,12 @@ class DialogsContainer extends React.Component {
     }
 }
 
-
 let mapStateToProps = (state) => {
     return {
         dialogs: state.dialogsPage.dialogs,
         newMessageText: state.dialogsPage.newMessageText
     }
 };
-
 
 export default compose(
     withAuthRedirect,

@@ -6,7 +6,7 @@ import {
     getUserProfile,
     getUserStatus,
     savePhoto,
-    saveProfileData,
+    saveProfileData, setUserProfile,
     updateUserStatus,
 } from "../../redux/profileReducer";
 import { withRouter} from 'react-router-dom';
@@ -30,6 +30,9 @@ class ProfileContainer extends React.Component {
     componentDidMount() {
         this.refreshProfile();
     }
+    componentWillUnmount() {
+        this.props.setUserProfile(null)
+    }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
 
@@ -40,15 +43,15 @@ class ProfileContainer extends React.Component {
 
     render() {
         return (
-            <Profile {...this.props}
-                     profile={this.props.profile}
-                     status={this.props.status}
-                     isOwner={!this.props.match.params.userId}
-                     currentUser={this.props.match.params.userId}
-                     savePhoto={this.props.savePhoto}
-                     saveProfileData={this.props.saveProfileData}
-                     startChatting={this.props.startChatting}
-            />
+        <Profile {...this.props}
+                 profile={this.props.profile}
+                 status={this.props.status}
+                 isOwner={!this.props.match.params.userId}
+                 currentUser={this.props.match.params.userId}
+                 savePhoto={this.props.savePhoto}
+                 saveProfileData={this.props.saveProfileData}
+                 setUserProfile={this.props.setUserProfile}
+        />
         )
     }
 }
@@ -65,7 +68,7 @@ let mapStateToProps = (state) => {
 
 export default compose(
     connect (mapStateToProps, {addPost,getUserProfile,
-        getUserStatus,updateUserStatus,savePhoto,saveProfileData,startChatting }),
+        getUserStatus,updateUserStatus,savePhoto,saveProfileData,startChatting,setUserProfile }),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)

@@ -5,7 +5,7 @@
 .formControls textarea,
 .formControls input
 {
-    border: #d63a51 solid 2px;
+    border: #d63a51 solid 4px;
 }
 .formControls span {
     margin-left: 5px;
