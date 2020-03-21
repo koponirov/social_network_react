@@ -8,26 +8,49 @@
   overflow-y: auto;
   flex-grow: 1;
   padding: 10px 5px;
-  max-height: 70vh;
+  min-height: 80vh;
 }
 .dialogWith {
   text-align: center;
-  height: 40px;
+  height: 85px;
   border: 1px solid rgba(161, 138, 138, 0.5);
   border-radius: 12px;
   margin: 0px 20px 12px 20px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   box-shadow: 5px 6px 5px -5px rgba(235, 0, 39, 0.32);
   text-decoration: none;
   font-size: 22px;
   color: whitesmoke;
+  transition: 0.4s;
 }
-.dialogWith a{
-  text-decoration: none;
-  font-size: 22px;
+.dialogWith:hover {
+  border: 1px solid rgba(165, 143, 143, 0.7);
+  box-shadow: 5px 6px 8px -5px rgba(235, 0, 39, 0.62);
   color: whitesmoke;
+  background-color: rgba(115, 115, 115, 1);
+  color: ivory;
+}
+.user__ava{
+  width: 50px;
+  margin-left: 20px;
+}
+.user__ava img {
+  max-width: 100%;
+  border-radius: 50%;
+  border: 1px solid #cf8f8f;
+  display: block;
+}
+.user__name{
+  padding-left: 20px;
+}
+.newMessages__indicator{
+  padding-left: 10px;
+  width: 20px;
+}
+.newMessages__indicator img{
+  width: 100%;
 }
 .messages__container{
   flex-grow: 2;
@@ -59,7 +82,7 @@
 }
 .message__container{
   max-width: 400px;
-  flex-basis: 240px;
+  flex-basis: 100px;
   margin: 10px 10px 0px 10px;
 
 

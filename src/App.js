@@ -30,7 +30,9 @@ class App extends React.Component {
             return (
 
                 <div className='app'>
-                    <HeaderContainer/>
+                    <div className='app__header'>
+                        <HeaderContainer/>
+                    </div>
                     <div className='app__content'>
                         <div className='app__content__container'>
                             <Route exact path='/'
@@ -38,14 +40,11 @@ class App extends React.Component {
                             <Route path='/profile/:userId?'
                                    render={() => <ProfileContainer/>}/>
                             <Route exact path='/dialogs'
-                                   render={() => <DialogsContainer store={this.props.store}/>}/>
+                                   render={() => <DialogsContainer />}/>
                             <Route path='/dialogs/:userId/messages'
-                                   render={() => <MessagesContainer store={this.props.store}/>}/>
+                                   render={() => <MessagesContainer />}/>
                             <Route path='/users'
-                                   render={() => <UsersContainer store={this.props.store}/>}/>
-                            <Route path='/news' component={News}/>
-                            <Route path='/music' component={Music}/>
-                            <Route path='/settings' component={Settings}/>
+                                   render={() => <UsersContainer />}/>
                             <Route path='/login'
                                    render={() => <Login store={this.props.store}/>}/>
                         </div>

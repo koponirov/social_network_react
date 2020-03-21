@@ -10,26 +10,27 @@ import Preloader from "../../common/Preloader/Preloader";
 
 const UsersList = (props) => {
 
-
     const users = props.users
-
 
     const Row = ({index, style}) => {
         const user = users[index];
         return (
             <NavLink to={'/profile/' + user.id}>
-                <div className={styles.listItem} style={style}>
-                    <div className={styles.ava}>
-                        <img src={user.photos.small ? user.photos.small : photo}/>
-                    </div>
-                    <div>
-                        <div className={styles.content}>
-                            { user.name}
+                <div className={styles.listItem__container} style={style}>
+                    <div className={styles.listItem}>
+                        <div className={styles.ava}>
+                            <img src={user.photos.small ? user.photos.small : photo}/>
                         </div>
-                        <div className={styles.status}>
-                            {user.status}
+                        <div className={styles.content__container}>
+                            <div className={styles.content}>
+                                { user.name}
+                            </div>
+                            <div className={styles.status}>
+                                {user.status}
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </NavLink>
 
@@ -37,15 +38,12 @@ const UsersList = (props) => {
     };
 
     const loadMoreItems = () => {
-        console.log('load')
-
         props.requestMoreUsers(props.currentPage, props.pageSize)
     }
 
     const isItemLoaded = () => {
         return props.isLoading
     }
-
 
     return (
         <div className={styles.list}>
@@ -56,18 +54,16 @@ const UsersList = (props) => {
                         loadMoreItems={loadMoreItems}
                         itemCount={users.length}
                         threshold={15}
-
                     >
                         {({onItemsRendered, ref}) => (
                             <List
-                                className="List"
                                 height={height}
                                 itemCount={users.length}
-                                itemSize={85}
+                                itemSize={100}
                                 width={width}
                                 ref={ref}
                                 onItemsRendered={onItemsRendered}
-                                className={styles.noScroll}
+                                className={styles.window_list}
                             >
                                 {Row}
                             </List>

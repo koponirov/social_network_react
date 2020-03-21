@@ -1,21 +1,22 @@
 .app {
   background-color: lavender;
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  flex-flow: column nowrap;
+  width: 100%;
   height: 100vh;
+}
+.app__header{
+  flex: 0 0 60px;
 }
 .app__content {
   background-color: dimgrey;
-  padding: 60px 0px 0px 0px;
-  height: 100%;
-  display: flex;
-  justify-content: center;
+  flex: 1 1 auto;
 }
 .app__content__container{
-  height: 100%;
-  flex-basis: 1180px;
+  min-height: 100%;
+  max-width: 1180px;
   min-width: 300px;
+  margin: 0 auto;
 }
 
 

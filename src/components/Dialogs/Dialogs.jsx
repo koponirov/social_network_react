@@ -8,7 +8,11 @@ const Dialogs = (props) => {
 
     let dialogs = props.dialogs.map((dialog) => {
            return (
-               <DialogWithUser userName={dialog.userName} userId={dialog.id}/>
+               <DialogWithUser userName={dialog.userName}
+                               userId={dialog.id}
+                               photo={dialog.photos.small}
+                               newMessages={dialog.hasNewMessages}
+               />
            )
        })
 
