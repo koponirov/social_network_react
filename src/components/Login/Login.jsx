@@ -34,7 +34,7 @@ const Login = (props) => {
 const LoginForm = (props) => {
 
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={props.handleSubmit} >
 
             <div className={s.form__group}>
                 <div className={s.form__field}>
@@ -60,7 +60,7 @@ const LoginForm = (props) => {
             </div>
             }
             <div>
-                <button className={s.form__button}>Login</button>
+                <button onTouchEnd={props.handleSubmit} className={s.form__button}>Login</button>
             </div>
         </form>
     )

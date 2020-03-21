@@ -88,6 +88,10 @@ export const dialogsAPI = {
     //send message to user
     sendMessage(userId,message) {
         return instance.post(`dialogs/${userId}/messages`,{body: message})
-    }
+    },
+    //count new messages
+    getNewMessagesCount() {
+        return instance.get('dialogs/messages/new/count')
+}
 }
 

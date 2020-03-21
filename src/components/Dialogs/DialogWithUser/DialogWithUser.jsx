@@ -8,13 +8,9 @@ const DialogWithUser = (props) => {
 
     let path = `/dialogs/${props.userId}/messages`
 
-    return (
-        <div className={style.dialogWith} >
-            <NavLink to={path}>
+    return  <NavLink to={path} className={style.dialogWith} >
                 {props.userName}
             </NavLink>
-        </div>
-    )
 }
 
 

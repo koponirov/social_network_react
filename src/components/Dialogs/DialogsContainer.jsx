@@ -3,13 +3,14 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {requestDialogs} from "../../redux/dialogsReducer";
+import {requestDialogs, requestNewMessagesCount} from "../../redux/dialogsReducer";
 
 
 class DialogsContainer extends React.Component {
 
     componentDidMount() {
         this.props.requestDialogs();
+        this.props.requestNewMessagesCount()
     }
 
     render() {
@@ -28,5 +29,5 @@ let mapStateToProps = (state) => {
 
 export default compose(
     withAuthRedirect,
-    connect(mapStateToProps, {requestDialogs})
+    connect(mapStateToProps, {requestDialogs,requestNewMessagesCount})
 )(DialogsContainer)

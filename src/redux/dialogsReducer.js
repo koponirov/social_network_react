@@ -4,6 +4,7 @@ import {reset} from 'redux-form';
 
 const SET_DIALOGS = 'SET_DIALOGS';
 const SET_MESSAGES = 'SET_MESSAGES';
+const SET_NEWMESSAGES_COUNT = 'SET_NEWMESSAGES_COUNT';
 const SET_CURRENT_USER = 'SET_CURRENT_USER';
 const SEND_MESSAGE = 'SEND_MESSAGE';
 const CREATE_DIALOG = 'CREATE_DIALOG';
@@ -11,6 +12,7 @@ const CREATE_DIALOG = 'CREATE_DIALOG';
 let initialState = {
     dialogs: [],
     messages: [],
+    newMessagesCount:null,
     currentUser: null
 };
 
@@ -27,6 +29,11 @@ const dialogsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 messages: [...action.messages]
+            };
+        case SET_NEWMESSAGES_COUNT :
+            return {
+                ...state,
+                newMessagesCount: action.number
             };
         case SET_CURRENT_USER :
             return {
@@ -57,10 +64,10 @@ const dialogsReducer = (state = initialState, action) => {
 
 export const setDialogs = (dialogs) => ({type: SET_DIALOGS, dialogs});
 export const setMessages = (messages) => ({type: SET_MESSAGES, messages});
+export const setNewMessagesCount = (number) => ({type: SET_NEWMESSAGES_COUNT, number});
 export const setCurrentUser = (user) => ({type: SET_CURRENT_USER, user});
 export const sendMessage = (message) => ({type: SEND_MESSAGE, message});
 export const createDialog = (user) => ({type: CREATE_DIALOG, user});
-
 
 
 export const requestDialogs = () => async (dispatch) => {
@@ -69,12 +76,11 @@ export const requestDialogs = () => async (dispatch) => {
     dispatch(setDialogs(response.data));
 }
 
-export const startChatting= (userId) => async (dispatch) => {
-debugger
+export const startChatting = (userId) => async (dispatch) => {
+
     let response = await dialogsAPI.startChatting(userId)
 
 }
-
 
 
 export const requestMessages = (userId) => async (dispatch) => {
@@ -96,7 +102,12 @@ export const sendNewMessage = (userId, message) => async (dispatch) => {
     }
 }
 
+export const requestNewMessagesCount = () => async (dispatch) => {
 
+    const response = await dialogsAPI.getNewMessagesCount();
+    let messagesCount = response.data
+    dispatch(setNewMessagesCount(messagesCount));
+}
 
 
 

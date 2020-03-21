@@ -20,7 +20,9 @@ const Header = (props) => {
                             <NavLink to='/users' className={s.header__link}>Users</NavLink>
                         </li>
                         <li>
-                            <NavLink to='/dialogs' className={s.header__link}>Dialogs</NavLink>
+                            <NavLink to='/dialogs' className={s.header__link}>
+                                Dialogs {props.newMessagesCount>0?props.newMessagesCount:'' }
+                            </NavLink>
                         </li>
                     </ul>
                 </nav>

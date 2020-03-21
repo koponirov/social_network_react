@@ -26,8 +26,6 @@ class UsersContainer extends React.Component {
     componentWillUnmount() {
         this.props.setCurrentPage(1);
         this.props.setUsers([]);
-
-
     }
 
     render() {

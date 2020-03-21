@@ -56,13 +56,15 @@
     top: 30px;
     color:#cf6161
 }
+.list .listItem .ava{
+    width: 50px;
+}
 
-
-
-.list .listItem img{
-    height: 50px;
-    border: 1px solid #cf8f8f;
+.ava img{
+    max-width: 100%;
     border-radius: 50%;
+    border: 1px solid #cf8f8f;
+    display: block;
 }
 
 .noScroll::-webkit-scrollbar {

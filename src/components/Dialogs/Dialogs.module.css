@@ -13,15 +13,16 @@
 .dialogWith {
   text-align: center;
   height: 40px;
-  border: 1px solid rgba(161, 138, 138,0.5);
+  border: 1px solid rgba(161, 138, 138, 0.5);
   border-radius: 12px;
   margin: 0px 20px 12px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 5px 6px 5px -5px rgba(235,0,39,0.32);
-
-
+  box-shadow: 5px 6px 5px -5px rgba(235, 0, 39, 0.32);
+  text-decoration: none;
+  font-size: 22px;
+  color: whitesmoke;
 }
 .dialogWith a{
   text-decoration: none;
@@ -36,8 +37,10 @@
 
 }
 .back__btn{
-  margin: 10px;
+  padding: 10px;
   text-transform: uppercase;
+  box-shadow:0px 10px 15px 0px rgba(105, 105, 105, 0.86);
+  z-index: 2;
 }
 .back__btn img{
   height: 12px;
@@ -52,22 +55,26 @@
   background-color: #737373;
   border-radius: 5px;
   margin-bottom: 10px;
+
 }
 .message__container{
   max-width: 400px;
   flex-basis: 240px;
   margin: 10px 10px 0px 10px;
 
+
 }
 .message__wrapper{
   border-radius: 15px;
   background-color: #3d3637;
+
 }
 .message__user__name{
   padding-left: 10px;
   word-wrap: break-word;
   color: #cf6161;
   font-weight: normal;
+
 }
 .message__text{
   color: whitesmoke;
@@ -75,6 +82,7 @@
   font-weight: lighter;
   font-size: 18px;
   padding: 5px 10px;
+
 }
 .message__add__time{
   color: gainsboro;
@@ -82,16 +90,16 @@
   opacity: 60%;
   margin-left: 15px;
 }
-.message__form__box {
-
-}
 .message__form{
   display: flex;
   align-items:stretch;
   height: 60px;
+  box-shadow: 0px -10px 15px 0px rgba(105, 105, 105, 105);
+  z-index: 2;
 }
 .message__field{
-  width: 240px;
+  max-width: 100%;
+  flex-basis: 228px;
 }
 .message__field textarea{
   padding:0px;
@@ -100,15 +108,17 @@
   width: 100%;
   height: 56px;
   overflow: hidden;
+  border-radius: 0px 12px 12px 0px;
+  border: 2px solid rgba(33,27,25,0.87);
 }
 .message__send__button{
 }
 .message__send__button button{
   height: 100%;
   padding: 10px 20px;
-  margin-right: 5px;
+  margin-left: 10px;
   border: none;
-  border-radius: 5px;
+  border-radius: 12px 0px 0px 12px;
   color: whitesmoke;
   background-color: rgba(33,27,25,0.87);
   outline: none;

@@ -9,6 +9,7 @@ import parseIso from 'date-fns/parseISO'
 const Messages = (props) => {
 
     let messages = props.messages.map((m) => {
+        console.log(m.addedAt)
         return (
             <Message userName={m.senderName}
                      userId={m.senderId}

@@ -19,7 +19,7 @@ const UsersList = (props) => {
         return (
             <NavLink to={'/profile/' + user.id}>
                 <div className={styles.listItem} style={style}>
-                    <div>
+                    <div className={styles.ava}>
                         <img src={user.photos.small ? user.photos.small : photo}/>
                     </div>
                     <div>
