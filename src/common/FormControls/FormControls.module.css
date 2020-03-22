@@ -5,24 +5,23 @@
 .formControls textarea,
 .formControls input
 {
-    border: #d63a51 solid 4px;
+    border: #d63a51 solid 1px;
 }
 .formControls span {
     margin-left: 5px;
-    color: #d63a51;
+    color: #e84848f7;
     font-size: 18px;
 }
 .formControls__error_text {
-    border: 1px red solid;
+    border: 1px #e84848f7 solid;
 }
 
 .error {
     padding: 5px 5px 15px 0px;
-    color: #d63a51;
+    color: #e84848f7;
 }
 
 .field {
     display: inline-block;
-
 
 }

@@ -30,7 +30,7 @@ class UsersContainer extends React.Component {
 
     render() {
         return (<div className={s.users__container}>
-                {this.props.users ? <UsersList
+                {this.props.users.length>0 ? <UsersList
                     currentPage={this.props.currentPage}
                     users={this.props.users}
                     pageSize={this.props.pageSize}

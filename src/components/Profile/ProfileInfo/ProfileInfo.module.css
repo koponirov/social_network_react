@@ -1,16 +1,93 @@
-.description {
-     padding: 10px 10px 10px 30px;
+.user__profile__title{
+    padding: 15px 0  0 15px;
+    color: ivory;
+}
+.user__profile__name{
+    font-weight: bold;
+    font-size: 22px;
+    letter-spacing: 1px;
+    padding-bottom: 15px;
+}
+.user__profile__status{
+
+}
+
+.user__profile__container {
+    padding: 10px;
     color: whitesmoke;
- }
-.description img{
-    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
 }
-.formWrapper input,textarea{
-    border: 1px outset cornflowerblue;
+.user__profile__container table{
+    letter-spacing: 1px;
+}
+.property{
+    color: rgba(255, 232, 232, 0.9);
+}
+.value{
+    padding-left: 30px;
+    font-size: large;
+
+}
+.value input,textarea{
+    min-width: 200px;
+    border-radius: 3px;
+    background-color: #e5b8b8ef;
+}
+.value textarea{
+    min-width: 198px;
+}
+.value input,textarea:focus{
+    outline: none;
+}
+.btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
     border-radius: 5px;
-    vertical-align:middle
+    color: whitesmoke;
+    background-color: rgba(33,27,25,0.87);
+    outline: none;
+    cursor: pointer;
+    transition: 0.4s;
 }
-.titleData {
-    min-width: 170px;
-    display: inline-block;
+.btn:focus,
+.btn:hover {
+    background-color: #fa4b4bb5;
+    color: rgba(33,27,25,0.87);
+    font-size: 14px;
+    font-weight: bold;
 }
+.user__profile__photo {
+    flex: 1 2 10em;
+    padding: 5px;
+
+}
+.user__profile__photo img{
+    width: 100%;
+    border-radius: 7px;
+}
+.user__profile__information{
+    flex: 2 1 30em;
+    padding: 5px;
+}
+.input__file{
+    top: -15px;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.input__file + label{
+    color: whitesmoke;
+    cursor: pointer;
+    transition: 0.4s;
+}
+.input__file:focus + label,
+.input__file + label:hover {
+    color: #e5b8b8ef;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0,0.6)
+}
+

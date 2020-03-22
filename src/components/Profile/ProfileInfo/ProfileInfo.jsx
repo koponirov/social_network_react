@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
-import style from './ProfileInfo.module.css';
+import s from './ProfileInfo.module.css';
 import Preloader from "../../../common/Preloader/Preloader";
-import photo from '../../../assets/images/ussser.svg'
+import photo from '../../../assets/images/man.svg'
 import ProfileStatusWithHooks from "../ProfileStatus/ProfileStatusWithHooks";
 import {ProfileDataFormRedux} from "../ProfileDataForm";
 import {NavLink} from "react-router-dom";
 
 
-const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto,saveProfileData,currentUser,startChatting}) => {
+const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto, saveProfileData, currentUser, startChatting}) => {
 
     const [editMode, setEditMode] = useState(false)
 
@@ -23,52 +23,94 @@ const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto,saveProf
 
     const onSubmit = (formData) => {
         saveProfileData(formData).then(
-            () => {setEditMode(false)})
+            () => {
+                setEditMode(false)
+            })
     };
 
-    return (
-        <div className={style.description}>
+    return (<div>
+            <div className={s.user__profile__title}>
+                <div className={s.user__profile__name}>{profile.fullName}</div>
+                <ProfileStatusWithHooks className={s.user__profile__status}
+                                        status={status}
+                                        isOwner={isOwner}
+                                        updateStatus={updateStatus}/>
+            </div>
+            <div className={s.user__profile__container}>
+                <div className={s.user__profile__photo}>
 
-            <img src={profile.photos.large != null ? profile.photos.large : photo} alt='user photo'/>
-            {editMode && <input type='file' onChange={onMainPhotoSelected}/>}
-            <ProfileStatusWithHooks status={status} isOwner={isOwner} updateStatus={updateStatus}/>
-            {!isOwner&&
-            <NavLink to={`/dialogs/${currentUser}/messages`}>
-                <button onClick={()=>startChatting(currentUser)}>chat</button>
-            </NavLink>}
-            {editMode ?
-                <ProfileDataFormRedux initialValues={profile} onSubmit={onSubmit} profile={profile} /> :
-                <ProfileData profile={profile}
-                             isOwner={isOwner}
-                             activateEditMode={() => {
-                                 setEditMode(true)
-                             }}/>
-            }
+                    <img src={profile.photos.large != null ? profile.photos.large : photo} alt='user photo'/>
+                    {editMode &&
+                    <div>
+                        <input type='file' name="file" id="file" onChange={onMainPhotoSelected} className={s.input__file}/>
+                        <label for="file">Upload photo...</label>
+                    </div>
+
+                    }
+
+                    {!isOwner &&
+                    <NavLink to={`/dialogs/${currentUser}/messages`}>
+                        <button onClick={() => startChatting(currentUser)} className={s.btn}>send message</button>
+                    </NavLink>}
+                </div>
+                <div className={s.user__profile__information}>
+
+
+                    {editMode ?
+                        <ProfileDataFormRedux initialValues={profile} onSubmit={onSubmit} profile={profile}/> :
+                        <ProfileData profile={profile}
+                                     isOwner={isOwner}
+                                     activateEditMode={() => {
+                                         setEditMode(true)
+                                     }}/>
+                    }
+                </div>
+
+            </div>
         </div>
+
     )
 }
 
 const Contact = ({contactTitle, contactValue}) => {
-    return (
-        <div><b>{contactTitle}</b> {contactValue}</div>
+    return (<tr>
+            <td className={s.property}>{contactTitle}</td>
+            <td className={s.value}>{contactValue}</td>
+        </tr>
     )
+
 };
 
 const ProfileData = ({profile, isOwner, activateEditMode}) => {
     return (
-        <div>
-            <div><b>{profile.fullName}</b></div>
-            <div><b>About me:</b> {profile.aboutMe}</div>
-            <div><b>Looking for a job:</b> {profile.lookingForAJob ? 'yes' : 'not'}</div>
-            <div><b>Professional skills:</b> {profile.lookingForAJobDescription}</div>
+        <div className={s.user__profile__information__container}>
+            <table>
+                <tr>
+                    <td className={s.property}>About me:</td>
+                    <td className={s.value}>{profile.aboutMe}</td>
+                </tr>
+                <tr>
+                    <td className={s.property}>Looking for a job:</td>
+                    <td className={s.value}>{profile.lookingForAJob ? 'yes' : 'not'}</td>
+                </tr>
+                <tr>
+                    <td className={s.property}>Professional skills:</td>
+                    <td className={s.value}>{profile.lookingForAJobDescription}</td>
+                </tr>
+                <tr>
+                    <td className={s.property}>Contacts:</td>
+                </tr>
+
+                {Object.keys(profile.contacts).map(key => {
+                    return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+                })}
+            </table>
             <div>
-                <b>Contacts:</b> {Object.keys(profile.contacts).map(key => {
-                return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
-            })}
+                {isOwner && <button onClick={activateEditMode} className={s.btn}>edit</button>}
             </div>
-            {isOwner && <button onClick={activateEditMode}>edit</button>}
         </div>
     )
 }
 
 export default ProfileInfo;
+

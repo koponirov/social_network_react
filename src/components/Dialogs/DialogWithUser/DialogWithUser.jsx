@@ -2,7 +2,7 @@ import React from 'react';
 import style from '../Dialogs.module.css';
 import {NavLink} from "react-router-dom";
 import letter from '../../../assets/images/letter.svg'
-import photo from "../../../assets/images/ussser.svg";
+import photo from "../../../assets/images/man.svg";
 
 const DialogWithUser = (props) => {
 

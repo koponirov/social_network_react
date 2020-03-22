@@ -4,5 +4,6 @@
     height: 100vh;
 }
 .container img{
+    padding-top: 45vh;
     height: 50px;
 }

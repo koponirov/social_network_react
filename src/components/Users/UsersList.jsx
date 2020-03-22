@@ -3,7 +3,7 @@ import styles from "./Users.module.css";
 import AutoSizer from "react-virtualized-auto-sizer";
 import InfiniteLoader from "react-window-infinite-loader";
 import {FixedSizeList as List} from "react-window"
-import photo from "../../assets/images/ussser.svg"
+import photo from "../../assets/images/man.svg"
 import {NavLink} from "react-router-dom";
 import Preloader from "../../common/Preloader/Preloader";
 

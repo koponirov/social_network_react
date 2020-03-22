@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
-import defaultPhoto from '../../assets/images/ussser.svg'
+import defaultPhoto from '../../assets/images/man.svg'
 
 const Header = (props) => {
 

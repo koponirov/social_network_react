@@ -41,13 +41,13 @@
     padding: 0 0 10px 0;
     color: whitesmoke;
     border: none;
-    border-bottom: 1px solid #362527;
+    border-bottom: 1px solid #2b2323;
     background-color: transparent;
     outline: none;
     transition: 0.3s;
 }
 .form__field input:focus {
-    border-bottom: 1px solid navajowhite;
+    border-bottom: 1px solid #ffebeb;
 }
 .form__button {
     margin-top: 30px;
@@ -58,10 +58,13 @@
     background-color: rgba(33,27,25,0.87);
     outline: none;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.4s;
 }
 .form__button:focus,
 .form__button:hover {
-    background-color: #f54949;
+    background-color: #fa4b4bb5;
+    color: rgba(33,27,25,0.87);
+
 }
 .form__field input::-webkit-input-placeholder { color: rgba(33,27,25,0.52); }
+

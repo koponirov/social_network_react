@@ -1,41 +1,45 @@
 import React from 'react';
 import {reduxForm} from "redux-form";
 import {createField, Input, Textarea} from "../../common/FormControls/FormControls";
-import style from './ProfileInfo/ProfileInfo.module.css'
+import s from './ProfileInfo/ProfileInfo.module.css'
 import styles from "../../common/FormControls/FormControls.module.css";
 
 const ProfileDataForm = (props) => {
 
     return (
-        <form onSubmit={props.handleSubmit} className={style.formWrapper}>
+        <form onSubmit={props.handleSubmit}>
+            <table>
+                <tr>
+                    <td className={s.property}>FullName:</td>
+                    <td className={s.value}>{createField('Full name', 'fullName', [], Input)}</td>
+                </tr>
+                <tr>
+                    <td className={s.property}>About me:</td>
+                    <td className={s.value}>{createField('About me', 'aboutMe', [], Textarea)}</td>
+                </tr>
+                <tr>
+                    <td className={s.property}>Looking for a job:</td>
+                    <td className={s.value}>{createField('Looking for a job',
+                        'lookingForAJob', [], Input, {type: 'checkbox'})}</td>
+                </tr>
+                <tr>
+                    <td className={s.property}>Professional skills:</td>
+                    <td className={s.value}>{createField('Professional skills', 'lookingForAJobDescription',
+                        [], Textarea)}</td>
+                </tr>
+                <tr>
+                    <td className={s.property}>Contacts:</td>
+                </tr>
+                {Object.keys(props.profile.contacts).map(key => {
+                    return <tr className={styles.contacts}>
+                        <td className={s.property}>{key}:</td>
+                        <td className={s.value}>{createField('', 'contacts.' + key, [], Input)} </td>
+                    </tr>
+                })}
 
-            <div >
-                <div className={style.titleData}><b>FullName:</b></div>{createField('Full name','fullName',[],Input)}
-            </div>
-            <div>
-                <div className={style.titleData}><b>About me:</b></div> {createField('About me','aboutMe',[],Textarea)}
-            </div>
-            <div>
-                <div className={style.titleData}><b>Looking for a job:</b></div>
-                {createField('Looking for a job',
-                    'lookingForAJob',[],Input,{type:'checkbox'})}
-            </div>
-            <div>
-                <div className={style.titleData}><b>Professional skills:</b></div>
-                {createField('Professional skills','lookingForAJobDescription',
-                    [],Textarea)}
-            </div>
-            <div>
-                <b>Contacts:</b> {Object.keys(props.profile.contacts).map(key => {
-                return <div className={styles.contacts}>
-                    <b>{key}: {createField('','contacts.'+key,[],Input)} </b>
-                </div>
-            })}
-            </div>
-
-                { props.error && <div className={styles.error}>{props.error}</div>}
-
-            <button >save</button>
+            </table>
+            {props.error && <div className={styles.error}>{props.error}</div>}
+            <button className={s.btn}>save</button>
         </form>
     )
 }
