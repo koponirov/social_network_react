@@ -84,21 +84,22 @@ const Contact = ({contactTitle, contactValue}) => {
 const ProfileData = ({profile, isOwner, activateEditMode}) => {
     return (
         <div className={s.user__profile__information__container}>
-            <table>
-                <tr>
+            <table className={s.user__profile__information__table}>
+                <tr >
                     <td className={s.property}>About me:</td>
                     <td className={s.value}>{profile.aboutMe}</td>
                 </tr>
-                <tr>
+                <tr className={s.user__profile__information__table__tread}>
                     <td className={s.property}>Looking for a job:</td>
                     <td className={s.value}>{profile.lookingForAJob ? 'yes' : 'not'}</td>
                 </tr>
-                <tr>
+                <tr className={s.user__profile__information__table__tread}>
                     <td className={s.property}>Professional skills:</td>
                     <td className={s.value}>{profile.lookingForAJobDescription}</td>
                 </tr>
-                <tr>
+                <tr >
                     <td className={s.property}>Contacts:</td>
+
                 </tr>
 
                 {Object.keys(profile.contacts).map(key => {

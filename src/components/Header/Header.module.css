@@ -43,6 +43,7 @@
     display: flex;
     position: relative;
     z-index: 2;
+    padding: 0;
 }
 .header__list li {
     list-style: none;
@@ -55,8 +56,8 @@
     text-decoration: none;
 }
 .header__link:hover {
-    color: rgba(33,27,25,0.87);
-    text-shadow: 1px 1px 2px rgba(250, 225, 225, 0.94);
+    color: rgba(33,27,25,0.97);
+    text-shadow: 1px 1px 3px whitesmoke;
     transition: 0.4s;
 }
 
@@ -132,6 +133,7 @@
     }
     .header__list li {
         margin: 0px 0px 5px 0px;
+        padding: 10px 0px;
     }
     .header__link:hover {
         color: #f54949;

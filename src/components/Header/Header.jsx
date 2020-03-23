@@ -13,17 +13,21 @@ const Header = (props) => {
                 <nav  onTouchEnd={() => setActive(!active)}
                     className={active ? `${s.header__menu} ${s.active}` : s.header__menu}>
                     <ul className={s.header__list}>
-                        <li>
-                            <NavLink to='/profile' className={s.header__link}>Profile</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to='/users' className={s.header__link}>Users</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to='/dialogs' className={s.header__link}>
+                        <NavLink to='/profile' className={s.header__link}>
+                            <li>
+                            Profile
+                            </li>
+                        </NavLink>
+                        <NavLink to='/users' className={s.header__link}>
+                            <li>
+                            Users
+                            </li>
+                        </NavLink>
+                        <NavLink to='/dialogs' className={s.header__link}>
+                            <li>
                                 Dialogs {props.newMessagesCount>0?props.newMessagesCount:'' }
-                            </NavLink>
-                        </li>
+                            </li>
+                        </NavLink>
                     </ul>
                 </nav>
                 <div onClick={() => setActive(!active)}

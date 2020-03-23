@@ -6,7 +6,7 @@
     font-weight: bold;
     font-size: 22px;
     letter-spacing: 1px;
-    padding-bottom: 15px;
+    padding-bottom: 12px;
 }
 .user__profile__status{
 
@@ -17,28 +17,7 @@
     color: whitesmoke;
     display: flex;
     flex-wrap: wrap;
-}
-.user__profile__container table{
-    letter-spacing: 1px;
-}
-.property{
-    color: rgba(255, 232, 232, 0.9);
-}
-.value{
-    padding-left: 30px;
-    font-size: large;
-
-}
-.value input,textarea{
-    min-width: 200px;
-    border-radius: 3px;
-    background-color: #e5b8b8ef;
-}
-.value textarea{
-    min-width: 198px;
-}
-.value input,textarea:focus{
-    outline: none;
+    overflow: hidden;
 }
 .btn {
     margin-top: 10px;
@@ -59,7 +38,8 @@
     font-weight: bold;
 }
 .user__profile__photo {
-    flex: 1 2 10em;
+    flex: 1 1 250px;
+    max-width: 250px;
     padding: 5px;
 
 }
@@ -67,9 +47,35 @@
     width: 100%;
     border-radius: 7px;
 }
-.user__profile__information{
-    flex: 2 1 30em;
+.user__profile__information__container {
+    flex: 2 5 30em;
     padding: 5px;
+}
+.user__profile__information__table {
+    letter-spacing: 1px;
+}
+.property{
+    color: #ffdee2;
+}
+.user__profile__information__table .value {
+    font-size: large;
+    display: block;
+    padding-left: 20px;
+    width: 240px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.value input,textarea{
+    min-width: 200px;
+    border-radius: 3px;
+    background-color: #e5b8b8ef;
+}
+.value textarea{
+    min-width: 198px;
+}
+.value input,textarea:focus{
+    outline: none;
 }
 .input__file{
     top: -15px;

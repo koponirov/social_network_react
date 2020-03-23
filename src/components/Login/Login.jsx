@@ -60,7 +60,7 @@ const LoginForm = (props) => {
             </div>
             }
             <div>
-                <button onTouchEnd={props.handleSubmit} className={s.form__button}>Login</button>
+                <button onTouchEnd={props.handleSubmit} className={s.form__button}>Log in</button>
             </div>
         </form>
     )
