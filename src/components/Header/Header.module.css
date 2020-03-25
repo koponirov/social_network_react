@@ -32,10 +32,8 @@
     height: 60px;
     align-items: center;
 }
-
 .header__menu{
 }
-
 .header__burger{
     display: none;
 }

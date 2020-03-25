@@ -11,7 +11,6 @@
 .user__profile__status{
 
 }
-
 .user__profile__container {
     padding: 10px;
     color: whitesmoke;
@@ -39,7 +38,7 @@
 }
 .user__profile__photo {
     flex: 1 1 250px;
-    max-width: 250px;
+    max-width: 300px;
     padding: 5px;
 
 }
@@ -48,7 +47,7 @@
     border-radius: 7px;
 }
 .user__profile__information__container {
-    flex: 2 5 30em;
+    flex: 2 5 250px;
     padding: 5px;
 }
 .user__profile__information__table {
@@ -61,7 +60,7 @@
     font-size: large;
     display: block;
     padding-left: 20px;
-    width: 240px;
+    width: 150px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
