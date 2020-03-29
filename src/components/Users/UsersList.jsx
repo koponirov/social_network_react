@@ -3,47 +3,59 @@ import styles from "./Users.module.css";
 import AutoSizer from "react-virtualized-auto-sizer";
 import InfiniteLoader from "react-window-infinite-loader";
 import {FixedSizeList as List} from "react-window"
-import photo from "../../assets/images/man.svg"
+import defaultPhoto from "../../assets/images/man.svg"
 import {NavLink} from "react-router-dom";
-import Preloader from "../../common/Preloader/Preloader";
 
+const UsersList = ({users, hasNextPage,isNextPageLoading,loadNextPage,totalUsers}) => {
 
-const UsersList = (props) => {
+    let items = users;
 
-    const users = props.users
+    const itemCount = totalUsers;
+
+    const loadMoreItems = isNextPageLoading ? () => {} : loadNextPage;
+
+    const isItemLoaded = index => !hasNextPage || index < items.length;
 
     const Row = ({index, style}) => {
-        const user = users[index];
+
+        let userPhoto,userName,userStatus,user,userId;
+
+        if (!isItemLoaded(index)) {
+
+            userId = ''
+            userPhoto = false;
+            userName = 'Loading...';
+            userStatus= 'Loading...';
+        } else {
+            user = items[index]
+            userId = user.id
+            userPhoto = user.photos.small
+            userName = user.name
+            userStatus= user.status
+        }
+
         return (
-            <NavLink to={'/profile/' + user.id}>
+            <NavLink to={'/profile/' + userId}>
                 <div className={styles.listItem__container} style={style}>
                     <div className={styles.listItem}>
                         <div className={styles.ava}>
-                            <img src={user.photos.small ? user.photos.small : photo}/>
+                            <img src={ userPhoto ? userPhoto : defaultPhoto}/>
                         </div>
                         <div className={styles.content__container}>
                             <div className={styles.content}>
-                                { user.name}
+                                {userName}
                             </div>
                             <div className={styles.status}>
-                                {user.status}
+                                {userStatus}
                             </div>
                         </div>
                     </div>
 
                 </div>
             </NavLink>
-
         );
     };
 
-    const loadMoreItems = () => {
-        props.requestMoreUsers(props.currentPage, props.pageSize)
-    }
-
-    const isItemLoaded = () => {
-        return props.isLoading
-    }
 
     return (
         <div className={styles.list}>
@@ -52,13 +64,14 @@ const UsersList = (props) => {
                     <InfiniteLoader
                         isItemLoaded={isItemLoaded}
                         loadMoreItems={loadMoreItems}
-                        itemCount={users.length}
-                        threshold={15}
+                        itemCount={itemCount}
+                        minimumBatchSize={50}
+                        threshold={25}
                     >
                         {({onItemsRendered, ref}) => (
                             <List
                                 height={height}
-                                itemCount={users.length}
+                                itemCount={itemCount}
                                 itemSize={100}
                                 width={width}
                                 ref={ref}
@@ -77,3 +90,25 @@ const UsersList = (props) => {
 };
 
 export default UsersList;
+
+// return (
+//     <NavLink to={'/profile/' + item.id}>
+//         <div className={styles.listItem__container} style={style}>
+//             <div className={styles.listItem}>
+//                 <div className={styles.ava}>
+//                     <img src={item.photos.small ? item.photos.small : photo}/>
+//                 </div>
+//                 <div className={styles.content__container}>
+//                     <div className={styles.content}>
+//                         { item.name}
+//                     </div>
+//                     <div className={styles.status}>
+//                         {item.status}
+//                     </div>
+//                 </div>
+//             </div>
+//
+//         </div>
+//     </NavLink>
+//
+// );

@@ -87,8 +87,9 @@ export const setTotalUsersCount = (totalUsers) => ({type: SET_TOTAL_USERS, total
 export const setIsLoading = (isLoading) => ({type: TOGGLE_IS_LOADING, isLoading});
 export const setInProgress = (inProgress, userId) => {
     return {type: TOGGLE_IS_FOLLOWING_PROGRESS, inProgress, userId}
-}
+};
 export const requestUsers = (currentPage, pageSize) => {
+
     return async (dispatch) => {
         dispatch(setIsLoading(true));
         let response = await usersAPI.getUsers(currentPage, pageSize)
@@ -99,10 +100,10 @@ export const requestUsers = (currentPage, pageSize) => {
 }
 
 export const requestMoreUsers = (currentPage, pageSize) => {
+
     return async (dispatch) => {
         dispatch(setIsLoading(true));
-        dispatch(setCurrentPage(currentPage + 1))
-        let response = await usersAPI.getUsers(currentPage + 1, pageSize)
+        let response = await usersAPI.getUsers(currentPage , pageSize)
         dispatch(setIsLoading(false));
         dispatch(setMoreUsers(response.data.items));
         dispatch(setTotalUsersCount(response.data.totalCount))

@@ -3,7 +3,6 @@ import React from 'react'
 import {
     setInProgress, onPageChanged, follow, unfollow, requestUsers, requestMoreUsers, setCurrentPage, setUsers
 } from '../../redux/usersReducer';
-import Users from "./Users";
 import Preloader from '../../common/Preloader/Preloader';
 import {compose} from "redux";
 import {
@@ -20,27 +19,35 @@ import s from './Users.module.css'
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, 10);
+        this.props.requestUsers(this.props.currentPage, 100);
+        console.log(this.props.users)
     }
 
     componentWillUnmount() {
-        this.props.setCurrentPage(1);
-        this.props.setUsers([]);
+        //this.props.setCurrentPage(1);
+        //this.props.setUsers([]);
+    }
+
+    loadNextPage = (startIndex,stopIndex) => {
+
+        let itemsNumber = (stopIndex - startIndex)+1;
+        let pageNumber = Math.ceil((startIndex+1)/itemsNumber)
+        this.props.requestMoreUsers(pageNumber,itemsNumber)
     }
 
     render() {
         return (<div className={s.users__container}>
                 {this.props.users.length>0 ? <UsersList
-                    currentPage={this.props.currentPage}
                     users={this.props.users}
-                    pageSize={this.props.pageSize}
-                    isLoading={this.props.isLoading}
-                    requestMoreUsers={this.props.requestMoreUsers}
+                    hasNextPage={true}
+                    isNextPageLoading={this.props.isLoading}
+                    loadNextPage={this.loadNextPage}
+                    totalUsers={this.props.totalUsersCount}
                 /> : <Preloader/>}
             </div>
         )
     }
-};
+}
 
 let mapStateToProps = (state) => {
 
