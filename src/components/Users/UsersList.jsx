@@ -56,7 +56,6 @@ const UsersList = ({users, hasNextPage,isNextPageLoading,loadNextPage,totalUsers
         );
     };
 
-
     return (
         <div className={styles.list}>
             <AutoSizer >

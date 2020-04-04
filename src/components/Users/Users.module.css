@@ -33,14 +33,13 @@
     box-shadow: 5px 6px 5px -5px rgba(235, 0, 39, 0.32);
     text-decoration: none;
     font-size: 22px;
-    color: whitesmoke;
+    color: rgba(20, 19, 19,0.9);
     transition: 0.4s;
 }
 .list .listItem:hover {
     border: 1px solid rgba(165, 143, 143, 0.7);
     box-shadow: 5px 6px 8px -5px rgba(235, 0, 39, 0.62);
-    color: whitesmoke;
-    background-color: rgba(115, 115, 115, 1);
+    background-color: rgba(235, 235, 235, 1);
 }
 .content__container{
 
@@ -50,7 +49,6 @@
     text-decoration: none;
 }
 .list .listItem .content {
-    color:whitesmoke;
     font-weight: bold;
 }
 .list .listItem .status {

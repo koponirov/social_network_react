@@ -1,17 +1,25 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
 import defaultPhoto from '../../assets/images/man.svg'
+import cn from 'classnames'
 
 const Header = (props) => {
 
-    const [active, setActive] = useState(false)
+    const [active, setActive] = useState(false);
 
+    const [avatar,setAvatar] = useState(props.avatar);
+
+    useEffect(()=>{
+        setAvatar(props.avatar)
+    },[props.avatar]);
+
+//`${s.header__menu} ${s.active}`
     return <header className={s.header}>
         <div className={s.container}>
             <div className={s.header__body}>
                 <nav  onTouchEnd={() => setActive(!active)}
-                    className={active ? `${s.header__menu} ${s.active}` : s.header__menu}>
+                    className={active ? cn(s.header__menu,s.active) : s.header__menu}>
                     <ul className={s.header__list}>
                         <NavLink to='/profile' className={s.header__link}>
                             <li>
@@ -35,19 +43,19 @@ const Header = (props) => {
                     <span></span>
                 </div>
                 <div className={s.header__auth}>
-                    {props.isAuth ?
+                    {props.profile ?
                         <div className={s.header__auth__info}>
 
                             <div className={s.header__auth__content}>
                                 <NavLink to='/profile'>
-                                    <div className={s.header__auth__name}>{props.login}</div>
+                                    <div className={s.header__auth__name}>{props.profile.fullName}</div>
                                 </NavLink>
                                 <div className={s.header__auth__logout}><span onClick={props.logout}>logout</span></div>
                             </div>
                             <div className={s.header__auth__ava}>
                                 <NavLink to='/profile'>
-                                    <img src={props.photo != null ?
-                                        props.photo : defaultPhoto} alt='photo'/>
+                                    <img src={props.profile.photos.small != null ?
+                                        props.profile.photos.small : defaultPhoto} alt='photo'/>
                                 </NavLink>
                             </div>
                         </div>

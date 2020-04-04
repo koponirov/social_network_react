@@ -5,11 +5,14 @@ import photo from '../../../assets/images/man.svg'
 import ProfileStatusWithHooks from "../ProfileStatus/ProfileStatusWithHooks";
 import {ProfileDataFormRedux} from "../ProfileDataForm";
 import {NavLink} from "react-router-dom";
+import editIcon from '../../../assets/images/gear.svg'
 
 
 const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto, saveProfileData, currentUser, startChatting}) => {
 
-    const [editMode, setEditMode] = useState(false)
+    const [editMode, setEditMode] = useState(false);
+
+    const [showContacts, setShowContacts] = useState(false)
 
     if (!profile) {
         return <Preloader/>
@@ -28,14 +31,17 @@ const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto, savePro
             })
     };
 
-    return (<div>
+    return (<div className={s.user__profile}>
             <div className={s.user__profile__title}>
                 <div className={s.user__profile__name}>{profile.fullName}</div>
-                <ProfileStatusWithHooks className={s.user__profile__status}
-                                        status={status}
-                                        isOwner={isOwner}
-                                        updateStatus={updateStatus}/>
+                <div className={s.user__profile__settings__btn}>
+                    {isOwner && <img src={editIcon} onClick={() => {setEditMode(!editMode)}}/>}
+                </div>
+
             </div>
+            <ProfileStatusWithHooks status={status}
+                                    isOwner={isOwner}
+                                    updateStatus={updateStatus}/>
             <div className={s.user__profile__container}>
                 <div className={s.user__profile__photo}>
 
@@ -43,7 +49,7 @@ const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto, savePro
                     {editMode &&
                     <div>
                         <input type='file' name="file" id="file" onChange={onMainPhotoSelected} className={s.input__file}/>
-                        <label for="file">Upload photo...</label>
+                        <label for="file">Choose main photo...</label>
                     </div>
 
                     }
@@ -60,8 +66,12 @@ const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto, savePro
                         <ProfileDataFormRedux initialValues={profile} onSubmit={onSubmit} profile={profile}/> :
                         <ProfileData profile={profile}
                                      isOwner={isOwner}
+                                     showContacts={showContacts}
                                      activateEditMode={() => {
                                          setEditMode(true)
+                                     }}
+                                     activateShowContacts={() => {
+                                         setShowContacts(!showContacts)
                                      }}/>
                     }
                 </div>
@@ -74,14 +84,14 @@ const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto, savePro
 
 const Contact = ({contactTitle, contactValue}) => {
     return (<tr>
-            <td className={s.property}>{contactTitle}</td>
+            <td className={s.property__contacts}>{contactTitle}</td>
             <td className={s.value}>{contactValue}</td>
         </tr>
     )
 
 };
 
-const ProfileData = ({profile, isOwner, activateEditMode}) => {
+const ProfileData = ({profile, isOwner, activateEditMode,showContacts, activateShowContacts}) => {
     return (
         <div className={s.user__profile__information__container}>
             <table className={s.user__profile__information__table}>
@@ -98,17 +108,15 @@ const ProfileData = ({profile, isOwner, activateEditMode}) => {
                     <td className={s.value}>{profile.lookingForAJobDescription}</td>
                 </tr>
                 <tr >
-                    <td className={s.property}>Contacts:</td>
-
+                    <td className={s.toggle__show} onClick={activateShowContacts}>
+                        {showContacts?'hide contacts':'show contacts'}
+                    </td>
                 </tr>
 
-                {Object.keys(profile.contacts).map(key => {
+                {showContacts&&(Object.keys(profile.contacts).map(key => {
                     return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
-                })}
+                }))}
             </table>
-            <div>
-                {isOwner && <button onClick={activateEditMode} className={s.btn}>edit</button>}
-            </div>
         </div>
     )
 }

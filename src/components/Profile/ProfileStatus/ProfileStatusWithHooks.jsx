@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react'
+import s from "../ProfileInfo/ProfileInfo.module.css";
+import editIcon from '../../../assets/images/edit.svg'
 
 const ProfileStatusWithHooks = (props) => {
 
@@ -25,15 +27,19 @@ const ProfileStatusWithHooks = (props) => {
     }
 
         return (
-            <div>
+            <div className={s.user__profile__status__container}>
+
                 {!editMode &&
-                    <div>
-                        <span onClick={activateEditMode}>{props.status|| "...status"}</span>
+                    <div className={s.user__profile__status}>
+                        <span >{props.status|| "...status"}</span>
                     </div>}
                 {editMode &&
-                    <div>
+                    <div className={s.user__profile__status}>
                         <input onChange={onStatusChange} autoFocus={true} onBlur={deactivateEditMode} value={status}></input>
                     </div>}
+                {props.isOwner && <div onClick={activateEditMode} className={s.user__profile__status__edit}>
+                    <img src={editIcon}/>
+                </div>}
             </div>
         )
     };

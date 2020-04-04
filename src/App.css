@@ -9,7 +9,7 @@
   flex: 0 0 60px;
 }
 .app__content {
-  background-color: dimgrey;
+  background-color: ghostwhite;
   flex: 1 1 auto;
 }
 .app__content__container{

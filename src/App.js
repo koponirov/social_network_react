@@ -46,7 +46,7 @@ class App extends React.Component {
                             <Route path='/users'
                                    render={() => <UsersContainer />}/>
                             <Route path='/login'
-                                   render={() => <Login store={this.props.store}/>}/>
+                                   render={() => <Login />}/>
                         </div>
                     </div>
                 </div>

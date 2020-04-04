@@ -75,3 +75,12 @@ export default compose(
     withAuthRedirect
 )(UsersContainer)
 
+// return (<div className={s.users__container}>
+//     {this.props.users.length>0 ? <UsersList
+//         users={this.props.users}
+//         hasNextPage={true}
+//         isNextPageLoading={this.props.isLoading}
+//         loadNextPage={this.loadNextPage}
+//         totalUsers={this.props.totalUsersCount}
+//     /> : <Preloader/>}
+// </div>
