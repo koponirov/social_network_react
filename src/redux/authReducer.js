@@ -2,7 +2,7 @@ import {authAPI, profileAPI, securityAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'socialNetwork/auth/SET_USER_DATA';
-const SHOW_USER_PHOTO = 'socialNetwork/auth/SHOW_USER_PHOTO';
+const SET_AUTH_PROFILE = 'socialNetwork/auth/SET_AUTH_PROFILE';
 const SET_CAPTCHA = 'socialNetwork/auth/SET_CAPTCHA';
 
 
@@ -12,7 +12,8 @@ let initialState = {
     login: null,
     isAuth: false,
     photo: null,
-    captcha: null
+    captcha: null,
+    authProfile:null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -29,10 +30,10 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 ...action.payload
             }
-        case SHOW_USER_PHOTO:
+        case SET_AUTH_PROFILE:
             return {
                 ...state,
-                photo: action.smallUserPhoto,
+                authProfile: action.data,
                 isAuth: true
             }
         default:
@@ -50,7 +51,7 @@ export const setCaptcha = (captcha) => ({
     payload: {captcha}
 });
 
-export const showUserPhoto = (smallUserPhoto) => ({type: SHOW_USER_PHOTO, smallUserPhoto});
+export const setAuthProfile = (data) => ({type: SET_AUTH_PROFILE, data});
 
 export const getAuthUserData = () => async (dispatch) => {
     let response = await authAPI.me();
@@ -60,8 +61,7 @@ export const getAuthUserData = () => async (dispatch) => {
         dispatch(setAuthUserData(email, id, login));
         profileAPI.getUserProfile(id)
             .then(data => {
-                let smallUserPhoto = data.photos.small;
-                dispatch(showUserPhoto(smallUserPhoto))
+                dispatch(setAuthProfile(data))
             })
     }
 }

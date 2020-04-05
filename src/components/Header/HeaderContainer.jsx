@@ -21,7 +21,7 @@ const mapStateToProps = (state) => ({
     login: state.auth.login,
     avatar: state.auth.photo,
     newMessagesCount: state.dialogsPage.newMessagesCount,
-    profile: state.profilePage.profile
+    profile: state.auth.authProfile
 })
-export default connect(mapStateToProps, {getAuthUserData,logout})(HeaderContainer);
+export default connect(mapStateToProps, {logout})(HeaderContainer);
 
