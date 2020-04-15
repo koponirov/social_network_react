@@ -27,110 +27,56 @@
 }
 .user__profile__status__container{
     padding-left: 15px;
+    height: 25px;
+    display: flex;
+    align-items: center;
 }
 .user__profile__status{
-    display: inline-block;
+    max-width: 500px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .user__profile__status__edit{
-    display: inline-block;
+
     padding-left: 10px;
 }
 .user__profile__status__edit img{
     width: 15px;
     cursor: pointer;
 }
+.input_status {
+    min-width: 250px;
+    max-width: 500px;
+    font-size: 16px;
+    color: rgba(20, 19, 19,0.9);
+}
+.saved_status {
+    font-size: 16px;
+    padding: 4px 0;
+}
 .user__profile__container {
-    padding: 10px;
+    padding: 15px;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     overflow: hidden;
 }
-.btn {
-    margin-top: 10px;
-    padding: 10px 20px;
-    border: 2px solid rgba(20, 19, 19,0.9);
+
+.user__profile__photo__block {
+    max-width: 250px;
     border-radius: 5px;
-    color: rgba(20, 19, 19,0.9);
-    font-weight: bold;
-    background-color: ghostwhite;
-    outline: none;
-    cursor: pointer;
-    transition: 0.4s;
-}
-.btn:focus,
-.btn:hover {
-    border: 2px solid #f54949;
-    background-color: #f54949;
+    margin-right: 10px;
 }
 .user__profile__photo {
-    flex: 1 1 250px;
-    max-width: 250px;
-    padding: 5px;
+    width: 100%;
+    overflow: hidden;
+
 }
 .user__profile__photo img{
-    width: 100%;
-    border-radius: 7px;
-}
-.user__profile__information__container {
-    flex: 2 5 250px;
-    padding: 5px;
-}
-.user__profile__information__table {
-    letter-spacing: 1px;
-}
-.property{
-    font-weight: bold;
-}
-.property__contacts{
-    font-weight: bold;
-    color: rgba(20, 19, 19,0.9);
-}
-.toggle__show{
-    text-align: center;
-    padding: 10px;
-    color: rgba(20, 19, 19,0.7);
+    max-width: 100%;
+    height: auto;
     border-radius: 5px;
-    cursor: pointer;
-}
-.toggle__show:hover{
-    background-color: lavender;
-}
 
-.user__profile__information__table .value {
-    font-size: large;
-    display: block;
-    padding-left: 20px;
-    width: 450px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-@media (max-width: 767px) {
-    .user__profile__information__table .value {
-        width: 250px;
-    }
-}
-
-@media (max-width: 415px) {
-    .user__profile__information__table .value {
-        width: 150px;
-    }
-}
-.value input,textarea{
-    box-sizing: border-box;
-    padding-left: 10px;
-    border-radius: 3px;
-    /*background-color: #e5b8b8ef;*/
-    border: 1px solid rgba(20, 19, 19,0.7);
-}
-.value textarea{
-    resize: none;
-    min-height: 30px;
-    max-height: 100px;
-}
-.value input,textarea:focus{
-    outline: none;
 }
 .input__file{
     top: -15px;
@@ -155,4 +101,10 @@
     /*text-shadow: 1px 1px 2px rgba(0, 0, 0,0.6);*/
     text-decoration: underline;
 }
+@media (max-width: 480px) {
+    .user__profile__container{
+        flex-wrap: wrap;
+    }
+}
+
 

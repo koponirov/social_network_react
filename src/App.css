@@ -4,6 +4,7 @@
   flex-flow: column nowrap;
   width: 100%;
   height: 100vh;
+  color: rgba(20, 19, 19,0.9);
 }
 .app__header{
   flex: 0 0 60px;
@@ -17,6 +18,26 @@
   max-width: 1180px;
   min-width: 300px;
   margin: 0 auto;
+}
+@media (max-width: 1366px) {
+  .app__content__container {
+    max-width: 980px;
+  }
+}
+@media (max-width: 1099px) {
+  .app__content__container {
+    max-width: 780px;
+  }
+}
+@media (max-width: 899px) {
+  .app__content__container {
+    max-width: 720px;
+  }
+}
+@media (max-width: 768px) {
+  .app__content__container {
+    max-width: 90%;
+  }
 }
 
 

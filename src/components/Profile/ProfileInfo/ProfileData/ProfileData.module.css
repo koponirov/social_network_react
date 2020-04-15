@@ -1,0 +1,84 @@
+.profile_info_container {
+    display: flex;
+    flex-direction: column;
+
+}
+.property_container{
+    display: flex;
+    flex-wrap: nowrap;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+    border-radius: 3px;
+}
+.property_container:not(:first-child){
+    margin-top: 10px;
+}
+.property_name{
+    max-width: 200px;
+    min-width: 150px;
+    line-height: 32px;
+    padding-left: 5px;
+}
+.property_value{
+    max-width: 450px;
+    min-width: 400px;
+    line-height: 32px;
+    padding-left: 5px;
+    font-weight: 600;
+}
+
+.checkbox input{
+    width: fit-content;
+}
+@media (max-width: 1099px) {
+    .property_name{
+        max-width: 100px;
+    }
+    .property_value{
+        max-width: 250px;
+        min-width: 200px;
+    }
+}
+@media (max-width: 999px) {
+    .property_name{
+        max-width: 80px;
+    }
+}
+@media (max-width: 699px) {
+    .property_container {
+        flex-wrap: wrap;
+    }
+    .property_value {
+        min-width: 150px;
+    }
+}
+
+.toggle__show{
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    color: rgba(20, 19, 19,0.7);
+    cursor: pointer;
+    transition: 0.2s;
+}
+.toggle__show:hover{
+
+    background-color: rgba(255, 207, 214,0.3);
+}
+.btn {
+    align-self: flex-start;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: 2px solid rgba(20, 19, 19,0.9);
+    border-radius: 5px;
+    color: rgba(20, 19, 19,0.9);
+    font-weight: bold;
+    background-color: ghostwhite;
+    outline: none;
+    cursor: pointer;
+    transition: 0.4s;
+}
+.btn:focus,
+.btn:hover {
+    border: 2px solid #f54949;
+    background-color: #f54949;
+}

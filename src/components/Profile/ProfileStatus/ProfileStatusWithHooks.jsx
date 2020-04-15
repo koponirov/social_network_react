@@ -31,11 +31,14 @@ const ProfileStatusWithHooks = (props) => {
 
                 {!editMode &&
                     <div className={s.user__profile__status}>
-                        <span >{props.status|| "...status"}</span>
+                        <span className={s.saved_status}>{props.status|| "...status"}</span>
                     </div>}
                 {editMode &&
                     <div className={s.user__profile__status}>
-                        <input onChange={onStatusChange} autoFocus={true} onBlur={deactivateEditMode} value={status}></input>
+                        <input onChange={onStatusChange} autoFocus={true}
+                               onBlur={deactivateEditMode} value={status} className={s.input_status}>
+
+                        </input>
                     </div>}
                 {props.isOwner && <div onClick={activateEditMode} className={s.user__profile__status__edit}>
                     <img src={editIcon}/>

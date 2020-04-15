@@ -21,7 +21,8 @@
     color: #e84848f7;
 }
 
-.field {
-    display: inline-block;
-
+.inputField{
+    width: 100%;
+    resize: none;
+    box-sizing: border-box;
 }

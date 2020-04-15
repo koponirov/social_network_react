@@ -9,7 +9,7 @@ export const Textarea = ({input, meta, ...props}) => {
     return (
         <div className={hasError && styles.formControls}>
             <div>
-                <textarea {...input} {...props} />
+                <textarea {...input} {...props} className={styles.inputField}/>
             </div>
             <div >
                 {hasError && <span> {meta.error} </span>}
@@ -24,8 +24,8 @@ export const Input = ({input, meta, ...props}) => {
 
     return (
         <div className={hasError && styles.formControls}>
-            <div>
-                <input {...input} {...props} />
+            <div >
+                <input {...input} {...props} className={styles.inputField}/>
             </div>
             <div>
                 {hasError && <span> {meta.error} </span>}

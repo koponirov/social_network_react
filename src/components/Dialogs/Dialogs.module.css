@@ -61,21 +61,19 @@
 }
 .back__btn{
   padding: 10px;
-  text-transform: uppercase;
-  box-shadow:0px 10px 15px 0px rgba(105, 105, 105, 0.86);
-  z-index: 2;
+  border-bottom: 1px solid rgba(161, 138, 138, 0.5);;
 }
 .back__btn img{
   height: 12px;
 }
 .back__btn a{
   text-decoration: none;
-  color: whitesmoke;
+  color: rgba(20, 19, 19,0.9);
 }
 .messages__box{
   height: 65vh;
   overflow-y: auto;
-  background-color: #737373;
+
   border-radius: 5px;
   margin-bottom: 10px;
 
@@ -117,8 +115,7 @@
   display: flex;
   align-items:stretch;
   height: 60px;
-  box-shadow: 0px -10px 15px 0px rgba(105, 105, 105, 105);
-  z-index: 2;
+
 }
 .message__field{
   max-width: 100%;
