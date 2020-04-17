@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {requestDialogs, requestNewMessagesCount} from "../../redux/dialogsReducer";
+import DialogsList from "./DialogsList";
 
 
 class DialogsContainer extends React.Component {
@@ -14,7 +15,7 @@ class DialogsContainer extends React.Component {
     }
 
     render() {
-        return <Dialogs
+        return <DialogsList
             dialogs={this.props.dialogs}
         />
     }
