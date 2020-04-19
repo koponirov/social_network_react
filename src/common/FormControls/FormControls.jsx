@@ -1,14 +1,16 @@
-import React from 'react'
+import React from 'react';
+import cn from 'classnames'
 import styles from './FormControls.module.css'
 import {Field} from "redux-form";
+
 
 export const Textarea = ({input, meta, ...props}) => {
 
     const hasError = (meta.touched && meta.error)
 
     return (
-        <div className={hasError && styles.formControls}>
-            <div>
+        <div className={cn(styles.container,{[styles.formControls]:hasError})}>
+            <div className={styles.inputField_container}>
                 <textarea {...input} {...props} className={styles.inputField}/>
             </div>
             <div >

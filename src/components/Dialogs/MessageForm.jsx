@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field, reduxForm} from "redux-form";
-import s from './Dialogs.module.css'
+import s from './Messages/Messages.module.css'
 import {maxLengthCreator, required} from "../../utilites/validators/validators";
 import {Textarea} from "../../common/FormControls/FormControls";
 
@@ -19,7 +19,7 @@ const MessageForm = (props)=> {
                     name='message'
                     component={Textarea}
                     autocompele='off'
-                    cols='200'
+
                 />
             </div>
 

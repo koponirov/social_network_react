@@ -1,0 +1,92 @@
+.messages__container{
+    flex-grow: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+}
+.back__btn{
+    padding: 10px;
+    border-bottom: 1px solid rgba(161, 138, 138, 0.5);;
+}
+.back__btn img{
+    height: 12px;
+}
+.back__btn a{
+    text-decoration: none;
+    color: rgba(20, 19, 19,0.9);
+}
+.messages__box{
+    height: 65vh;
+    overflow-y: auto;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+}
+.message__container{
+    min-width: 150px;
+    max-width: 450px;
+    margin: 10px 10px 0px 3px;
+}
+.message__wrapper{
+    border-radius: 7px;
+    background-color: rgba(61, 54, 55, 0.85);
+
+}
+.message__user__name{
+    padding-left: 10px;
+    word-wrap: break-word;
+    color: #cf6161;
+    font-weight: normal;
+
+}
+.message__text{
+    color: whitesmoke;
+    word-wrap: break-word;
+    font-weight: lighter;
+    font-size: 18px;
+    padding: 5px 10px;
+
+}
+.message__add__time{
+    color: rgba(38,31,27,0.7);
+    font-size: 10px;
+    opacity: 70%;
+    margin-top: 2px;
+    margin-left: 10px;
+
+}
+.message__form{
+    display: flex;
+    height: 60px;
+
+}
+.message__field{
+    width: 100%;
+    height: auto;
+    padding-right: 15px;
+    
+}
+.message__field textarea{
+
+}
+.message__send__button{
+}
+.message__send__button button{
+    height: 100%;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 12px 0px 0px 12px;
+    color: whitesmoke;
+    background-color: rgba(33,27,25,0.87);
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.message__send__button button:focus,
+.message__send__button button:hover {
+    background-color: #f54949;
+}

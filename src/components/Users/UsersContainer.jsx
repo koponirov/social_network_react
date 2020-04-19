@@ -36,7 +36,7 @@ class UsersContainer extends React.Component {
     }
 
     render() {
-        return (<div className={s.users__container}>
+        return (<div className={s.list__container}>
                 {this.props.users.length>0 ? <UsersList
                     users={this.props.users}
                     hasNextPage={true}

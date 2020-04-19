@@ -13,7 +13,7 @@ import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./common/Preloader/Preloader";
-import MessagesContainer from "./components/Dialogs/Message/MessagesContainer";
+import MessagesContainer from "./components/Dialogs/Messages/MessagesContainer";
 
 class App extends React.Component {
 

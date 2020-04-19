@@ -5,6 +5,7 @@ import InfiniteLoader from "react-window-infinite-loader";
 import {FixedSizeList as List} from "react-window"
 import defaultPhoto from "../../assets/images/man.svg"
 import {NavLink} from "react-router-dom";
+import UserItem from "./UserItem";
 
 const UsersList = ({users, hasNextPage,isNextPageLoading,loadNextPage,totalUsers}) => {
 
@@ -34,25 +35,14 @@ const UsersList = ({users, hasNextPage,isNextPageLoading,loadNextPage,totalUsers
             userStatus= user.status
         }
 
-        return (
-            <NavLink to={'/profile/' + userId}>
-                <div className={styles.listItem__container} style={style}>
-                    <div className={styles.listItem}>
-                        <div className={styles.ava}>
-                            <img src={ userPhoto ? userPhoto : defaultPhoto}/>
-                        </div>
-                        <div className={styles.content__container}>
-                            <div className={styles.content}>
-                                {userName}
-                            </div>
-                            <div className={styles.status}>
-                                {userStatus}
-                            </div>
-                        </div>
-                    </div>
+        let path = '/profile/' + userId
 
-                </div>
-            </NavLink>
+        return (
+            <UserItem path={path}
+                      style={style}
+                      userName={userName}
+                      userPhoto={userPhoto}
+                      userStatus={userStatus}/>
         );
     };
 

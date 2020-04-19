@@ -1,7 +1,7 @@
 import React from 'react';
 import Message from "./Message";
 import MessageReduxForm from "./../MessageForm";
-import s from './../Dialogs.module.css'
+import s from './Messages.module.css'
 import {NavLink} from "react-router-dom";
 import arrow from './../../../assets/images/arrow_back.svg'
 import parseIso from 'date-fns/parseISO'
@@ -33,7 +33,7 @@ const Messages = (props) => {
         </div>
 
 
-        <div className={s.message__form}>
+        <div className={s.message__form_container}>
             <MessageReduxForm onSubmit={sendMessage}/>
         </div>
 

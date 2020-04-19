@@ -5,6 +5,8 @@ import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {requestDialogs, requestNewMessagesCount} from "../../redux/dialogsReducer";
 import DialogsList from "./DialogsList";
+import s from "../Users/Users.module.css";
+import Preloader from "../../common/Preloader/Preloader";
 
 
 class DialogsContainer extends React.Component {
@@ -15,9 +17,12 @@ class DialogsContainer extends React.Component {
     }
 
     render() {
-        return <DialogsList
-            dialogs={this.props.dialogs}
-        />
+        return (<div className={s.list__container}>
+                {this.props.dialogs.length > 0 ? <DialogsList
+                    dialogs={this.props.dialogs}
+                /> : <Preloader/>}
+            </div>
+        )
     }
 }
 

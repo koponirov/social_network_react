@@ -6,29 +6,28 @@ import Preloader from "../../common/Preloader/Preloader";
 import {FixedSizeList as List} from "react-window";
 import styles from "../Users/Users.module.css";
 import AutoSizer from "react-virtualized-auto-sizer";
+import UserItem from "../Users/UserItem";
 
 const DialogsList = ({dialogs}) => {
 
 
     const Row = ({index, style}) => {
+        
+        let user = dialogs[index];
 
-        let user = dialogs[index]
+        let path = `/dialogs/${user.id}/messages`
 
-        return (<div style={style}>
-                <DialogWithUser userName={user.userName}
-                                userId={user.id}
-                                photo={user.photos.small}
-                                newMessages={user.hasNewMessages}
-
-                />
-            </div>
+        return (<UserItem path={path}
+                          style={style}
+                          userPhoto={user.photos.small}
+                          userName={user.userName}/>
 
         )
     }
 
     return (<div className={styles.list}>
 
-            {dialogs.length > 0 ?
+
                 <AutoSizer>
                     {({height, width}) => (
 
@@ -42,10 +41,10 @@ const DialogsList = ({dialogs}) => {
                             {Row}
                         </List>
                     )}
-                </AutoSizer> :
-                <Preloader/>}
-
+                </AutoSizer>
         </div>
+
+
     )
 }
 

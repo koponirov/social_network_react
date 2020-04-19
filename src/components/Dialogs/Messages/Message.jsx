@@ -1,5 +1,5 @@
 import React from 'react';
-import s from '../Dialogs.module.css';
+import s from './Messages.module.css';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const Message = ({userName,messageText,addedAt}) => {
@@ -9,8 +9,9 @@ const Message = ({userName,messageText,addedAt}) => {
                 <div className={s.message__user__name}>{userName}:</div>
                 <div className={s.message__text}>{messageText}</div>
             </div>
-
-            <div className={s.message__add__time}>{formatDistanceToNow(addedAt,{addSuffix:true})}</div>
+            <div className={s.message__add__time}>
+                {formatDistanceToNow(addedAt,{addSuffix:true})}
+            </div>
         </div>
     )
 }
