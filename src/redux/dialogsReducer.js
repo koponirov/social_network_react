@@ -1,19 +1,20 @@
 import {dialogsAPI} from "../api/api";
 import {reset} from 'redux-form';
 
-
-const SET_DIALOGS = 'SET_DIALOGS';
-const SET_MESSAGES = 'SET_MESSAGES';
-const SET_NEWMESSAGES_COUNT = 'SET_NEWMESSAGES_COUNT';
-const SET_CURRENT_USER = 'SET_CURRENT_USER';
-const SEND_MESSAGE = 'SEND_MESSAGE';
-const CREATE_DIALOG = 'CREATE_DIALOG';
+const SET_DIALOGS = 'socialNetwork/dialogs/SET_DIALOGS';
+const SET_MESSAGES = 'socialNetwork/dialogs/SET_MESSAGES';
+const SET_NEWMESSAGES_COUNT = 'socialNetwork/dialogs/SET_NEWMESSAGES_COUNT';
+const SET_CURRENT_USER = 'socialNetwork/dialogs/SET_CURRENT_USER';
+const SEND_MESSAGE = 'socialNetwork/dialogs/SEND_MESSAGE';
+const CREATE_DIALOG = 'socialNetwork/dialogs/CREATE_DIALOG';
+const TOGGLE_IS_LOADING = 'socialNetwork/dialogs/TOGGLE_IS_LOADING';
 
 let initialState = {
     dialogs: [],
     messages: [],
     newMessagesCount:null,
-    currentUser: null
+    currentUser: null,
+    isLoading:false
 };
 
 const dialogsReducer = (state = initialState, action) => {
@@ -30,6 +31,11 @@ const dialogsReducer = (state = initialState, action) => {
                 ...state,
                 messages: [...action.messages]
             };
+        case TOGGLE_IS_LOADING:
+            return {
+                ...state,
+                isLoading: action.isLoading
+            }
         case SET_NEWMESSAGES_COUNT :
             return {
                 ...state,
@@ -68,6 +74,7 @@ export const setNewMessagesCount = (number) => ({type: SET_NEWMESSAGES_COUNT, nu
 export const setCurrentUser = (user) => ({type: SET_CURRENT_USER, user});
 export const sendMessage = (message) => ({type: SEND_MESSAGE, message});
 export const createDialog = (user) => ({type: CREATE_DIALOG, user});
+export const setIsLoading = (isLoading) => ({type: TOGGLE_IS_LOADING, isLoading});
 
 
 export const requestDialogs = () => async (dispatch) => {
@@ -84,11 +91,12 @@ export const startChatting = (userId) => async (dispatch) => {
 
 
 export const requestMessages = (userId) => async (dispatch) => {
-
+    dispatch(setIsLoading(true))
     dispatch(setCurrentUser(userId))
     let response = await dialogsAPI.getDialogWithUser(userId)
     let messages = response.data.items
     dispatch(setMessages(messages));
+    dispatch(setIsLoading(false))
 }
 
 export const sendNewMessage = (userId, message) => async (dispatch) => {
@@ -108,7 +116,5 @@ export const requestNewMessagesCount = () => async (dispatch) => {
     let messagesCount = response.data
     dispatch(setNewMessagesCount(messagesCount));
 }
-
-
 
 export default dialogsReducer;

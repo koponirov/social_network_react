@@ -20,7 +20,6 @@ class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.requestUsers(this.props.currentPage, 100);
-        console.log(this.props.users)
     }
 
     componentWillUnmount() {
@@ -31,19 +30,21 @@ class UsersContainer extends React.Component {
     loadNextPage = (startIndex,stopIndex) => {
 
         let itemsNumber = (stopIndex - startIndex)+1;
-        let pageNumber = Math.ceil((startIndex+1)/itemsNumber)
+        let pageNumber = Math.ceil((startIndex+1)/itemsNumber);
         this.props.requestMoreUsers(pageNumber,itemsNumber)
-    }
+    };
 
     render() {
         return (<div className={s.list__container}>
-                {this.props.users.length>0 ? <UsersList
-                    users={this.props.users}
-                    hasNextPage={true}
-                    isNextPageLoading={this.props.isLoading}
-                    loadNextPage={this.loadNextPage}
-                    totalUsers={this.props.totalUsersCount}
-                /> : <Preloader/>}
+                {this.props.users.length>0 ?
+                    <UsersList
+                        users={this.props.users}
+                        hasNextPage={true}
+                        isNextPageLoading={this.props.isLoading}
+                        loadNextPage={this.loadNextPage}
+                        totalUsers={this.props.totalUsersCount}
+                    /> : <Preloader/>
+                }
             </div>
         )
     }
@@ -74,13 +75,3 @@ export default compose(
     }),
     withAuthRedirect
 )(UsersContainer)
-
-// return (<div className={s.users__container}>
-//     {this.props.users.length>0 ? <UsersList
-//         users={this.props.users}
-//         hasNextPage={true}
-//         isNextPageLoading={this.props.isLoading}
-//         loadNextPage={this.loadNextPage}
-//         totalUsers={this.props.totalUsersCount}
-//     /> : <Preloader/>}
-// </div>

@@ -64,7 +64,14 @@ export const getAuthUserData = () => async (dispatch) => {
                 dispatch(setAuthProfile(data))
             })
     }
-}
+};
+
+export const refreshProfileData = (id) => (dispatch) => {
+    profileAPI.getUserProfile(id)
+        .then(data => {
+            dispatch(setAuthProfile(data))
+        })
+};
 
 export const login = (email, password, rememberMe, captcha) => async (dispatch) => {
     let response = await authAPI.login(email, password, rememberMe,captcha);

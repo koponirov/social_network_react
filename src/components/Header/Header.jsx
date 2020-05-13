@@ -62,7 +62,8 @@ const Header = (props) => {
 
                         : <div className={s.header__auth__login}>
                             <NavLink className={s.header__login} to={'/login'}>LOGIN</NavLink>
-                        </div>}
+                        </div>
+                    }
                 </div>
             </div>
         </div>

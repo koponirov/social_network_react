@@ -1,25 +1,20 @@
-export const getUsers = (state) => {
+export const getMessages = (state) => {
 
-    return state.usersPage.users
+    return state.dialogsPage.messages
 };
-export const getPageSize = (state) => {
-    return state.usersPage.pageSize
+export const getCurrentUserID = (state) => {
+    return state.dialogsPage.currentUser
 };
-export const getTotalUsersCount = (state) => {
-    return state.usersPage.totalUsersCount
+export const getCurrentUserData = (state) => {
+    return state.dialogsPage.dialogs.filter(d=>d.id==getCurrentUserID(state))
 };
-
-export const getCurrentPage = (state) => {
-    return state.usersPage.currentPage
-};
-
 export const getIsLoading = (state) => {
-    return state.usersPage.isLoading
+    return state.dialogsPage.isLoading
+};
+export const getAuthId = (state) => {
+    return state.auth.id
 };
 
-export const getFollowingInProgress = (state) => {
-    return state.usersPage.followingInProgress
-};
 
 
 

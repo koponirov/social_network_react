@@ -5,12 +5,21 @@ import Messages from "./Messages";
 import {requestMessages, sendNewMessage, setMessages} from "../../../redux/dialogsReducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {withRouter} from "react-router-dom";
+import Preloader from "../../../common/Preloader/Preloader";
+import {
+    getAuthId,
+    getCurrentUserData,
+    getCurrentUserID,
+    getIsLoading,
+    getMessages
+} from "../../../redux/dialogsSelectors";
 
 class MessagesContainer extends React.Component {
 
     componentDidMount() {
-        let currentUser = this.props.match.params.userId;
-        this.props.requestMessages(currentUser)
+        debugger
+        let currentUserId = this.props.match.params.userId;
+        this.props.requestMessages(currentUserId)
     }
     componentWillUnmount () {
         this.props.setMessages('')
@@ -18,19 +27,24 @@ class MessagesContainer extends React.Component {
 
     render() {
 
-        return <Messages
+        return  <Messages
             messages={this.props.messages}
             sendMessage={this.props.sendNewMessage}
-            currentUser={this.props.currentUser}
+            currentUser={this.props.currentUserId}
+            userData={this.props.currentUserData}
+            isLoading={this.props.isLoading}
+            authId={this.props.authId}
         />
     }
 }
 
 let mapStateToProps = (state) => {
     return {
-        messages: state.dialogsPage.messages,
-        currentUser: state.dialogsPage.currentUser,
-        newMessageText: state.dialogsPage.newMessageText
+        messages: getMessages(state),
+        currentUserId: getCurrentUserID(state),
+        currentUserData: getCurrentUserData(state),
+        isLoading: getIsLoading(state),
+        authId: getAuthId(state)
     }
 };
 

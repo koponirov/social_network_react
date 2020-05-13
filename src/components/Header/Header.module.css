@@ -51,6 +51,7 @@
     color: whitesmoke;
     text-transform: uppercase;
     font-size: 18px;
+    font-weight: 600;
     text-decoration: none;
 }
 .header__link:hover {
@@ -58,8 +59,25 @@
     text-shadow: 1px 1px 3px whitesmoke;
     transition: 0.4s;
 }
-
+@media (max-width: 1366px) {
+    .container {
+        max-width: 980px;
+    }
+}
+@media (max-width: 1099px) {
+    .container {
+        max-width: 780px;
+    }
+}
+@media (max-width: 899px) {
+    .container {
+        max-width: 720px;
+    }
+}
 @media (max-width: 767px) {
+    .container {
+        max-width: 90%;
+    }
     .header__body {
         height: 50px;
     }

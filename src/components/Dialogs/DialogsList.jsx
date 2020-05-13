@@ -10,18 +10,18 @@ import UserItem from "../Users/UserItem";
 
 const DialogsList = ({dialogs}) => {
 
-
     const Row = ({index, style}) => {
         
         let user = dialogs[index];
 
-        let path = `/dialogs/${user.id}/messages`
+        let path = `/dialogs/${user.id}/messages`;
 
         return (<UserItem path={path}
                           style={style}
                           userPhoto={user.photos.small}
-                          userName={user.userName}/>
-
+                          userName={user.userName}
+                          lastSeen={user.lastUserActivityDate}
+            />
         )
     }
 

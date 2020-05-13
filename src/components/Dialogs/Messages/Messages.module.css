@@ -3,16 +3,42 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
+}
+.messages__header{
+    margin-top: 20px;
+    border-bottom: 1px solid rgba(161, 138, 138, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 45px;
+}
+.messages__header_button{
+    height: 100%;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.messages__header_button img {
+    width: 18px;
+    margin-right: 3px;
+}
+.header__user_name{
+    font-size: 18px;
+    font-weight: bold;
+}
+.header__user_photo_box{
+    width: 35px;
+    margin-right: 20px;
+}
+.header__user_photo_image{
+    display: block;
+    width: 100%;
+    border-radius: 50%;
+    border: 1px solid lightgray;
+}
 
-}
-.back__btn{
-    padding: 10px;
-    border-bottom: 1px solid rgba(161, 138, 138, 0.5);;
-}
-.back__btn img{
-    height: 12px;
-}
-.back__btn a{
+.messages__header a{
     text-decoration: none;
     color: rgba(20, 19, 19,0.9);
 }
@@ -20,53 +46,60 @@
     height: 65vh;
     overflow-y: auto;
     display: flex;
-    align-items: flex-start;
     flex-direction: column;
     margin-bottom: 10px;
-
+    padding: 0px 30px;
 }
 .message__container{
-    min-width: 150px;
-    max-width: 450px;
     margin: 10px 10px 0px 3px;
+    display: flex;
+    flex-direction: column;
 }
 .message__wrapper{
     border-radius: 7px;
-    background-color: rgba(61, 54, 55, 0.85);
 
+    background-color: rgba(255, 64, 64,0.45);
+    box-shadow: inset 0px 0px 4px 1px rgba(61, 61, 61,0.35);
+    display: inline-block;
+    max-width: 75%;
+    padding: 5px 8px;
+    align-self: flex-start;
+}
+.owner{
+    align-self: flex-end;
+}
+.owner_color {
+    background-color: rgba(105, 105, 105, 0.75);
 }
 .message__user__name{
-    padding-left: 10px;
+    margin: 1px 4px;
     word-wrap: break-word;
     color: #cf6161;
     font-weight: normal;
-
+    display: flex;
+    flex-direction: column;
 }
+
 .message__text{
-    color: whitesmoke;
+    color: #ffffff;
     word-wrap: break-word;
     font-weight: lighter;
     font-size: 18px;
-    padding: 5px 10px;
+
 
 }
 .message__add__time{
-    color: rgba(38,31,27,0.7);
+    color: rgba(38,31,27,0.5);
     font-size: 10px;
-    opacity: 70%;
-    margin-top: 2px;
-    margin-left: 10px;
-
+    margin: 2px 5px 0px 5px;
 }
 .message__form{
     display: flex;
-    height: 60px;
-
+    max-height: 100px;
 }
 .message__field{
     width: 100%;
     height: auto;
-    padding-right: 15px;
     
 }
 .message__field textarea{
@@ -77,16 +110,15 @@
 .message__send__button button{
     height: 100%;
     padding: 10px 20px;
-    margin-left: 10px;
     border: none;
-    border-radius: 12px 0px 0px 12px;
+    border-radius: 3px;
     color: whitesmoke;
     background-color: rgba(33,27,25,0.87);
     outline: none;
     cursor: pointer;
     transition: 0.3s;
+    margin-right: 10px;
 }
-.message__send__button button:focus,
 .message__send__button button:hover {
     background-color: #f54949;
 }

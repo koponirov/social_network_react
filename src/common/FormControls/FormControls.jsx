@@ -3,10 +3,9 @@ import cn from 'classnames'
 import styles from './FormControls.module.css'
 import {Field} from "redux-form";
 
-
 export const Textarea = ({input, meta, ...props}) => {
 
-    const hasError = (meta.touched && meta.error)
+    const hasError = (meta.touched && meta.error);
 
     return (
         <div className={cn(styles.container,{[styles.formControls]:hasError})}>
@@ -22,10 +21,10 @@ export const Textarea = ({input, meta, ...props}) => {
 
 export const Input = ({input, meta, ...props}) => {
 
-    const hasError = (meta.touched && meta.error)
+    const hasError = (meta.touched && meta.error);
 
     return (
-        <div className={hasError && styles.formControls}>
+        <div className={cn({[styles.formControls]:hasError})}>
             <div >
                 <input {...input} {...props} className={styles.inputField}/>
             </div>
@@ -47,5 +46,5 @@ export const createField = (placeholder, name, validators, component, props = {}
             /> {text}
         </div>
     )
-}
+};
 

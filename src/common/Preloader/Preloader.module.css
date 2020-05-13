@@ -1,9 +1,10 @@
 .container{
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 100vh;
 }
 .container img{
-    padding-top: 45vh;
-    height: 50px;
+    /*padding-top: 45vh;*/
+    height: 40px;
 }

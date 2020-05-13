@@ -83,7 +83,7 @@ export const updateUserStatus = (status) => async (dispatch) => {
         }
     }
     catch (error) {
-        debugger
+
         alert('error')
         console.error(error)
         console.log(error)
@@ -101,8 +101,8 @@ export const savePhoto = (file) => async (dispatch) => {
 export const saveProfileData = (formData) => async (dispatch,getState) => {
     let response = await profileAPI.saveProfileData(formData);
     if (response.data.resultCode === 0) {
-        debugger;
-        const userId=getState().auth.id
+
+        const userId=getState().auth.id;
         const data = await profileAPI.getUserProfile(userId);
         dispatch(setUserProfile(data));
     }

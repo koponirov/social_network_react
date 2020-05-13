@@ -3,7 +3,7 @@ import * as axios from "axios";
 const instance = axios.create({
     withCredentials: true,
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
-    headers: {"API-KEY": "ed6168aa-083c-4712-91d3-afe70566eba2"},
+    headers: {"API-KEY": "5be31108-cfa1-42c7-b29b-6aa25f5ae2bd"},
 //ya:374b61b3-3684-46aa-832c-9d3f951a688f,klubn:9a26a650-26b0-4c4b-8aab-54c45ef378c9,gm:
 })
 
@@ -20,10 +20,10 @@ export const authAPI = {
                 return response.data
             })
     },
-    login (email,password,rememberMe = false,captcha = null) {
-        return instance.post('auth/login',{email,password,rememberMe,captcha})
+    login(email, password, rememberMe = false, captcha = null) {
+        return instance.post('auth/login', {email, password, rememberMe, captcha})
     },
-    logout () {
+    logout() {
         return instance.delete('auth/login')
     }
 };
@@ -43,12 +43,11 @@ export const profileAPI = {
     },
     updateUserStatus(status) {
         return instance.put(`profile/status`, {status: status})
-
     },
     savePhoto(file) {
         const formData = new FormData();
         formData.append("image", file);
-        return instance.put(`profile/photo`, formData,{
+        return instance.put(`profile/photo`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -58,6 +57,7 @@ export const profileAPI = {
         return instance.put(`profile`, formData)
     }
 };
+
 export const followAPI = {
     followToUser(userId) {
         return instance.delete(`follow/${userId}`)
@@ -71,6 +71,7 @@ export const securityAPI = {
         return instance.get('security/get-captcha-url')
     }
 };
+
 export const dialogsAPI = {
     //get all dialogs
     getDialogs() {
@@ -78,20 +79,19 @@ export const dialogsAPI = {
     },
     //start chatting
     startChatting(userId) {
-
         return instance.put(`dialogs/${userId}`)
     },
     //get list of messages with user
-    getDialogWithUser (userId) {
+    getDialogWithUser(userId) {
         return instance.get(`dialogs/${userId}/messages`)
     },
     //send message to user
-    sendMessage(userId,message) {
-        return instance.post(`dialogs/${userId}/messages`,{body: message})
+    sendMessage(userId, message) {
+        return instance.post(`dialogs/${userId}/messages`, {body: message})
     },
     //count new messages
     getNewMessagesCount() {
         return instance.get('dialogs/messages/new/count')
-}
-}
+    }
+};
 

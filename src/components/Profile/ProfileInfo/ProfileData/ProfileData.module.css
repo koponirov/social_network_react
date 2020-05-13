@@ -7,8 +7,10 @@
 .property_container{
     display: flex;
     flex-wrap: nowrap;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
     border-radius: 3px;
+}
+.shadow{
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
 }
 .property_container:not(:first-child){
     margin-top: 10px;
