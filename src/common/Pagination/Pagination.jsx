@@ -40,12 +40,12 @@ const Pagination = (props) => {
             })}
 
             { portionCount > portionNumber &&
-            <button onClick={() => { setPortionNumber(portionNumber + 1) }}> > </button> }
+            <button onClick={() => { setPortionNumber(portionNumber + 1) }}> &gt </button> }
 
         </div>
 
     )
-}
+};
 
 export default Pagination;
 

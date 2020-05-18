@@ -4,6 +4,11 @@
   "private": true,
   "homepage": "http://koponirov.github.io/social_network_react",
   "dependencies": {
+    "@types/jest": "^25.2.2",
+    "@types/node": "^14.0.1",
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
+    "@types/redux-form": "^8.2.5",
     "axios": "^0.19.0",
     "classnames": "^2.2.6",
     "date-fns": "^2.11.0",
@@ -19,7 +24,8 @@
     "redux-form": "^8.2.6",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
-    "thunk": "0.0.1"
+    "thunk": "0.0.1",
+    "typescript": "^3.9.2"
   },
   "scripts": {
     "start": "react-scripts start",
