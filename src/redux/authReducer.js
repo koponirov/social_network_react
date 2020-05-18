@@ -5,7 +5,6 @@ const SET_USER_DATA = 'socialNetwork/auth/SET_USER_DATA';
 const SET_AUTH_PROFILE = 'socialNetwork/auth/SET_AUTH_PROFILE';
 const SET_CAPTCHA = 'socialNetwork/auth/SET_CAPTCHA';
 
-
 let initialState = {
     id: null,
     email: null,
@@ -87,14 +86,14 @@ export const login = (email, password, rememberMe, captcha) => async (dispatch) 
         let errorMessage = response.data.messages.length > 0 ? response.data.messages[0] : 'Oops'
         dispatch(stopSubmit('login', {_error: errorMessage}))
     }
-}
+};
 
 export const getCaptcha = () => async (dispatch) => {
     debugger;
     let response = await securityAPI.getCapthaUrl();
     const captcha = (response.data.url)
     dispatch(setCaptcha(captcha))
-}
+};
 
 
 export const logout = () => async (dispatch) => {
@@ -103,6 +102,6 @@ export const logout = () => async (dispatch) => {
     if (response.data.resultCode === 0) {
         dispatch(setAuthUserData(null, null, null, false))
     }
-}
+};
 
 export default authReducer;

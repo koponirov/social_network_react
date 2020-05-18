@@ -19,6 +19,6 @@ const Message = ({userName,messageText,addedAt,userId,authId}) => {
             </div>
         </div>
     )
-}
+};
 
 export default Message;

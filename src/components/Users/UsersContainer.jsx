@@ -15,7 +15,6 @@ import UsersList from "./UsersList";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import s from './Users.module.css'
 
-
 class UsersContainer extends React.Component {
 
     componentDidMount() {

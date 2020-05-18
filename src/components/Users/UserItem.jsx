@@ -1,22 +1,22 @@
 import React from 'react';
-import styles from "./UserItem.module.css";
+import s from "./UserItem.module.css";
 import defaultPhoto from "../../assets/images/man.svg";
 import {NavLink} from "react-router-dom";
 
-const UserItem = ({userName,userStatus,userPhoto,path,style}) => {
+const UserItem = ({ userName, userStatus, userPhoto, path, style }) => {
 
     return (
         <NavLink to={path}>
-            <div className={styles.listItem__container} style={style}>
-                <div className={styles.listItem}>
-                    <div className={styles.ava}>
-                        <img src={ userPhoto ? userPhoto : defaultPhoto}/>
+            <div className={s.listItem__container} style={style}>
+                <div className={s.listItem}>
+                    <div className={s.ava}>
+                        <img src={ userPhoto ? userPhoto : defaultPhoto} alt='userPhoto'/>
                     </div>
-                    <div className={styles.content__container}>
-                        <div className={styles.content}>
+                    <div className={s.content__container}>
+                        <div className={s.content}>
                             {userName}
                         </div>
-                        <div className={styles.status}>
+                        <div className={s.status}>
                             {userStatus}
                         </div>
                     </div>

@@ -10,11 +10,12 @@ import editIcon from '../../../assets/images/gear.svg'
 import ProfileData from "./ProfileData/ProfileData";
 
 
-const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto, saveProfileData, currentUser, startChatting}) => {
+const ProfileInfo = ({ profile, isOwner, status, updateStatus, savePhoto,
+                         saveProfileData, currentUser, startChatting }) => {
 
     const [editMode, setEditMode] = useState(false);
 
-    const [showContacts, setShowContacts] = useState(false)
+    const [showContacts, setShowContacts] = useState(false);
 
     if (!profile) {
         return <Preloader/>
@@ -24,7 +25,7 @@ const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto, savePro
         if (e.target.files.length) {
             savePhoto(e.target.files[0])
         }
-    }
+    };
 
     const onSubmit = (formData) => {
         saveProfileData(formData).then(
@@ -37,7 +38,7 @@ const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto, savePro
             <div className={s.user__profile__title}>
                 <div className={s.user__profile__name}>{profile.fullName}</div>
                 <div className={s.user__profile__settings__btn}>
-                    {isOwner && <img src={editIcon} onClick={() => {setEditMode(!editMode)}}/>}
+                    {isOwner && <img src={editIcon} onClick={() => {setEditMode(!editMode)}} alt='editIcon'/>}
                 </div>
 
             </div>
@@ -47,7 +48,7 @@ const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto, savePro
             <div className={s.user__profile__container}>
                 <div className={s.user__profile__photo__block}>
                     <div className={s.user__profile__photo}>
-                        <img src={profile.photos.large != null ? profile.photos.large : photo} alt='user photo'/>
+                        <img src={profile.photos.large != null ? profile.photos.large : photo} alt='userPhoto'/>
                     </div>
 
                     {editMode &&
@@ -63,11 +64,10 @@ const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto, savePro
                     {!isOwner &&
                     <NavLink to={`/dialogs/${currentUser}/messages`}>
                         <button onClick={() => startChatting(currentUser)} className={s_p.btn}>send message</button>
-                    </NavLink>}
+                    </NavLink>
+                    }
                 </div>
                 <div className={s.user__profile__information}>
-
-
                     {editMode ?
                         <ProfileDataFormRedux initialValues={profile}
                                               onSubmit={onSubmit}
@@ -83,14 +83,10 @@ const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto, savePro
                                      }}/>
                     }
                 </div>
-
             </div>
         </div>
-
     )
 };
-
-
 
 export default ProfileInfo;
 

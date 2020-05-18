@@ -1,5 +1,5 @@
 import React from 'react';
-import {Field, reduxForm} from "redux-form";
+import {reduxForm} from "redux-form";
 import {required} from "../../utilites/validators/validators";
 import {createField, Input} from "../../common/FormControls/FormControls";
 import {connect} from "react-redux";
@@ -13,7 +13,7 @@ const Login = (props) => {
 
     const onSubmit = (formData) => {
         props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
-    }
+    };
 
     if (props.isAuth) {
 
@@ -29,7 +29,7 @@ const Login = (props) => {
             </div>
         </div>
     )
-}
+};
 
 const LoginForm = (props) => {
 
@@ -50,7 +50,7 @@ const LoginForm = (props) => {
                 <label className={s.form__label}></label>
             </div>
 
-            {props.captcha && <img src={props.captcha}/>}
+            {props.captcha && <img src={props.captcha} alt='captcha'/>}
             {props.captcha && <div>
                 {createField('captcha', 'captcha', [required], Input)}
             </div>}

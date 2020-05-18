@@ -7,7 +7,6 @@ import thunkMiddleware from 'redux-thunk';
 import {reducer as formReducer} from 'redux-form';
 import appReducer from "./appReducer";
 
-
 let reducers = combineReducers(
     {
         profilePage: profileReducer,

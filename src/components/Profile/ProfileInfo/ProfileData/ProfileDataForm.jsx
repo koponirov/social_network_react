@@ -40,16 +40,15 @@ const ProfileDataForm = (props) => {
                         </div>
                     })}
 
-
                 {props.error && <div className={styles.error}>{props.error}</div>}
                 <button className={s.btn}>save</button>
             </div>
 
         </form>
     )
-}
+};
 
 export const ProfileDataFormRedux = reduxForm({
     form: 'profileData'
-})(ProfileDataForm)
+})(ProfileDataForm);
 

@@ -1,6 +1,6 @@
 import {getAuthUserData} from "./authReducer";
 
-const SET_INITIALIZED = 'SET_INITIALIZED';
+const SET_INITIALIZED = 'socialNetwork/app/SET_INITIALIZED';
 
 let initialState = {
     initialized: false
@@ -28,7 +28,7 @@ export const initializeApp = () => (dispatch) => {
     Promise.all([promise]).then(() => {
         dispatch(initialized())
     })
-}
+};
 
 
 export default appReducer;

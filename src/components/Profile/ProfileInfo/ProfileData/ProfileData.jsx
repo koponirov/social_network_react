@@ -2,7 +2,7 @@ import React from 'react';
 import s from './ProfileData.module.css';
 import cn from 'classnames';
 
-const ProfileData = ({profile, isOwner, activateEditMode,showContacts, activateShowContacts}) => {
+const ProfileData = ({ profile, isOwner, activateEditMode,showContacts, activateShowContacts }) => {
     return (
         <div className={s.profile_info_container}>
             <div className={cn(s.property_container,s.shadow)}>
@@ -28,8 +28,6 @@ const ProfileData = ({profile, isOwner, activateEditMode,showContacts, activateS
             }))}
 
         </div>
-
-
     )
 };
 

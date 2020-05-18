@@ -29,6 +29,7 @@ const profileReducer = (state = initialState, action) => {
         case DELETE_POST:
             return {
                 ...state,
+                // eslint-disable-next-line eqeqeq
                 posts: state.posts.filter(post => post.userId != action.id)
             }
         case SET_USER_PROFILE:
@@ -68,12 +69,12 @@ export const getUserProfile = (id) => async (dispatch) => {
     const data = await profileAPI.getUserProfile(id);
     dispatch(setUserProfile(data));
 
-}
+};
 
 export const getUserStatus = (userId) => async (dispatch) => {
     const data = await profileAPI.getUserStatus(userId);
     dispatch(setStatus(data));
-}
+};
 
 export const updateUserStatus = (status) => async (dispatch) => {
     try {
@@ -96,7 +97,7 @@ export const savePhoto = (file) => async (dispatch) => {
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))
     }
-}
+};
 
 export const saveProfileData = (formData) => async (dispatch,getState) => {
     let response = await profileAPI.saveProfileData(formData);

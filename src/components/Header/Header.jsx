@@ -14,7 +14,6 @@ const Header = (props) => {
         setAvatar(props.avatar)
     },[props.avatar]);
 
-//`${s.header__menu} ${s.active}`
     return <header className={s.header}>
         <div className={s.container}>
             <div className={s.header__body}>
@@ -45,17 +44,18 @@ const Header = (props) => {
                 <div className={s.header__auth}>
                     {props.profile ?
                         <div className={s.header__auth__info}>
-
                             <div className={s.header__auth__content}>
                                 <NavLink to='/profile'>
                                     <div className={s.header__auth__name}>{props.profile.fullName}</div>
                                 </NavLink>
-                                <div className={s.header__auth__logout}><span onClick={props.logout}>logout</span></div>
+                                <div className={s.header__auth__logout}>
+                                    <span onClick={props.logout}>logout</span>
+                                </div>
                             </div>
                             <div className={s.header__auth__ava}>
                                 <NavLink to='/profile'>
                                     <img src={props.profile.photos.small != null ?
-                                        props.profile.photos.small : defaultPhoto} alt='photo'/>
+                                        props.profile.photos.small : defaultPhoto} alt='userMainPhoto'/>
                                 </NavLink>
                             </div>
                         </div>
@@ -68,6 +68,6 @@ const Header = (props) => {
             </div>
         </div>
     </header>
-}
+};
 
 export default Header;

@@ -92,23 +92,23 @@ export const requestUsers = (currentPage, pageSize) => {
 
     return async (dispatch) => {
         dispatch(setIsLoading(true));
-        let response = await usersAPI.getUsers(currentPage, pageSize)
+        let response = await usersAPI.getUsers(currentPage, pageSize);
         dispatch(setIsLoading(false));
         dispatch(setUsers(response.data.items));
         dispatch(setTotalUsersCount(response.data.totalCount))
     }
-}
+};
 
 export const requestMoreUsers = (currentPage, pageSize) => {
 
     return async (dispatch) => {
         dispatch(setIsLoading(true));
-        let response = await usersAPI.getUsers(currentPage , pageSize)
+        let response = await usersAPI.getUsers(currentPage , pageSize);
         dispatch(setIsLoading(false));
         dispatch(setMoreUsers(response.data.items));
         dispatch(setTotalUsersCount(response.data.totalCount))
     }
-}
+};
 
 export const onPageChanged = (currentPageNumber, pageSize) => {
     return async (dispatch) => {
@@ -118,7 +118,7 @@ export const onPageChanged = (currentPageNumber, pageSize) => {
         dispatch(setIsLoading(false));
         dispatch(setUsers(response.data.items));
     }
-}
+};
 
 const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) => {
     dispatch(setInProgress(true, userId));
@@ -127,7 +127,7 @@ const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) =>
         dispatch(actionCreator(userId))
     }
     dispatch(setInProgress(false, userId));
-}
+};
 
 export const follow = (userId) => {
     return async (dispatch) => {
@@ -137,7 +137,8 @@ export const follow = (userId) => {
             followAPI.followToUser.bind(followAPI),
             unfollowUser)
     }
-}
+};
+
 export const unfollow = (userId) => {
     return async (dispatch) => {
         followUnfollowFlow(
@@ -146,6 +147,6 @@ export const unfollow = (userId) => {
             followAPI.unfollowToUser.bind(followAPI),
             followUser)
     }
-}
+};
 
 export default usersReducer;

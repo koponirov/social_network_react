@@ -3,8 +3,6 @@ import styles from "./Users.module.css";
 import AutoSizer from "react-virtualized-auto-sizer";
 import InfiniteLoader from "react-window-infinite-loader";
 import {FixedSizeList as List} from "react-window"
-import defaultPhoto from "../../assets/images/man.svg"
-import {NavLink} from "react-router-dom";
 import UserItem from "./UserItem";
 
 const UsersList = ({users, hasNextPage,isNextPageLoading,loadNextPage,totalUsers}) => {
@@ -23,19 +21,19 @@ const UsersList = ({users, hasNextPage,isNextPageLoading,loadNextPage,totalUsers
 
         if (!isItemLoaded(index)) {
 
-            userId = ''
+            userId = '';
             userPhoto = false;
             userName = 'Loading...';
             userStatus= 'Loading...';
         } else {
-            user = items[index]
-            userId = user.id
-            userPhoto = user.photos.small
-            userName = user.name
+            user = items[index];
+            userId = user.id;
+            userPhoto = user.photos.small;
+            userName = user.name;
             userStatus= user.status
         }
 
-        let path = '/profile/' + userId
+        let path = '/profile/' + userId;
 
         return (
             <UserItem path={path}
@@ -49,7 +47,7 @@ const UsersList = ({users, hasNextPage,isNextPageLoading,loadNextPage,totalUsers
     return (
         <div className={styles.list}>
             <AutoSizer >
-                {({height, width}) => (
+                {({ height, width }) => (
                     <InfiniteLoader
                         isItemLoaded={isItemLoaded}
                         loadMoreItems={loadMoreItems}
@@ -57,7 +55,7 @@ const UsersList = ({users, hasNextPage,isNextPageLoading,loadNextPage,totalUsers
                         minimumBatchSize={50}
                         threshold={25}
                     >
-                        {({onItemsRendered, ref}) => (
+                        {({ onItemsRendered, ref }) => (
                             <List
                                 height={height}
                                 itemCount={itemCount}
@@ -73,31 +71,9 @@ const UsersList = ({users, hasNextPage,isNextPageLoading,loadNextPage,totalUsers
                     </InfiniteLoader>
                 )}
             </AutoSizer>
-
         </div>
     )
 };
 
 export default UsersList;
 
-// return (
-//     <NavLink to={'/profile/' + item.id}>
-//         <div className={styles.listItem__container} style={style}>
-//             <div className={styles.listItem}>
-//                 <div className={styles.ava}>
-//                     <img src={item.photos.small ? item.photos.small : photo}/>
-//                 </div>
-//                 <div className={styles.content__container}>
-//                     <div className={styles.content}>
-//                         { item.name}
-//                     </div>
-//                     <div className={styles.status}>
-//                         {item.status}
-//                     </div>
-//                 </div>
-//             </div>
-//
-//         </div>
-//     </NavLink>
-//
-// );

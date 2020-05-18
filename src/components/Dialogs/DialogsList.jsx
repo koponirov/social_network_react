@@ -1,16 +1,12 @@
 import React from 'react';
-import s from './Dialogs.module.css';
-import DialogWithUser from './DialogWithUser/DialogWithUser'
-import {Redirect} from "react-router-dom";
-import Preloader from "../../common/Preloader/Preloader";
 import {FixedSizeList as List} from "react-window";
-import styles from "../Users/Users.module.css";
+import s from "../Users/Users.module.css";
 import AutoSizer from "react-virtualized-auto-sizer";
 import UserItem from "../Users/UserItem";
 
-const DialogsList = ({dialogs}) => {
+const DialogsList = ({ dialogs }) => {
 
-    const Row = ({index, style}) => {
+    const Row = ({ index, style }) => {
         
         let user = dialogs[index];
 
@@ -23,20 +19,18 @@ const DialogsList = ({dialogs}) => {
                           lastSeen={user.lastUserActivityDate}
             />
         )
-    }
+    };
 
-    return (<div className={styles.list}>
-
-
+    return (<div className={s.list}>
                 <AutoSizer>
-                    {({height, width}) => (
+                    {({ height, width }) => (
 
                         <List
                             height={height}
                             itemCount={dialogs.length}
                             itemSize={100}
                             width={width}
-                            className={styles.window_list}
+                            className={s.window_list}
                         >
                             {Row}
                         </List>
@@ -46,7 +40,7 @@ const DialogsList = ({dialogs}) => {
 
 
     )
-}
+};
 
 export default DialogsList;
 

@@ -2,14 +2,8 @@ import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
 import {logout, refreshProfileData,} from "../../redux/authReducer";
-import {requestNewMessagesCount} from "../../redux/dialogsReducer";
-import {getProfileAvatar} from "../../redux/usersSelectors";
 
 class HeaderContainer extends React.Component {
-
-    componentDidMount() {
-
-    }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.currentProfileData !== this.props.currentProfileData) {

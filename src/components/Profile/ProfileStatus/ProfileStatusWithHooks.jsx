@@ -24,7 +24,7 @@ const ProfileStatusWithHooks = (props) => {
 
     const onStatusChange = (e) => {
         setStatus(e.currentTarget.value)
-    }
+    };
 
         return (
             <div className={s.user__profile__status__container}>
@@ -41,11 +41,10 @@ const ProfileStatusWithHooks = (props) => {
                         </input>
                     </div>}
                 {props.isOwner && <div onClick={activateEditMode} className={s.user__profile__status__edit}>
-                    <img src={editIcon}/>
+                    <img src={editIcon} alt='editIcon'/>
                 </div>}
             </div>
         )
     };
-
 
 export default ProfileStatusWithHooks;

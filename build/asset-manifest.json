@@ -1,21 +1,20 @@
 {
   "files": {
-    "main.css": "/social_network_react/static/css/main.15bb8088.chunk.css",
-    "main.js": "/social_network_react/static/js/main.97daa018.chunk.js",
-    "main.js.map": "/social_network_react/static/js/main.97daa018.chunk.js.map",
+    "main.css": "/social_network_react/static/css/main.a956ec01.chunk.css",
+    "main.js": "/social_network_react/static/js/main.498cca85.chunk.js",
+    "main.js.map": "/social_network_react/static/js/main.498cca85.chunk.js.map",
     "runtime-main.js": "/social_network_react/static/js/runtime-main.37d20f1e.js",
     "runtime-main.js.map": "/social_network_react/static/js/runtime-main.37d20f1e.js.map",
-    "static/js/2.4a66ecd9.chunk.js": "/social_network_react/static/js/2.4a66ecd9.chunk.js",
-    "static/js/2.4a66ecd9.chunk.js.map": "/social_network_react/static/js/2.4a66ecd9.chunk.js.map",
+    "static/js/2.a7c853ff.chunk.js": "/social_network_react/static/js/2.a7c853ff.chunk.js",
+    "static/js/2.a7c853ff.chunk.js.map": "/social_network_react/static/js/2.a7c853ff.chunk.js.map",
     "index.html": "/social_network_react/index.html",
-    "precache-manifest.e492297f92a7d9c6b2472f53bde40bd5.js": "/social_network_react/precache-manifest.e492297f92a7d9c6b2472f53bde40bd5.js",
+    "precache-manifest.949fe03feb73c90d0d28d783a7051bd0.js": "/social_network_react/precache-manifest.949fe03feb73c90d0d28d783a7051bd0.js",
     "service-worker.js": "/social_network_react/service-worker.js",
-    "static/css/main.15bb8088.chunk.css.map": "/social_network_react/static/css/main.15bb8088.chunk.css.map",
+    "static/css/main.a956ec01.chunk.css.map": "/social_network_react/static/css/main.a956ec01.chunk.css.map",
     "static/media/466.svg": "/social_network_react/static/media/466.b5b1dbdf.svg",
     "static/media/arrow.svg": "/social_network_react/static/media/arrow.6c9efe0c.svg",
     "static/media/edit.svg": "/social_network_react/static/media/edit.33ae1541.svg",
     "static/media/gear.svg": "/social_network_react/static/media/gear.a411a4d3.svg",
-    "static/media/letter.svg": "/social_network_react/static/media/letter.2cf0bd6f.svg",
     "static/media/man.svg": "/social_network_react/static/media/man.5a9e9877.svg"
   }
 }

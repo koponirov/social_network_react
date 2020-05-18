@@ -1,9 +1,5 @@
 import React from 'react';
 import './App.css';
-import Navbar from './components/Navbar/Navbar';
-import News from './components/News/News';
-import Music from './components/Music/Music';
-import Settings from './components/Settings/Settings';
 import {Redirect, Route} from 'react-router-dom';
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
@@ -26,9 +22,7 @@ class App extends React.Component {
         if (!this.props.initialized) {
             return <Preloader/>
         } else {
-
             return (
-
                 <div className='app'>
                     <div className='app__header'>
                         <HeaderContainer/>
@@ -50,7 +44,6 @@ class App extends React.Component {
                         </div>
                     </div>
                 </div>
-
             )
         }
     }
@@ -59,6 +52,6 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => ({
     initialized: state.app.initialized
-})
+});
 
 export default connect(mapStateToProps, {initializeApp})(App);

@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 
 let mapStateToPropsForRedirect = (state) => ({
     auth: state.auth.isAuth
-})
+});
 
 export const withAuthRedirect = (Component) => {
     class RedirectComponent extends React.Component {
@@ -20,4 +20,4 @@ export const withAuthRedirect = (Component) => {
     let ConnectedAuthRedirectComponent = connect(mapStateToPropsForRedirect)(RedirectComponent);
     return ConnectedAuthRedirectComponent
 
-}
+};

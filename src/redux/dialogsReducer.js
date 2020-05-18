@@ -76,45 +76,40 @@ export const sendMessage = (message) => ({type: SEND_MESSAGE, message});
 export const createDialog = (user) => ({type: CREATE_DIALOG, user});
 export const setIsLoading = (isLoading) => ({type: TOGGLE_IS_LOADING, isLoading});
 
-
 export const requestDialogs = () => async (dispatch) => {
-
-    let response = await dialogsAPI.getDialogs()
+    let response = await dialogsAPI.getDialogs();
     dispatch(setDialogs(response.data));
-}
+};
 
 export const startChatting = (userId) => async (dispatch) => {
-
     let response = await dialogsAPI.startChatting(userId)
-
-}
-
+};
 
 export const requestMessages = (userId) => async (dispatch) => {
-    dispatch(setIsLoading(true))
-    dispatch(setCurrentUser(userId))
-    let response = await dialogsAPI.getDialogWithUser(userId)
-    let messages = response.data.items
+    dispatch(setIsLoading(true));
+    dispatch(setCurrentUser(userId));
+    let response = await dialogsAPI.getDialogWithUser(userId);
+    let messages = response.data.items;
     dispatch(setMessages(messages));
     dispatch(setIsLoading(false))
-}
+};
 
 export const sendNewMessage = (userId, message) => async (dispatch) => {
 
     const response = await dialogsAPI.sendMessage(userId, message);
     if (response.data.resultCode === 0) {
-        let response = await dialogsAPI.getDialogWithUser(userId)
-        let messages = response.data.items
+        let response = await dialogsAPI.getDialogWithUser(userId);
+        let messages = response.data.items;
         dispatch(setMessages(messages));
         dispatch(reset('message'))
     }
-}
+};
 
 export const requestNewMessagesCount = () => async (dispatch) => {
 
     const response = await dialogsAPI.getNewMessagesCount();
-    let messagesCount = response.data
+    let messagesCount = response.data;
     dispatch(setNewMessagesCount(messagesCount));
-}
+};
 
 export default dialogsReducer;

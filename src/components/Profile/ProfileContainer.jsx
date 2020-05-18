@@ -1,6 +1,6 @@
 import React from 'react';
 import Profile from './Profile';
-import {connect} from "react-redux";
+import {connect} from 'react-redux';
 import {
     addPost,
     getUserProfile,
@@ -8,18 +8,18 @@ import {
     savePhoto,
     saveProfileData, setUserProfile,
     updateUserStatus,
-} from "../../redux/profileReducer";
+} from '../../redux/profileReducer';
 import { withRouter} from 'react-router-dom';
-import {withAuthRedirect} from "../hoc/withAuthRedirect";
-import {compose} from "redux";
-import {startChatting} from "../../redux/dialogsReducer";
+import {withAuthRedirect} from '../hoc/withAuthRedirect';
+import {compose} from 'redux';
+import {startChatting} from '../../redux/dialogsReducer';
 
 class ProfileContainer extends React.Component {
 
     refreshProfile () {
         let userId=this.props.match.params.userId;
         if (!userId) {
-            userId=this.props.authorizedUserId};
+            userId=this.props.authorizedUserId}
         if(!userId) {
             this.props.history.push('/login')
         }
