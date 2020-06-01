@@ -9,15 +9,47 @@ const SEND_MESSAGE = 'socialNetwork/dialogs/SEND_MESSAGE';
 const CREATE_DIALOG = 'socialNetwork/dialogs/CREATE_DIALOG';
 const TOGGLE_IS_LOADING = 'socialNetwork/dialogs/TOGGLE_IS_LOADING';
 
+export type DialogType = {
+    id: number
+    userName: string
+    hasNewMessages: boolean
+    lastDialogActivityDate: string
+    lastUserActivityDate: string
+    newMessagesCount: number
+    photos: {
+        small: string
+        large: string
+    }
+}
+
+export type MessagesItemsType = {
+    id: string
+    body: string
+    translatedBody: null|string
+    addedAt: string
+    senderId: number
+    senderName: string,
+    recipientId: number
+    viewed: boolean
+}
+
+export type MessagesType = {
+    items:  MessagesItemsType
+    totalCount: number
+    error: null
+}
+
 let initialState = {
-    dialogs: [],
+    dialogs: [] as Array<DialogType>,
     messages: [],
     newMessagesCount:null,
     currentUser: null,
     isLoading:false
 };
 
-const dialogsReducer = (state = initialState, action) => {
+export type initialStateType = typeof initialState
+
+const dialogsReducer = (state = initialState, action: any) => {
 
     switch (action.type) {
 
@@ -68,24 +100,57 @@ const dialogsReducer = (state = initialState, action) => {
     }
 };
 
-export const setDialogs = (dialogs) => ({type: SET_DIALOGS, dialogs});
-export const setMessages = (messages) => ({type: SET_MESSAGES, messages});
-export const setNewMessagesCount = (number) => ({type: SET_NEWMESSAGES_COUNT, number});
-export const setCurrentUser = (user) => ({type: SET_CURRENT_USER, user});
-export const sendMessage = (message) => ({type: SEND_MESSAGE, message});
-export const createDialog = (user) => ({type: CREATE_DIALOG, user});
-export const setIsLoading = (isLoading) => ({type: TOGGLE_IS_LOADING, isLoading});
+type setDialogsActionCreatorType = {
+    type: typeof SET_DIALOGS
+    dialogs: DialogType
+}
 
-export const requestDialogs = () => async (dispatch) => {
+type setMessagesActionCreatorType = {
+    type: typeof SET_MESSAGES
+    messages: MessagesType
+}
+
+type setNewMessagesCountActionCreatorType = {
+    type: typeof SET_NEWMESSAGES_COUNT
+    number: number
+}
+
+type setCurrentUserActionCreatorType = {
+    type: typeof SET_CURRENT_USER
+    userId: number
+}
+
+type sendMessageActionCreatorType = {
+    type: typeof SEND_MESSAGE
+    message: string
+}
+type createDialogActionCreatorType = {
+    type: typeof CREATE_DIALOG
+    userId: number
+}
+type setIsLoadingActionCreatorType = {
+    type: typeof TOGGLE_IS_LOADING
+    isLoading: boolean
+}
+
+export const setDialogs = (dialogs: DialogType): setDialogsActionCreatorType => ({type: SET_DIALOGS, dialogs});
+export const setMessages = (messages: MessagesType): setMessagesActionCreatorType=> ({type: SET_MESSAGES, messages});
+export const setNewMessagesCount = (number: number): setNewMessagesCountActionCreatorType => ({type: SET_NEWMESSAGES_COUNT, number});
+export const setCurrentUser = (userId:number): setCurrentUserActionCreatorType => ({type: SET_CURRENT_USER, userId});
+export const sendMessage = (message: string): sendMessageActionCreatorType => ({type: SEND_MESSAGE, message});
+export const createDialog = (userId: number): createDialogActionCreatorType => ({type: CREATE_DIALOG, userId});
+export const setIsLoading = (isLoading: boolean): setIsLoadingActionCreatorType => ({type: TOGGLE_IS_LOADING, isLoading});
+
+export const requestDialogs = () => async (dispatch: any) => {
     let response = await dialogsAPI.getDialogs();
     dispatch(setDialogs(response.data));
 };
 
-export const startChatting = (userId) => async (dispatch) => {
+export const startChatting = (userId: number) => async (dispatch: any) => {
     let response = await dialogsAPI.startChatting(userId)
 };
 
-export const requestMessages = (userId) => async (dispatch) => {
+export const requestMessages = (userId: number) => async (dispatch: any) => {
     dispatch(setIsLoading(true));
     dispatch(setCurrentUser(userId));
     let response = await dialogsAPI.getDialogWithUser(userId);
@@ -94,7 +159,7 @@ export const requestMessages = (userId) => async (dispatch) => {
     dispatch(setIsLoading(false))
 };
 
-export const sendNewMessage = (userId, message) => async (dispatch) => {
+export const sendNewMessage = (userId: number, message: string) => async (dispatch: any) => {
 
     const response = await dialogsAPI.sendMessage(userId, message);
     if (response.data.resultCode === 0) {
@@ -105,7 +170,7 @@ export const sendNewMessage = (userId, message) => async (dispatch) => {
     }
 };
 
-export const requestNewMessagesCount = () => async (dispatch) => {
+export const requestNewMessagesCount = () => async (dispatch: any) => {
 
     const response = await dialogsAPI.getNewMessagesCount();
     let messagesCount = response.data;
