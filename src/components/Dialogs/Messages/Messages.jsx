@@ -24,7 +24,7 @@ const Messages = ({userData,messages,currentUser,sendMessage,isLoading,authId}) 
     });
 
     const sendMessageForm = (values) => {
-
+        debugger
         sendMessage(currentUser, values.message)
     };
 

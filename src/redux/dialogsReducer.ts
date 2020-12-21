@@ -74,9 +74,10 @@ const dialogsReducer = (state = initialState, action: any) => {
                 newMessagesCount: action.number
             };
         case SET_CURRENT_USER :
+            debugger
             return {
                 ...state,
-                currentUser: action.user
+                currentUser: action.userId
             };
         case SEND_MESSAGE :
             return {
@@ -117,7 +118,7 @@ type setNewMessagesCountActionCreatorType = {
 
 type setCurrentUserActionCreatorType = {
     type: typeof SET_CURRENT_USER
-    userId: number
+    userId: string
 }
 
 type sendMessageActionCreatorType = {
@@ -136,7 +137,7 @@ type setIsLoadingActionCreatorType = {
 export const setDialogs = (dialogs: DialogType): setDialogsActionCreatorType => ({type: SET_DIALOGS, dialogs});
 export const setMessages = (messages: MessagesType): setMessagesActionCreatorType=> ({type: SET_MESSAGES, messages});
 export const setNewMessagesCount = (number: number): setNewMessagesCountActionCreatorType => ({type: SET_NEWMESSAGES_COUNT, number});
-export const setCurrentUser = (userId:number): setCurrentUserActionCreatorType => ({type: SET_CURRENT_USER, userId});
+export const setCurrentUser = (userId:string): setCurrentUserActionCreatorType => ({type: SET_CURRENT_USER, userId});
 export const sendMessage = (message: string): sendMessageActionCreatorType => ({type: SEND_MESSAGE, message});
 export const createDialog = (userId: number): createDialogActionCreatorType => ({type: CREATE_DIALOG, userId});
 export const setIsLoading = (isLoading: boolean): setIsLoadingActionCreatorType => ({type: TOGGLE_IS_LOADING, isLoading});
@@ -150,7 +151,8 @@ export const startChatting = (userId: number) => async (dispatch: any) => {
     let response = await dialogsAPI.startChatting(userId)
 };
 
-export const requestMessages = (userId: number) => async (dispatch: any) => {
+export const requestMessages = (userId: string) => async (dispatch: any) => {
+    debugger
     dispatch(setIsLoading(true));
     dispatch(setCurrentUser(userId));
     let response = await dialogsAPI.getDialogWithUser(userId);
