@@ -6,20 +6,48 @@ const DELETE_POST = 'socialNetwork/profile/DELETE_POST';
 const SET_USER_PROFILE = 'socialNetwork/profile/SET_USER_PROFILE';
 const LOOKING_FOR_JOB = 'socialNetwork/profile/LOOKING_FOR_JOB';
 const SET_STATUS = 'socialNetwork/profile/SET_STATUS';
-const SAVE_PHOTO_SUCCES = 'socialNetwork/profile/SAVE_PHOTO_SUCCES';
+const SAVE_PHOTO_SUCCESS = 'socialNetwork/profile/SAVE_PHOTO_SUCCES';
+
+
+export type PostType = {
+    userId: Number,
+    postText: String,
+    likeCounter: Number
+}
+
+export type ContactsType = {
+    github: String
+    vk: String
+    facebook: String
+    instagram: String
+    twitter: String
+    website: String
+    youtube: String
+    mainLink: String
+}
+
+export type ProfileType = {
+    userId: Number
+    lookingForAJob: Boolean
+    lookingForAJobDescription: String
+    fullName: String
+    contacts: ContactsType
+}
+
+
 
 let initialState = {
     posts: [
         {userId: 1, postText: 'How r u?', likeCounter: 1},
         {userId: 2, postText: 'Hi!', likeCounter: 0},
         {userId: 3, postText: 'What?', likeCounter: 5},
-    ],
-    profile: null,
+    ] as Array<PostType>,
+    profile:null as null | ProfileType,
     lookingForAJob: false,
     status: '',
 };
 
-const profileReducer = (state = initialState, action) => {
+const profileReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case ADD_POST:
             return {
@@ -29,8 +57,7 @@ const profileReducer = (state = initialState, action) => {
         case DELETE_POST:
             return {
                 ...state,
-                // eslint-disable-next-line eqeqeq
-                posts: state.posts.filter(post => post.userId != action.id)
+                posts: state.posts.filter(post => post.userId !== action.id)
             }
         case SET_USER_PROFILE:
             return {
@@ -47,7 +74,7 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 status: action.status
             }
-        case SAVE_PHOTO_SUCCES:
+        case SAVE_PHOTO_SUCCESS:
             return {
                 ...state,
                 profile: {...state.profile, photos: action.file}
@@ -57,26 +84,26 @@ const profileReducer = (state = initialState, action) => {
     }
 };
 
-export const addPost = (newPost) => ({type: ADD_POST, newPost});
-export const deletePost = (id) => ({type: DELETE_POST, id});
-export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
+export const addPost = (newPost: PostType) => ({type: ADD_POST, newPost});
+export const deletePost = (id: Number) => ({type: DELETE_POST, id});
+export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile});
 
-export const setStatus = (status) => ({type: SET_STATUS, status});
-export const savePhotoSuccess = (file) => ({type: SAVE_PHOTO_SUCCES, file});
+export const setStatus = (status: String) => ({type: SET_STATUS, status});
+export const savePhotoSuccess = (file: String) => ({type: SAVE_PHOTO_SUCCESS, file});
 
 
-export const getUserProfile = (id) => async (dispatch) => {
+export const getUserProfile = (id: Number) => async (dispatch: any) => {
     const data = await profileAPI.getUserProfile(id);
     dispatch(setUserProfile(data));
 
 };
 
-export const getUserStatus = (userId) => async (dispatch) => {
+export const getUserStatus = (userId: Number) => async (dispatch: any) => {
     const data = await profileAPI.getUserStatus(userId);
     dispatch(setStatus(data));
 };
 
-export const updateUserStatus = (status) => async (dispatch) => {
+export const updateUserStatus = (status: String) => async (dispatch: any) => {
     try {
         const response = await profileAPI.updateUserStatus(status);
         if (response.data.resultCode === 0) {
@@ -84,26 +111,24 @@ export const updateUserStatus = (status) => async (dispatch) => {
         }
     }
     catch (error) {
-
-        alert('error')
+        alert('error updateUserStatus')
         console.error(error)
         console.log(error)
     }
-
 }
 
-export const savePhoto = (file) => async (dispatch) => {
+export const savePhoto = (file: String) => async (dispatch: any) => {
     const response = await profileAPI.savePhoto(file);
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))
     }
 };
 
-export const saveProfileData = (formData) => async (dispatch,getState) => {
+export const saveProfileData = (formData: ProfileType ) => async (dispatch: any,getState: any) => {
     let response = await profileAPI.saveProfileData(formData);
-    if (response.data.resultCode === 0) {
 
-        const userId=getState().auth.id;
+    if (response.data.resultCode === 0) {
+        const userId = getState().auth.id;
         const data = await profileAPI.getUserProfile(userId);
         dispatch(setUserProfile(data));
     }

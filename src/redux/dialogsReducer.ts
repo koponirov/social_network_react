@@ -36,14 +36,14 @@ export type MessagesItemsType = {
 export type MessagesType = {
     items:  MessagesItemsType
     totalCount: number
-    error: null
+    error: null|number
 }
 
 let initialState = {
     dialogs: [] as Array<DialogType>,
-    messages: [],
-    newMessagesCount:null,
-    currentUser: null,
+    messages: [] as Array<MessagesType>,
+    newMessagesCount: null as null|number,
+    currentUser: null as null|number,
     isLoading:false
 };
 

@@ -9,8 +9,21 @@ const SET_TOTAL_USERS = 'socialNetwork/users/SET_TOTAL_USERS';
 const TOGGLE_IS_LOADING = 'socialNetwork/users/TOGGLE_IS_LOADING';
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'socialNetwork/users/TOGGLE_IS_FOLLOWING_PROGRESS';
 
+export type User = {
+    name: String,
+    id: Number,
+    photos: {
+        small: null,
+        large: null
+    },
+    status: null|String,
+    followed: Boolean
+}
+
+type initialStateType = typeof initialState
+
 let initialState = {
-    users: [],
+    users: [] as Array<User>,
     pageSize: 10,
     totalUsersCount: 20,
     currentPage: 1,
@@ -18,7 +31,7 @@ let initialState = {
     isLoading: false,
 };
 
-const usersReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action: any) => {
 
     switch (action.type) {
         case FOLLOW:
@@ -49,7 +62,7 @@ const usersReducer = (state = initialState, action) => {
         case SET_MORE_USERS:
             return {
                 ...state,
-                users: [...state.users,...action.usersss]
+                users: [...state.users,...action.users]
             }
         case SET_CURRENT_PAGE:
             return {
@@ -71,26 +84,26 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 followingInProgress: action.inProgress
                     ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id => id != action.userId)
+                    : state.followingInProgress.filter(id => id !== action.userId)
             }
         default:
             return state;
     }
 };
 
-export const followUser = (userId) => ({type: FOLLOW, userId});
-export const unfollowUser = (userId) => ({type: UNFOLLOW, userId});
-export const setUsers = (users) => ({type: SET_USERS, users});
-export const setMoreUsers = (usersss) => ({type: SET_MORE_USERS, usersss});
-export const setCurrentPage = (pageNumber) => ({type: SET_CURRENT_PAGE, pageNumber});
-export const setTotalUsersCount = (totalUsers) => ({type: SET_TOTAL_USERS, totalUsers});
-export const setIsLoading = (isLoading) => ({type: TOGGLE_IS_LOADING, isLoading});
-export const setInProgress = (inProgress, userId) => {
+export const followUser = (userId: Number) => ({type: FOLLOW, userId});
+export const unfollowUser = (userId: Number) => ({type: UNFOLLOW, userId});
+export const setUsers = (users: Array<User>) => ({type: SET_USERS, users});
+export const setMoreUsers = (users: Array<User>) => ({type: SET_MORE_USERS, users});
+export const setCurrentPage = (pageNumber: Number) => ({type: SET_CURRENT_PAGE, pageNumber});
+export const setTotalUsersCount = (totalUsers: Number) => ({type: SET_TOTAL_USERS, totalUsers});
+export const setIsLoading = (isLoading: Boolean) => ({type: TOGGLE_IS_LOADING, isLoading});
+export const setInProgress = (inProgress: Boolean, userId: Number) => {
     return {type: TOGGLE_IS_FOLLOWING_PROGRESS, inProgress, userId}
 };
-export const requestUsers = (currentPage, pageSize) => {
+export const requestUsers = (currentPage: Number, pageSize: Number) => {
 
-    return async (dispatch) => {
+    return async (dispatch: any) => {
         dispatch(setIsLoading(true));
         let response = await usersAPI.getUsers(currentPage, pageSize);
         dispatch(setIsLoading(false));
@@ -99,9 +112,9 @@ export const requestUsers = (currentPage, pageSize) => {
     }
 };
 
-export const requestMoreUsers = (currentPage, pageSize) => {
+export const requestMoreUsers = (currentPage: Number, pageSize: Number) => {
 
-    return async (dispatch) => {
+    return async (dispatch: any) => {
         dispatch(setIsLoading(true));
         let response = await usersAPI.getUsers(currentPage , pageSize);
         dispatch(setIsLoading(false));
@@ -110,8 +123,8 @@ export const requestMoreUsers = (currentPage, pageSize) => {
     }
 };
 
-export const onPageChanged = (currentPageNumber, pageSize) => {
-    return async (dispatch) => {
+export const onPageChanged = (currentPageNumber: Number, pageSize: Number) => {
+    return async (dispatch: any) => {
         dispatch(setIsLoading(true));
         dispatch(setCurrentPage(currentPageNumber));
         let response = await usersAPI.getUsers(currentPageNumber, pageSize)
@@ -120,18 +133,18 @@ export const onPageChanged = (currentPageNumber, pageSize) => {
     }
 };
 
-const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) => {
+const followUnfollowFlow = async (dispatch: any, userId: Number, apiMethod: any, actionCreator: any) => {
     dispatch(setInProgress(true, userId));
     let response = await apiMethod(userId)
-    if (response.data.resultCode == 0) {
+    if (response.data.resultCode === 0) {
         dispatch(actionCreator(userId))
     }
     dispatch(setInProgress(false, userId));
 };
 
-export const follow = (userId) => {
-    return async (dispatch) => {
-        followUnfollowFlow(
+export const follow = (userId: Number) => {
+    return async (dispatch: any) => {
+        await followUnfollowFlow(
             dispatch,
             userId,
             followAPI.followToUser.bind(followAPI),
@@ -139,9 +152,9 @@ export const follow = (userId) => {
     }
 };
 
-export const unfollow = (userId) => {
-    return async (dispatch) => {
-        followUnfollowFlow(
+export const unfollow = (userId: Number) => {
+    return async (dispatch: any) => {
+        await followUnfollowFlow(
             dispatch,
             userId,
             followAPI.unfollowToUser.bind(followAPI),
