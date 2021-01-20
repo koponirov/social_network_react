@@ -2,15 +2,15 @@ import {getAuthUserData} from "./authReducer";
 
 const SET_INITIALIZED = 'socialNetwork/app/SET_INITIALIZED';
 
-export type initialStateType = {
+type InitialStateType = {
     initialized: boolean
 }
 
-let initialState : initialStateType = {
+let initialState : InitialStateType = {
     initialized: false
 };
 
-const appReducer = (state = initialState, action:any) : initialStateType => {
+const appReducer = (state = initialState, action:any): InitialStateType => {
 
     switch (action.type) {
         case SET_INITIALIZED:
@@ -28,7 +28,7 @@ type initializedSuccesActionType = {
     type: typeof SET_INITIALIZED
 }
 
-export const initialized = () : initializedSuccesActionType => ({type: SET_INITIALIZED});
+export const initialized = (): initializedSuccesActionType => ({type: SET_INITIALIZED});
 
 export const initializeApp = () => (dispatch:any) => {
     let promise = dispatch(getAuthUserData());

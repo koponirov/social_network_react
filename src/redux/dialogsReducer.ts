@@ -47,9 +47,9 @@ let initialState = {
     isLoading:false
 };
 
-export type initialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 
-const dialogsReducer = (state = initialState, action: any) => {
+const dialogsReducer = (state = initialState, action: any): InitialStateType  => {
 
     switch (action.type) {
 

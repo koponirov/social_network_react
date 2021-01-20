@@ -1,19 +1,12 @@
 import {authAPI, profileAPI, securityAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
+import {ProfileType} from "../types";
 
 
 const SET_USER_DATA = 'socialNetwork/auth/SET_USER_DATA';
 const SET_AUTH_PROFILE = 'socialNetwork/auth/SET_AUTH_PROFILE';
 const SET_CAPTCHA = 'socialNetwork/auth/SET_CAPTCHA';
 
-// export type initialStateType = {
-//     id: number | null
-//     email: string | null
-//     login: string | null
-//     isAuth: boolean
-//     captcha: string | null,
-//     authProfile: object | null,
-// };
 
 let initialState = {
     id: null as null|number,
@@ -24,9 +17,9 @@ let initialState = {
     authProfile:null
 };
 
-export type initialStateType = typeof initialState;
+export type InitialStateType = typeof initialState;
 
-const authReducer = (state = initialState, action: any) : initialStateType => {
+const authReducer = (state = initialState, action: any) : InitialStateType => {
 
     switch (action.type) {
 
@@ -63,7 +56,7 @@ type setAuthUserDataActionCreatorType = {
     payload: setAuthUserDataActionPayloadCreatorType
 }
 
-export const setAuthUserData = (email: string | null, id: number | null, login: string | null, isAuth: boolean) : setAuthUserDataActionCreatorType => ({
+export const setAuthUserData = (email: string | null , id: number | null, login: string | null, isAuth: boolean): setAuthUserDataActionCreatorType => ({
     type: SET_USER_DATA,
     payload: {email, id, login, isAuth}
 });
@@ -78,34 +71,14 @@ export const setCaptcha = (captcha: string) : setCaptchaType => ({
     payload: {captcha}
 });
 
-type setAuthProfileActionPayloadType = {
-    aboutMe: string,
-    contacts: {
-        facebook: string | null
-        website: string | null
-        vk: string | null
-        twitter: string | null
-        instagram: string | null
-        youtube: string | null
-        github: string | null
-        mainLink: string | null
-    },
-    lookingForAJob: boolean,
-    lookingForAJobDescription: string | null,
-    fullName: string | null,
-    userId: number,
-    photos: {
-        small: string | null
-        large: string | null
-    }
-}
+
 
 type setAuthProfileActionType = {
     type: typeof SET_AUTH_PROFILE
-    payload: setAuthProfileActionPayloadType
+    payload: ProfileType
 }
 
-export const setAuthProfile = (data: setAuthProfileActionPayloadType) : setAuthProfileActionType => ({type: SET_AUTH_PROFILE, payload: data});
+export const setAuthProfile = (data: ProfileType) : setAuthProfileActionType => ({type: SET_AUTH_PROFILE, payload: data});
 
 export const getAuthUserData = () => async (dispatch: any) => {
     let response = await authAPI.me();
@@ -122,7 +95,7 @@ export const getAuthUserData = () => async (dispatch: any) => {
 
 export const refreshProfileData = (id: number) => (dispatch: any) => {
     profileAPI.getUserProfile(id)
-        .then((data: setAuthProfileActionPayloadType ) => {
+        .then((data: ProfileType ) => {
             dispatch(setAuthProfile(data))
         })
 };
@@ -143,7 +116,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
 };
 
 export const getCaptcha = () => async (dispatch: any) => {
-    debugger;
+
     let response = await securityAPI.getCapthaUrl();
     const captcha = (response.data.url)
     dispatch(setCaptcha(captcha))
