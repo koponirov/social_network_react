@@ -3,36 +3,59 @@ import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
 import defaultPhoto from '../../assets/images/man.svg'
 import cn from 'classnames'
+import {ProfileType} from "../../types";
+import {logout, refreshProfileData} from "../../redux/authReducer";
 
-const Header = (props) => {
+type PropsType = {
+    isAuth: boolean
+    id: number| null
+    login: string | null
+    avatar: string | null
+    newMessagesCount: number
+    profile: ProfileType | null
+    currentProfileData: ProfileType | null
+    logout: () => void
+    refreshProfileData: (id: number) => void
+}
+
+const Header: React.FC<PropsType> = ({
+                                         isAuth,
+                                         id,
+                                         login,
+                                         avatar,
+                                         newMessagesCount,
+                                         profile,
+                                         currentProfileData,
+                                         logout, refreshProfileData
+                                     }) => {
 
     const [active, setActive] = useState(false);
 
-    const [avatar,setAvatar] = useState(props.avatar);
+    const [newAvatar, setAvatar] = useState(avatar);
 
-    useEffect(()=>{
-        setAvatar(props.avatar)
-    },[props.avatar]);
+    useEffect(() => {
+        setAvatar(avatar)
+    }, [avatar]);
 
     return <header className={s.header}>
         <div className={s.container}>
             <div className={s.header__body}>
-                <nav  onTouchEnd={() => setActive(!active)}
-                    className={active ? cn(s.header__menu,s.active) : s.header__menu}>
+                <nav onTouchEnd={() => setActive(!active)}
+                     className={active ? cn(s.header__menu, s.active) : s.header__menu}>
                     <ul className={s.header__list}>
                         <NavLink to='/profile' className={s.header__link}>
                             <li>
-                            Profile
+                                Profile
                             </li>
                         </NavLink>
                         <NavLink to='/users' className={s.header__link}>
                             <li>
-                            Users
+                                Users
                             </li>
                         </NavLink>
                         <NavLink to='/dialogs' className={s.header__link}>
                             <li>
-                                Dialogs {props.newMessagesCount>0?props.newMessagesCount:'' }
+                                Dialogs {newMessagesCount > 0 ? newMessagesCount : ''}
                             </li>
                         </NavLink>
                     </ul>
@@ -42,20 +65,20 @@ const Header = (props) => {
                     <span></span>
                 </div>
                 <div className={s.header__auth}>
-                    {props.profile ?
+                    {profile ?
                         <div className={s.header__auth__info}>
                             <div className={s.header__auth__content}>
                                 <NavLink to='/profile'>
-                                    <div className={s.header__auth__name}>{props.profile.fullName}</div>
+                                    <div className={s.header__auth__name}>{profile.fullName}</div>
                                 </NavLink>
                                 <div className={s.header__auth__logout}>
-                                    <span onClick={props.logout}>logout</span>
+                                    <span onClick={logout}>logout</span>
                                 </div>
                             </div>
                             <div className={s.header__auth__ava}>
                                 <NavLink to='/profile'>
-                                    <img src={props.profile.photos.small != null ?
-                                        props.profile.photos.small : defaultPhoto} alt='userMainPhoto'/>
+                                    <img src={profile.photos.small != null ?
+                                        profile.photos.small : defaultPhoto} alt='userMainPhoto'/>
                                 </NavLink>
                             </div>
                         </div>

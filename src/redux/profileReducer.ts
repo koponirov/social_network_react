@@ -11,9 +11,9 @@ const SAVE_PHOTO_SUCCESS = 'socialNetwork/profile/SAVE_PHOTO_SUCCES';
 
 
 export type PostType = {
-    userId: Number,
-    postText: String,
-    likeCounter: Number
+    userId: number,
+    postText: string,
+    likeCounter: number
 }
 
 
@@ -91,16 +91,16 @@ type SetStatusType = {
     type: typeof SET_STATUS
     status: String
 }
-export const setStatus = (status: String): SetStatusType => ({type: SET_STATUS, status});
+export const setStatus = (status: string): SetStatusType => ({type: SET_STATUS, status});
 
 type SavePhotoSuccessType = {
     type: typeof SAVE_PHOTO_SUCCESS
     file: String
 }
-export const savePhotoSuccess = (file: String): SavePhotoSuccessType => ({type: SAVE_PHOTO_SUCCESS, file});
+export const savePhotoSuccess = (file: string): SavePhotoSuccessType => ({type: SAVE_PHOTO_SUCCESS, file});
 
 
-export const getUserProfile = (id: Number) => async (dispatch: any) => {
+export const getUserProfile = (id: number) => async (dispatch: any) => {
     const data = await profileAPI.getUserProfile(id);
     dispatch(setUserProfile(data));
 
@@ -111,7 +111,7 @@ export const getUserStatus = (userId: Number) => async (dispatch: any) => {
     dispatch(setStatus(data));
 };
 
-export const updateUserStatus = (status: String) => async (dispatch: any) => {
+export const updateUserStatus = (status: string) => async (dispatch: any) => {
     try {
         const response = await profileAPI.updateUserStatus(status);
         if (response.data.resultCode === 0) {
@@ -125,7 +125,7 @@ export const updateUserStatus = (status: String) => async (dispatch: any) => {
     }
 }
 
-export const savePhoto = (file: String) => async (dispatch: any) => {
+export const savePhoto = (file: string) => async (dispatch: any) => {
     const response = await profileAPI.savePhoto(file);
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))

@@ -8,13 +8,24 @@ const SET_AUTH_PROFILE = 'socialNetwork/auth/SET_AUTH_PROFILE';
 const SET_CAPTCHA = 'socialNetwork/auth/SET_CAPTCHA';
 
 
+// export type InitialStateType = {
+//     id: number| null
+//     email:  null|string,
+//     login:   null|string,
+//     isAuth: boolean,
+//     captcha: null|string,
+//     authProfile:null| ProfileType,
+//     photo: string|null
+// }
+
 let initialState = {
-    id: null as null|number,
+    id: 0,
     email: null as null|string,
     login: null as null|string,
     isAuth: false,
     captcha: null as null|string,
-    authProfile:null
+    authProfile:null,
+    photo: null as string|null
 };
 
 export type InitialStateType = typeof initialState;
@@ -46,7 +57,7 @@ const authReducer = (state = initialState, action: any) : InitialStateType => {
 
 type setAuthUserDataActionPayloadCreatorType = {
     email: string | null
-    id: number | null
+    id: null | number
     login: string | null
     isAuth: boolean
 }

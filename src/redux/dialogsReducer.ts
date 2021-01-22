@@ -42,7 +42,7 @@ export type MessagesType = {
 let initialState = {
     dialogs: [] as Array<DialogType>,
     messages: [] as Array<MessagesType>,
-    newMessagesCount: null as null|number,
+    newMessagesCount: 0,
     currentUser: null as null|number,
     isLoading:false
 };
