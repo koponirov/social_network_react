@@ -4,8 +4,18 @@ import AutoSizer from "react-virtualized-auto-sizer";
 import InfiniteLoader from "react-window-infinite-loader";
 import {FixedSizeList as List} from "react-window"
 import UserItem from "./UserItem";
+import { User } from '../../types';
 
-const UsersList = ({users, hasNextPage,isNextPageLoading,loadNextPage,totalUsers}) => {
+
+type PropsType = {
+    users: Array<User>
+    hasNextPage: boolean
+    isNextPageLoading: boolean
+    loadNextPage: (startIndex: number, stopIndex: number) => void
+    totalUsers: number
+}
+
+const UsersList: React.FC<PropsType> = ({users, hasNextPage,isNextPageLoading,loadNextPage,totalUsers}) => {
 
     let items = users;
 
@@ -13,8 +23,9 @@ const UsersList = ({users, hasNextPage,isNextPageLoading,loadNextPage,totalUsers
 
     const loadMoreItems = isNextPageLoading ? () => {} : loadNextPage;
 
-    const isItemLoaded = index => !hasNextPage || index < items.length;
+    const isItemLoaded = (index: number) => !hasNextPage || index < items.length;
 
+    // @ts-ignore
     const Row = ({index, style}) => {
 
         let userPhoto,userName,userStatus,user,userId;
@@ -22,7 +33,7 @@ const UsersList = ({users, hasNextPage,isNextPageLoading,loadNextPage,totalUsers
         if (!isItemLoaded(index)) {
 
             userId = '';
-            userPhoto = false;
+            userPhoto = '';
             userName = 'Loading...';
             userStatus= 'Loading...';
         } else {
@@ -44,12 +55,14 @@ const UsersList = ({users, hasNextPage,isNextPageLoading,loadNextPage,totalUsers
         );
     };
 
+    // @ts-ignore
     return (
         <div className={styles.list}>
             <AutoSizer >
                 {({ height, width }) => (
                     <InfiniteLoader
                         isItemLoaded={isItemLoaded}
+                        //@ts-ignore
                         loadMoreItems={loadMoreItems}
                         itemCount={itemCount}
                         minimumBatchSize={50}

@@ -1,4 +1,5 @@
-import {followAPI, usersAPI} from "../api/api";
+import { followAPI, usersAPI } from "../api/api";
+import { User } from "../types";
 
 const FOLLOW = 'socialNetwork/users/FOLLOW';
 const UNFOLLOW = 'socialNetwork/users/UNFOLLOW';
@@ -9,16 +10,7 @@ const SET_TOTAL_USERS = 'socialNetwork/users/SET_TOTAL_USERS';
 const TOGGLE_IS_LOADING = 'socialNetwork/users/TOGGLE_IS_LOADING';
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'socialNetwork/users/TOGGLE_IS_FOLLOWING_PROGRESS';
 
-export type User = {
-    name: string,
-    id: number,
-    photos: {
-        small: null,
-        large: null
-    },
-    status: null|string,
-    followed: boolean
-}
+
 
 type initialStateType = typeof initialState
 
@@ -145,16 +137,16 @@ export const requestUsers = (currentPage: number, pageSize: number) => {
     }
 };
 
-export const requestMoreUsers = (currentPage: Number, pageSize: Number) => {
-
-    return async (dispatch: any) => {
-        dispatch(setIsLoading(true));
-        let response = await usersAPI.getUsers(currentPage , pageSize);
-        dispatch(setIsLoading(false));
-        dispatch(setMoreUsers(response.data.items));
-        dispatch(setTotalUsersCount(response.data.totalCount))
-    }
-};
+// export const requestMoreUsers = (currentPage: Number, pageSize: Number) => {
+//
+//     return async (dispatch: any) => {
+//         dispatch(setIsLoading(true));
+//         let response = await usersAPI.getUsers(currentPage , pageSize);
+//         dispatch(setIsLoading(false));
+//         dispatch(setMoreUsers(response.data.items));
+//         dispatch(setTotalUsersCount(response.data.totalCount))
+//     }
+// };
 
 export const onPageChanged = (currentPageNumber: number, pageSize: number) => {
     return async (dispatch: any) => {

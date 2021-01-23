@@ -3,7 +3,15 @@ import s from "./UserItem.module.css";
 import defaultPhoto from "../../assets/images/man.svg";
 import {NavLink} from "react-router-dom";
 
-const UserItem = ({ userName, userStatus, userPhoto, path, style }) => {
+type PropsType = {
+    userName: string
+    userStatus: string
+    userPhoto: string | null
+    path: string
+    style: any
+}
+
+const UserItem: React.FC<PropsType> = ({ userName, userStatus, userPhoto, path, style }) => {
 
     return (
         <NavLink to={path}>

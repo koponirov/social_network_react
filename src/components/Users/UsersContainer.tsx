@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import React from 'react'
 import {
-    setInProgress, onPageChanged, follow, unfollow, requestUsers, requestMoreUsers, setCurrentPage, setUsers
+    setInProgress, onPageChanged, follow, unfollow, requestUsers, setCurrentPage, setUsers
 } from '../../redux/usersReducer';
 import Preloader from '../../common/Preloader/Preloader';
 import {compose} from "redux";
@@ -14,8 +14,36 @@ import {
 import UsersList from "./UsersList";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import s from './Users.module.css'
+import {User} from "../../types";
+import {AppStateType} from "../../redux/reduxStore";
 
-class UsersContainer extends React.Component {
+
+
+type MapStatePropsType = {
+    users: Array<User>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isLoading: boolean
+    followingInProgress: boolean
+}
+
+type MapDispatchPropsType = {
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+    setInProgress: (inProgress: boolean, userId: number) => void
+    requestUsers: (currentPage: number, pageSize: number) => void
+    setCurrentPage: (pageNumber: number) => void
+    setUsers: (users: Array<User>) => void
+}
+
+type OwnProps = {
+
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType & OwnProps
+
+class UsersContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         this.props.requestUsers(this.props.currentPage, 100);
@@ -26,16 +54,16 @@ class UsersContainer extends React.Component {
         //this.props.setUsers([]);
     }
 
-    loadNextPage = (startIndex,stopIndex) => {
+    loadNextPage = (startIndex: number,stopIndex: number) => {
 
         let itemsNumber = (stopIndex - startIndex)+1;
         let pageNumber = Math.ceil((startIndex+1)/itemsNumber);
-        this.props.requestMoreUsers(pageNumber,itemsNumber)
+        this.props.requestUsers(pageNumber,itemsNumber)
     };
 
     render() {
         return (<div className={s.list__container}>
-                {this.props.users.length>0 ?
+                {this.props.users.length > 0 ?
                     <UsersList
                         users={this.props.users}
                         hasNextPage={true}
@@ -49,7 +77,7 @@ class UsersContainer extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType) => {
 
     return {
         users: getUsers(state),
@@ -67,10 +95,8 @@ export default compose(
         unfollow,
         setInProgress,
         requestUsers,
-        requestMoreUsers,
         setCurrentPage,
         setUsers,
-        onPageChanged
     }),
     withAuthRedirect
 )(UsersContainer)
