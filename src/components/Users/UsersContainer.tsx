@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import React from 'react'
 import {
-    setInProgress, onPageChanged, follow, unfollow, requestUsers, setCurrentPage, setUsers
+    setInProgress, follow, unfollow, requestUsers, setCurrentPage, setUsers
 } from '../../redux/usersReducer';
 import Preloader from '../../common/Preloader/Preloader';
 import {compose} from "redux";
@@ -25,7 +25,7 @@ type MapStatePropsType = {
     totalUsersCount: number
     currentPage: number
     isLoading: boolean
-    followingInProgress: boolean
+    followingInProgress: Array<number>
 }
 
 type MapDispatchPropsType = {
@@ -77,7 +77,7 @@ class UsersContainer extends React.Component<PropsType> {
     }
 }
 
-let mapStateToProps = (state: AppStateType) => {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 
     return {
         users: getUsers(state),
@@ -90,7 +90,7 @@ let mapStateToProps = (state: AppStateType) => {
 };
 
 export default compose(
-    connect(mapStateToProps, {
+    connect<MapStatePropsType,MapDispatchPropsType, OwnProps, AppStateType>(mapStateToProps, {
         follow,
         unfollow,
         setInProgress,

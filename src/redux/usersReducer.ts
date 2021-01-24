@@ -23,7 +23,7 @@ let initialState = {
     isLoading: false,
 };
 
-const usersReducer = (state = initialState, action: any) => {
+const usersReducer = (state = initialState, action: any): initialStateType => {
 
     switch (action.type) {
         case FOLLOW:
