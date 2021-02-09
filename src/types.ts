@@ -30,3 +30,9 @@ export type User = {
     status: string
     followed: boolean
 }
+
+export type PostType = {
+    userId: number,
+    postText: string,
+    likeCounter: number
+}

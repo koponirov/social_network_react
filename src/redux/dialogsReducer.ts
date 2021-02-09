@@ -25,7 +25,7 @@ export type DialogType = {
 export type MessagesItemsType = {
     id: string
     body: string
-    translatedBody: null|string
+    translatedBody: null | string
     addedAt: string
     senderId: number
     senderName: string,
@@ -34,22 +34,22 @@ export type MessagesItemsType = {
 }
 
 export type MessagesType = {
-    items:  MessagesItemsType
+    items: MessagesItemsType
     totalCount: number
-    error: null|number
+    error: null | number
 }
 
 let initialState = {
     dialogs: [] as Array<DialogType>,
     messages: [] as Array<MessagesType>,
     newMessagesCount: 0,
-    currentUser: null as null|number,
-    isLoading:false
+    currentUser: null as null | number,
+    isLoading: false
 };
 
 export type InitialStateType = typeof initialState
 
-const dialogsReducer = (state = initialState, action: any): InitialStateType  => {
+const dialogsReducer = (state = initialState, action: any): InitialStateType => {
 
     switch (action.type) {
 
@@ -135,12 +135,18 @@ type setIsLoadingActionCreatorType = {
 }
 
 export const setDialogs = (dialogs: DialogType): setDialogsActionCreatorType => ({type: SET_DIALOGS, dialogs});
-export const setMessages = (messages: MessagesType): setMessagesActionCreatorType=> ({type: SET_MESSAGES, messages});
-export const setNewMessagesCount = (number: number): setNewMessagesCountActionCreatorType => ({type: SET_NEWMESSAGES_COUNT, number});
-export const setCurrentUser = (userId:string): setCurrentUserActionCreatorType => ({type: SET_CURRENT_USER, userId});
+export const setMessages = (messages: MessagesType): setMessagesActionCreatorType => ({type: SET_MESSAGES, messages});
+export const setNewMessagesCount = (number: number): setNewMessagesCountActionCreatorType => ({
+    type: SET_NEWMESSAGES_COUNT,
+    number
+});
+export const setCurrentUser = (userId: string): setCurrentUserActionCreatorType => ({type: SET_CURRENT_USER, userId});
 export const sendMessage = (message: string): sendMessageActionCreatorType => ({type: SEND_MESSAGE, message});
 export const createDialog = (userId: number): createDialogActionCreatorType => ({type: CREATE_DIALOG, userId});
-export const setIsLoading = (isLoading: boolean): setIsLoadingActionCreatorType => ({type: TOGGLE_IS_LOADING, isLoading});
+export const setIsLoading = (isLoading: boolean): setIsLoadingActionCreatorType => ({
+    type: TOGGLE_IS_LOADING,
+    isLoading
+});
 
 export const requestDialogs = () => async (dispatch: any) => {
     let response = await dialogsAPI.getDialogs();
