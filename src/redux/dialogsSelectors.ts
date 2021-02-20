@@ -2,6 +2,8 @@ import { AppStateType } from './reduxStore'
 
 export const getMessages = (state: AppStateType) => state.dialogsPage.messages;
 
+export const getNewMessagesNumber = (state: AppStateType) => state.dialogsPage.newMessagesCount;
+
 export const getCurrentUserID = (state: AppStateType) => state.dialogsPage.currentUser;
 
 export const getCurrentUserData = (state: AppStateType) => state.dialogsPage.dialogs.filter(d => d.id === getCurrentUserID(state));

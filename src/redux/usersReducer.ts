@@ -1,5 +1,8 @@
 import { followAPI, usersAPI } from "../api/api";
 import { User } from "../types";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./reduxStore";
+import {Dispatch} from "redux";
 
 const FOLLOW = 'socialNetwork/users/FOLLOW';
 const UNFOLLOW = 'socialNetwork/users/UNFOLLOW';
@@ -23,7 +26,7 @@ let initialState = {
     isLoading: false,
 };
 
-const usersReducer = (state = initialState, action: any): initialStateType => {
+const usersReducer = (state = initialState, action: ActionsTypes): initialStateType => {
 
     switch (action.type) {
         case FOLLOW:
@@ -82,6 +85,11 @@ const usersReducer = (state = initialState, action: any): initialStateType => {
             return state;
     }
 };
+
+type ActionsTypes = FollowUserType | UnfollowUserType | SetUsersType | SetMoreUsersType | SetCurrentPageType |
+    SetTotalUsersCountType| SetIsLoadingType | SetInProgressType
+
+
 type FollowUserType = {
     type: typeof FOLLOW
     userId: number
@@ -126,39 +134,31 @@ export const setIsLoading = (isLoading: boolean): SetIsLoadingType => ({type: TO
 export const setInProgress = (inProgress: boolean, userId: number): SetInProgressType => {
     return {type: TOGGLE_IS_FOLLOWING_PROGRESS, inProgress, userId}
 };
-export const requestUsers = (currentPage: number, pageSize: number) => {
 
-    return async (dispatch: any) => {
+type DispatchType = Dispatch<ActionsTypes>
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
+
+export const requestUsers = (currentPage: number, pageSize: number): ThunkType => {
+    return async (dispatch, getState) => {
         dispatch(setIsLoading(true));
-        let response = await usersAPI.getUsers(currentPage, pageSize);
+
+        let data = await usersAPI.getUsers(currentPage, pageSize);
+        if (getState().usersPage.users && getState().usersPage.users.length > 0 ) {
+            dispatch(setMoreUsers(data.items));
+        } else {
+            dispatch(setUsers(data.items));
+        }
         dispatch(setIsLoading(false));
-        dispatch(setUsers(response.data.items));
-        dispatch(setTotalUsersCount(response.data.totalCount))
+        dispatch(setTotalUsersCount(data.totalCount))
     }
 };
 
-// export const requestMoreUsers = (currentPage: Number, pageSize: Number) => {
-//
-//     return async (dispatch: any) => {
-//         dispatch(setIsLoading(true));
-//         let response = await usersAPI.getUsers(currentPage , pageSize);
-//         dispatch(setIsLoading(false));
-//         dispatch(setMoreUsers(response.data.items));
-//         dispatch(setTotalUsersCount(response.data.totalCount))
-//     }
-// };
+const _followUnfollowFlow = async (
+    dispatch: DispatchType,
+    userId: number,
+    apiMethod: any,
+    actionCreator: (userId: number) => FollowUserType | UnfollowUserType) => {
 
-export const onPageChanged = (currentPageNumber: number, pageSize: number) => {
-    return async (dispatch: any) => {
-        dispatch(setIsLoading(true));
-        dispatch(setCurrentPage(currentPageNumber));
-        let response = await usersAPI.getUsers(currentPageNumber, pageSize)
-        dispatch(setIsLoading(false));
-        dispatch(setUsers(response.data.items));
-    }
-};
-
-const followUnfollowFlow = async (dispatch: any, userId: number, apiMethod: any, actionCreator: any) => {
     dispatch(setInProgress(true, userId));
     let response = await apiMethod(userId)
     if (response.data.resultCode === 0) {
@@ -169,7 +169,7 @@ const followUnfollowFlow = async (dispatch: any, userId: number, apiMethod: any,
 
 export const follow = (userId: number) => {
     return async (dispatch: any) => {
-        await followUnfollowFlow(
+        await _followUnfollowFlow(
             dispatch,
             userId,
             followAPI.followToUser.bind(followAPI),
@@ -179,7 +179,7 @@ export const follow = (userId: number) => {
 
 export const unfollow = (userId: number) => {
     return async (dispatch: any) => {
-        await followUnfollowFlow(
+        await _followUnfollowFlow(
             dispatch,
             userId,
             followAPI.unfollowToUser.bind(followAPI),

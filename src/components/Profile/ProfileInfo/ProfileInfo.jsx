@@ -60,9 +60,13 @@ const ProfileInfo = ({ profile, isOwner, status, updateStatus, savePhoto,
                     }
 
                     {!isOwner &&
-                    <NavLink to={`/dialogs/${currentUser}/messages`}>
-                        <button onClick={() => startChatting(currentUser)} className={s_p.btn}>send message</button>
-                    </NavLink>
+                        <div className={s_p.btn_container}>
+                            <NavLink to={`/dialogs/${currentUser}/messages`}>
+                                <button onClick={() => startChatting(currentUser)} className={s_p.btn}>send message</button>
+                            </NavLink>
+                            <button className={s_p.btn}>follow</button>
+                        </div>
+
                     }
                 </div>
                 <div className={s.user__profile__information}>

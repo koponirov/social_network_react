@@ -55,7 +55,6 @@ class UsersContainer extends React.Component<PropsType> {
     }
 
     loadNextPage = (startIndex: number,stopIndex: number) => {
-
         let itemsNumber = (stopIndex - startIndex)+1;
         let pageNumber = Math.ceil((startIndex+1)/itemsNumber);
         this.props.requestUsers(pageNumber,itemsNumber)

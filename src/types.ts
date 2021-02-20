@@ -10,8 +10,8 @@ export type ContactsType = {
 }
 
 export type PhotosType = {
-    small: string | null
-    large: string | null
+    small: string
+    large: string
 }
 
 export type ProfileType = {
@@ -35,4 +35,25 @@ export type PostType = {
     userId: number,
     postText: string,
     likeCounter: number
+}
+
+export type DialogType = {
+    hasNewMessages: boolean
+    id: number
+    lastDialogActivityDate: string
+    lastUserActivityDate: string
+    newMessagesCount: number
+    userName: string
+    photos: PhotosType
+}
+
+export type MessageType = {
+    addedAt: string
+    body: string
+    id: string
+    recipientId: number
+    senderId: number
+    senderName: string
+    translatedBody: null
+    viewed: boolean
 }

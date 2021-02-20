@@ -1,4 +1,4 @@
-import {profileAPI} from "../api/api";
+import {profileAPI, ResultCodesEnum} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {ProfileType} from "../types";
 
@@ -97,7 +97,7 @@ type SavePhotoSuccessType = {
     type: typeof SAVE_PHOTO_SUCCESS
     file: String
 }
-export const savePhotoSuccess = (file: string): SavePhotoSuccessType => ({type: SAVE_PHOTO_SUCCESS, file});
+export const savePhotoSuccess = (file: any): SavePhotoSuccessType => ({type: SAVE_PHOTO_SUCCESS, file});
 
 
 export const getUserProfile = (id: number) => async (dispatch: any) => {
@@ -106,15 +106,15 @@ export const getUserProfile = (id: number) => async (dispatch: any) => {
 
 };
 
-export const getUserStatus = (userId: Number) => async (dispatch: any) => {
+export const getUserStatus = (userId: number) => async (dispatch: any) => {
     const data = await profileAPI.getUserStatus(userId);
     dispatch(setStatus(data));
 };
 
 export const updateUserStatus = (status: string) => async (dispatch: any) => {
     try {
-        const response = await profileAPI.updateUserStatus(status);
-        if (response.data.resultCode === 0) {
+        const data = await profileAPI.updateUserStatus(status);
+        if (data.resultCode === ResultCodesEnum.success) {
             dispatch(setStatus(status))
         }
     }
@@ -126,22 +126,22 @@ export const updateUserStatus = (status: string) => async (dispatch: any) => {
 }
 
 export const savePhoto = (file: string) => async (dispatch: any) => {
-    const response = await profileAPI.savePhoto(file);
-    if (response.data.resultCode === 0) {
-        dispatch(savePhotoSuccess(response.data.data.photos))
+    const data = await profileAPI.savePhoto(file);
+    if (data.resultCode === ResultCodesEnum.success) {
+        dispatch(savePhotoSuccess(data.data))
     }
 };
 
 export const saveProfileData = (formData: ProfileType ) => async (dispatch: any,getState: any) => {
-    let response = await profileAPI.saveProfileData(formData);
+    let data = await profileAPI.saveProfileData(formData);
 
-    if (response.data.resultCode === 0) {
+    if (data.resultCode === 0) {
         const userId = getState().auth.id;
         const data = await profileAPI.getUserProfile(userId);
         dispatch(setUserProfile(data));
     }
     else {
-        let errorMessage = response.data.messages.length > 0 ? response.data.messages[0] : 'Oops';
+        let errorMessage = data.messages.length > 0 ? data.messages[0] : 'Oops';
         console.log(errorMessage)
         dispatch(stopSubmit('profileData', {_error: errorMessage}));
         return Promise.reject(errorMessage)

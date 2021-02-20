@@ -67,6 +67,12 @@
 
     background-color: rgba(255, 207, 214,0.3);
 }
+
+.btn_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
 .btn {
     align-self: flex-start;
     margin-top: 10px;

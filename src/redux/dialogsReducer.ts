@@ -1,5 +1,6 @@
-import {dialogsAPI} from "../api/api";
+import {dialogsAPI, ResultCodesEnum} from "../api/api";
 import {reset} from 'redux-form';
+import {DialogType, MessageType} from "../types";
 
 const SET_DIALOGS = 'socialNetwork/dialogs/SET_DIALOGS';
 const SET_MESSAGES = 'socialNetwork/dialogs/SET_MESSAGES';
@@ -9,32 +10,32 @@ const SEND_MESSAGE = 'socialNetwork/dialogs/SEND_MESSAGE';
 const CREATE_DIALOG = 'socialNetwork/dialogs/CREATE_DIALOG';
 const TOGGLE_IS_LOADING = 'socialNetwork/dialogs/TOGGLE_IS_LOADING';
 
-export type DialogType = {
-    id: number
-    userName: string
-    hasNewMessages: boolean
-    lastDialogActivityDate: string
-    lastUserActivityDate: string
-    newMessagesCount: number
-    photos: {
-        small: string
-        large: string
-    }
-}
+// export type DialogType = {
+//     id: number
+//     userName: string
+//     hasNewMessages: boolean
+//     lastDialogActivityDate: string
+//     lastUserActivityDate: string
+//     newMessagesCount: number
+//     photos: {
+//         small: string
+//         large: string
+//     }
+// }
 
-export type MessagesItemsType = {
-    id: string
-    body: string
-    translatedBody: null | string
-    addedAt: string
-    senderId: number
-    senderName: string,
-    recipientId: number
-    viewed: boolean
-}
+// export type MessagesItemsType = {
+//     id: string
+//     body: string
+//     translatedBody: null | string
+//     addedAt: string
+//     senderId: number
+//     senderName: string,
+//     recipientId: number
+//     viewed: boolean
+// }
 
 export type MessagesType = {
-    items: MessagesItemsType
+    items: Array<MessageType> | []
     totalCount: number
     error: null | number
 }
@@ -74,7 +75,6 @@ const dialogsReducer = (state = initialState, action: any): InitialStateType => 
                 newMessagesCount: action.number
             };
         case SET_CURRENT_USER :
-            debugger
             return {
                 ...state,
                 currentUser: action.userId
@@ -103,12 +103,12 @@ const dialogsReducer = (state = initialState, action: any): InitialStateType => 
 
 type setDialogsActionCreatorType = {
     type: typeof SET_DIALOGS
-    dialogs: DialogType
+    dialogs: Array<DialogType>
 }
 
 type setMessagesActionCreatorType = {
     type: typeof SET_MESSAGES
-    messages: MessagesType
+    messages: Array<MessageType>
 }
 
 type setNewMessagesCountActionCreatorType = {
@@ -118,7 +118,7 @@ type setNewMessagesCountActionCreatorType = {
 
 type setCurrentUserActionCreatorType = {
     type: typeof SET_CURRENT_USER
-    userId: string
+    userId: number
 }
 
 type sendMessageActionCreatorType = {
@@ -134,13 +134,13 @@ type setIsLoadingActionCreatorType = {
     isLoading: boolean
 }
 
-export const setDialogs = (dialogs: DialogType): setDialogsActionCreatorType => ({type: SET_DIALOGS, dialogs});
-export const setMessages = (messages: MessagesType): setMessagesActionCreatorType => ({type: SET_MESSAGES, messages});
+export const setDialogs = (dialogs: Array<DialogType>): setDialogsActionCreatorType => ({type: SET_DIALOGS, dialogs});
+export const setMessages = (messages: Array<MessageType>): setMessagesActionCreatorType => ({type: SET_MESSAGES, messages});
 export const setNewMessagesCount = (number: number): setNewMessagesCountActionCreatorType => ({
     type: SET_NEWMESSAGES_COUNT,
     number
 });
-export const setCurrentUser = (userId: string): setCurrentUserActionCreatorType => ({type: SET_CURRENT_USER, userId});
+export const setCurrentUser = (userId: number): setCurrentUserActionCreatorType => ({type: SET_CURRENT_USER, userId});
 export const sendMessage = (message: string): sendMessageActionCreatorType => ({type: SEND_MESSAGE, message});
 export const createDialog = (userId: number): createDialogActionCreatorType => ({type: CREATE_DIALOG, userId});
 export const setIsLoading = (isLoading: boolean): setIsLoadingActionCreatorType => ({
@@ -149,15 +149,15 @@ export const setIsLoading = (isLoading: boolean): setIsLoadingActionCreatorType 
 });
 
 export const requestDialogs = () => async (dispatch: any) => {
-    let response = await dialogsAPI.getDialogs();
-    dispatch(setDialogs(response.data));
+    let data = await dialogsAPI.getDialogs();
+    dispatch(setDialogs(data));
 };
 
 export const startChatting = (userId: number) => async (dispatch: any) => {
     let response = await dialogsAPI.startChatting(userId)
 };
 
-export const requestMessages = (userId: string) => async (dispatch: any) => {
+export const requestMessages = (userId: number) => async (dispatch: any) => {
     debugger
     dispatch(setIsLoading(true));
     dispatch(setCurrentUser(userId));

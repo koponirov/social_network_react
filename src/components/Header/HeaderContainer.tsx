@@ -5,6 +5,7 @@ import { compose } from "redux";
 import { logout, refreshProfileData } from "../../redux/authReducer";
 import { ProfileType } from "../../types";
 import { AppStateType } from "../../redux/reduxStore";
+import {getNewMessagesNumber} from "../../redux/dialogsSelectors";
 
 
 type MapStatePropsType = {
@@ -47,12 +48,13 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     id: state.auth.id,
     login: state.auth.login,
     avatar: state.auth.photo,
-    newMessagesCount: state.dialogsPage.newMessagesCount,
+    newMessagesCount: getNewMessagesNumber(state),
+    //newMessagesCount: state.dialogsPage.newMessagesCount,
     profile: state.auth.authProfile,
     currentProfileData: state.profilePage.profile
 });
 
 export default  compose(
-    connect<MapStatePropsType,MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {logout, refreshProfileData})
+    connect<MapStatePropsType,MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {logout, refreshProfileData, })
 )(HeaderContainer);
 
