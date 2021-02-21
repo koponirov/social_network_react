@@ -5,10 +5,11 @@ import {NavLink} from "react-router-dom";
 
 type PropsType = {
     userName: string
-    userStatus: string
+    userStatus?: string
     userPhoto: string | null
     path: string
     style: any
+    lastSeen?: string
 }
 
 const UserItem: React.FC<PropsType> = ({ userName, userStatus, userPhoto, path, style }) => {

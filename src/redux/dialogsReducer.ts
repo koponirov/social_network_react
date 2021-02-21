@@ -88,7 +88,7 @@ export const dialogsActions = {
 type ActionsTypes = InferActionsTypes<typeof dialogsActions>
 
 type DispatchType = Dispatch<ActionsTypes>
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
+export type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 
 
 export const requestDialogs = (): ThunkType => async (dispatch, getState) => {

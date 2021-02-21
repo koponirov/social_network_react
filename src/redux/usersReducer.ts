@@ -1,19 +1,8 @@
-import {followAPI, ResultCodesEnum, usersAPI} from "../api/api";
+import { followAPI, ResultCodesEnum, usersAPI } from "../api/api";
 import { User } from "../types";
-import {ThunkAction} from "redux-thunk";
-import {AppStateType, InferActionsTypes} from "./reduxStore";
-import {Dispatch} from "redux";
-
-// const FOLLOW = 'socialNetwork/users/FOLLOW';
-// const UNFOLLOW = 'socialNetwork/users/UNFOLLOW';
-// const SET_USERS = 'socialNetwork/users/SET_USERS';
-// const SET_MORE_USERS = 'socialNetwork/users/SET_MORE_USERS';
-// const SET_CURRENT_PAGE = 'socialNetwork/users/SET_CURRENT_PAGE';
-// const SET_TOTAL_USERS = 'socialNetwork/users/SET_TOTAL_USERS';
-// const TOGGLE_IS_LOADING = 'socialNetwork/users/TOGGLE_IS_LOADING';
-// const TOGGLE_IS_FOLLOWING_PROGRESS = 'socialNetwork/users/TOGGLE_IS_FOLLOWING_PROGRESS';
-
-
+import { ThunkAction } from "redux-thunk";
+import { AppStateType, InferActionsTypes } from "./reduxStore";
+import { Dispatch } from "redux";
 
 type initialStateType = typeof initialState
 

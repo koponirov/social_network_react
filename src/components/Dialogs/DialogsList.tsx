@@ -3,11 +3,17 @@ import {FixedSizeList as List} from "react-window";
 import s from "../Users/Users.module.css";
 import AutoSizer from "react-virtualized-auto-sizer";
 import UserItem from "../Users/UserItem";
+import { DialogType } from "../../types";
 
-const DialogsList = ({ dialogs }) => {
+type PropsType = {
+    dialogs: Array<DialogType>
+}
 
+const DialogsList: React.FC<PropsType> = ({ dialogs }) => {
+
+    // @ts-ignore
     const Row = ({ index, style }) => {
-        
+
         let user = dialogs[index];
 
         let path = `/dialogs/${user.id}/messages`;
