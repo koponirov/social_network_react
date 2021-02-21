@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {compose} from "redux";
 import Messages from "./Messages";
-import {requestMessages, sendNewMessage, setMessages} from "../../../redux/dialogsReducer";
+import {requestMessages, sendNewMessage, dialogsActions} from "../../../redux/dialogsReducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {withRouter} from "react-router-dom";
 import Preloader from "../../../common/Preloader/Preloader";
@@ -47,6 +47,8 @@ let mapStateToProps = (state) => {
         authId: getAuthId(state)
     }
 };
+
+const { setMessages } = dialogsActions
 
 export default compose(
     connect(mapStateToProps, {requestMessages,sendNewMessage,setMessages}),

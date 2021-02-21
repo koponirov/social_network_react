@@ -2,7 +2,7 @@ import React from 'react';
 import Header from "./Header";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { logout, refreshProfileData } from "../../redux/authReducer";
+import { logout,  refreshProfileData} from "../../redux/authReducer";
 import { ProfileType } from "../../types";
 import { AppStateType } from "../../redux/reduxStore";
 import {getNewMessagesNumber} from "../../redux/dialogsSelectors";
@@ -10,7 +10,7 @@ import {getNewMessagesNumber} from "../../redux/dialogsSelectors";
 
 type MapStatePropsType = {
     isAuth: boolean
-    id: number
+    id: number | null
     login: string | null
     avatar: string | null
     newMessagesCount: number
@@ -34,7 +34,7 @@ class HeaderContainer extends React.Component<PropsType> {
 
     componentDidUpdate(prevProps: PropsType) {
         if (prevProps.currentProfileData !== this.props.currentProfileData) {
-            this.props.refreshProfileData(this.props.id)
+            this.props.refreshProfileData(this.props.id as number)
         }
     }
 
@@ -53,6 +53,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     profile: state.auth.authProfile,
     currentProfileData: state.profilePage.profile
 });
+
 
 export default  compose(
     connect<MapStatePropsType,MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {logout, refreshProfileData, })

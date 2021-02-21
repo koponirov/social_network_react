@@ -32,7 +32,7 @@ const Messages = ({userData,messages,currentUser,sendMessage,isLoading,authId}) 
         <div className={s.messages__header}>
 
             <NavLink to={'/dialogs'} className={s.messages__header_button}>
-                <img src={arrow}></img>
+                <img src={arrow} alt='back'/>
                 <span>back </span>
             </NavLink>
 

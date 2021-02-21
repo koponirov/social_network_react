@@ -156,6 +156,7 @@ export const dialogsAPI = {
     //get list of messages with user
     getDialogWithUser(userId: number) {
         return instance.get<GetMessagesResponseType>(`dialogs/${userId}/messages`)
+            .then(res => res.data)
     },
     //send message to user
     sendMessage(userId: number, message: string) {

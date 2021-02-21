@@ -1,17 +1,17 @@
-import { followAPI, usersAPI } from "../api/api";
+import {followAPI, ResultCodesEnum, usersAPI} from "../api/api";
 import { User } from "../types";
 import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "./reduxStore";
+import {AppStateType, InferActionsTypes} from "./reduxStore";
 import {Dispatch} from "redux";
 
-const FOLLOW = 'socialNetwork/users/FOLLOW';
-const UNFOLLOW = 'socialNetwork/users/UNFOLLOW';
-const SET_USERS = 'socialNetwork/users/SET_USERS';
-const SET_MORE_USERS = 'socialNetwork/users/SET_MORE_USERS';
-const SET_CURRENT_PAGE = 'socialNetwork/users/SET_CURRENT_PAGE';
-const SET_TOTAL_USERS = 'socialNetwork/users/SET_TOTAL_USERS';
-const TOGGLE_IS_LOADING = 'socialNetwork/users/TOGGLE_IS_LOADING';
-const TOGGLE_IS_FOLLOWING_PROGRESS = 'socialNetwork/users/TOGGLE_IS_FOLLOWING_PROGRESS';
+// const FOLLOW = 'socialNetwork/users/FOLLOW';
+// const UNFOLLOW = 'socialNetwork/users/UNFOLLOW';
+// const SET_USERS = 'socialNetwork/users/SET_USERS';
+// const SET_MORE_USERS = 'socialNetwork/users/SET_MORE_USERS';
+// const SET_CURRENT_PAGE = 'socialNetwork/users/SET_CURRENT_PAGE';
+// const SET_TOTAL_USERS = 'socialNetwork/users/SET_TOTAL_USERS';
+// const TOGGLE_IS_LOADING = 'socialNetwork/users/TOGGLE_IS_LOADING';
+// const TOGGLE_IS_FOLLOWING_PROGRESS = 'socialNetwork/users/TOGGLE_IS_FOLLOWING_PROGRESS';
 
 
 
@@ -29,7 +29,7 @@ let initialState = {
 const usersReducer = (state = initialState, action: ActionsTypes): initialStateType => {
 
     switch (action.type) {
-        case FOLLOW:
+        case 'FOLLOW':
             return {
                 ...state,
                 users: state.users.map(user => {
@@ -39,7 +39,7 @@ const usersReducer = (state = initialState, action: ActionsTypes): initialStateT
                     return user;
                 })
             };
-        case UNFOLLOW:
+        case 'UNFOLLOW':
             return {
                 ...state,
                 users: state.users.map(user => {
@@ -49,32 +49,32 @@ const usersReducer = (state = initialState, action: ActionsTypes): initialStateT
                     return user;
                 })
             };
-        case SET_USERS:
+        case 'SET_USERS':
             return {
                 ...state,
                 users: [...action.users]
             }
-        case SET_MORE_USERS:
+        case 'SET_MORE_USERS':
             return {
                 ...state,
                 users: [...state.users,...action.users]
             }
-        case SET_CURRENT_PAGE:
+        case 'SET_CURRENT_PAGE':
             return {
                 ...state,
                 currentPage: action.pageNumber
             }
-        case SET_TOTAL_USERS:
+        case 'SET_TOTAL_USERS':
             return {
                 ...state,
                 totalUsersCount: action.totalUsers
             }
-        case TOGGLE_IS_LOADING:
+        case 'TOGGLE_IS_LOADING':
             return {
                 ...state,
                 isLoading: action.isLoading
             }
-        case TOGGLE_IS_FOLLOWING_PROGRESS:
+        case 'TOGGLE_IS_FOLLOWING_PROGRESS':
             return {
                 ...state,
                 followingInProgress: action.inProgress
@@ -86,70 +86,37 @@ const usersReducer = (state = initialState, action: ActionsTypes): initialStateT
     }
 };
 
-type ActionsTypes = FollowUserType | UnfollowUserType | SetUsersType | SetMoreUsersType | SetCurrentPageType |
-    SetTotalUsersCountType| SetIsLoadingType | SetInProgressType
+type ActionsTypes = InferActionsTypes<typeof usersActions>
 
-
-type FollowUserType = {
-    type: typeof FOLLOW
-    userId: number
-}
-type UnfollowUserType = {
-    type: typeof UNFOLLOW
-    userId: number
-}
-type SetUsersType = {
-    type: typeof SET_USERS
-    users: Array<User>
-}
-type SetMoreUsersType = {
-    type: typeof SET_MORE_USERS
-    users: Array<User>
-}
-type SetCurrentPageType = {
-    type: typeof SET_CURRENT_PAGE
-    pageNumber: number
-}
-type SetTotalUsersCountType = {
-    type: typeof SET_TOTAL_USERS
-    totalUsers: number
-}
-type SetIsLoadingType = {
-    type: typeof TOGGLE_IS_LOADING
-    isLoading: boolean
-}
-type SetInProgressType = {
-    type: typeof TOGGLE_IS_FOLLOWING_PROGRESS
-    userId: number
-    inProgress: boolean
+export const usersActions = {
+    followUser: (userId: number) => ({type: 'FOLLOW', userId} as const),
+    unfollowUser: (userId: number) => ({type: 'UNFOLLOW', userId} as const),
+    setUsers: (users: Array<User>) => ({type: 'SET_USERS', users} as const),
+    setMoreUsers: (users: Array<User>) => ({type: 'SET_MORE_USERS', users} as const),
+    setCurrentPage: (pageNumber: number) => ({type: 'SET_CURRENT_PAGE', pageNumber} as const),
+    setTotalUsersCount: (totalUsers: number) => ({type: 'SET_TOTAL_USERS', totalUsers} as const),
+    setIsLoading: (isLoading: boolean) => ({type: 'TOGGLE_IS_LOADING', isLoading} as const),
+    setInProgress: (inProgress: boolean, userId: number) => {
+        return {type: 'TOGGLE_IS_FOLLOWING_PROGRESS', inProgress, userId} as const
+    },
 }
 
-export const followUser = (userId: number): FollowUserType => ({type: FOLLOW, userId});
-export const unfollowUser = (userId: number): UnfollowUserType => ({type: UNFOLLOW, userId});
-export const setUsers = (users: Array<User>): SetUsersType => ({type: SET_USERS, users});
-export const setMoreUsers = (users: Array<User>): SetMoreUsersType => ({type: SET_MORE_USERS, users});
-export const setCurrentPage = (pageNumber: number): SetCurrentPageType => ({type: SET_CURRENT_PAGE, pageNumber});
-export const setTotalUsersCount = (totalUsers: number): SetTotalUsersCountType => ({type: SET_TOTAL_USERS, totalUsers});
-export const setIsLoading = (isLoading: boolean): SetIsLoadingType => ({type: TOGGLE_IS_LOADING, isLoading});
-export const setInProgress = (inProgress: boolean, userId: number): SetInProgressType => {
-    return {type: TOGGLE_IS_FOLLOWING_PROGRESS, inProgress, userId}
-};
 
 type DispatchType = Dispatch<ActionsTypes>
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 
 export const requestUsers = (currentPage: number, pageSize: number): ThunkType => {
     return async (dispatch, getState) => {
-        dispatch(setIsLoading(true));
+        dispatch(usersActions.setIsLoading(true));
 
         let data = await usersAPI.getUsers(currentPage, pageSize);
         if (getState().usersPage.users && getState().usersPage.users.length > 0 ) {
-            dispatch(setMoreUsers(data.items));
+            dispatch(usersActions.setMoreUsers(data.items));
         } else {
-            dispatch(setUsers(data.items));
+            dispatch(usersActions.setUsers(data.items));
         }
-        dispatch(setIsLoading(false));
-        dispatch(setTotalUsersCount(data.totalCount))
+        dispatch(usersActions.setIsLoading(false));
+        dispatch(usersActions.setTotalUsersCount(data.totalCount))
     }
 };
 
@@ -157,23 +124,23 @@ const _followUnfollowFlow = async (
     dispatch: DispatchType,
     userId: number,
     apiMethod: any,
-    actionCreator: (userId: number) => FollowUserType | UnfollowUserType) => {
+    actionCreator: (userId: number) => ActionsTypes) => {
 
-    dispatch(setInProgress(true, userId));
+    dispatch(usersActions.setInProgress(true, userId));
     let response = await apiMethod(userId)
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultCodesEnum.success) {
         dispatch(actionCreator(userId))
     }
-    dispatch(setInProgress(false, userId));
+    dispatch(usersActions.setInProgress(false, userId));
 };
 
 export const follow = (userId: number) => {
-    return async (dispatch: any) => {
+    return async (dispatch: DispatchType) => {
         await _followUnfollowFlow(
             dispatch,
             userId,
             followAPI.followToUser.bind(followAPI),
-            unfollowUser)
+            usersActions.unfollowUser)
     }
 };
 
@@ -183,7 +150,7 @@ export const unfollow = (userId: number) => {
             dispatch,
             userId,
             followAPI.unfollowToUser.bind(followAPI),
-            followUser)
+            usersActions.followUser)
     }
 };
 

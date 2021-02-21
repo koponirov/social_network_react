@@ -5,7 +5,7 @@ import cn from 'classnames';
 
 const Message = ({userName,messageText,addedAt,userId,authId}) => {
 
-    let owner = !!(userId==authId)
+    let owner = (userId === authId)
     return (
         <div className={s.message__container} >
             <div className={s.message__user__name}>

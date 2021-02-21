@@ -5,7 +5,9 @@ const Post = (props) => {
     return (
         <div className={style.item}>
             <img
-                src='https://картинки-для-срисовки.рф/image/cache/catalog/vse-kartinki/kosmonavt/kosmonavt-011-800x800.jpg'></img>
+                src='https://картинки-для-срисовки.рф/image/cache/catalog/vse-kartinki/kosmonavt/kosmonavt-011-800x800.jpg'
+                alt='post image'
+            />
             <div>{props.postText}</div>
             <span className={style.likes}>like {props.likeCounter}</span>
         </div>

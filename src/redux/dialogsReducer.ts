@@ -1,38 +1,10 @@
 import {dialogsAPI, ResultCodesEnum} from "../api/api";
 import {reset} from 'redux-form';
 import {DialogType, MessageType} from "../types";
+import {AppStateType, InferActionsTypes} from "./reduxStore";
+import {Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
 
-const SET_DIALOGS = 'socialNetwork/dialogs/SET_DIALOGS';
-const SET_MESSAGES = 'socialNetwork/dialogs/SET_MESSAGES';
-const SET_NEWMESSAGES_COUNT = 'socialNetwork/dialogs/SET_NEWMESSAGES_COUNT';
-const SET_CURRENT_USER = 'socialNetwork/dialogs/SET_CURRENT_USER';
-const SEND_MESSAGE = 'socialNetwork/dialogs/SEND_MESSAGE';
-const CREATE_DIALOG = 'socialNetwork/dialogs/CREATE_DIALOG';
-const TOGGLE_IS_LOADING = 'socialNetwork/dialogs/TOGGLE_IS_LOADING';
-
-// export type DialogType = {
-//     id: number
-//     userName: string
-//     hasNewMessages: boolean
-//     lastDialogActivityDate: string
-//     lastUserActivityDate: string
-//     newMessagesCount: number
-//     photos: {
-//         small: string
-//         large: string
-//     }
-// }
-
-// export type MessagesItemsType = {
-//     id: string
-//     body: string
-//     translatedBody: null | string
-//     addedAt: string
-//     senderId: number
-//     senderName: string,
-//     recipientId: number
-//     viewed: boolean
-// }
 
 export type MessagesType = {
     items: Array<MessageType> | []
@@ -42,7 +14,7 @@ export type MessagesType = {
 
 let initialState = {
     dialogs: [] as Array<DialogType>,
-    messages: [] as Array<MessagesType>,
+    messages: [] as Array<MessageType>,
     newMessagesCount: 0,
     currentUser: null as null | number,
     isLoading: false
@@ -50,139 +22,111 @@ let initialState = {
 
 export type InitialStateType = typeof initialState
 
-const dialogsReducer = (state = initialState, action: any): InitialStateType => {
+const dialogsReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
 
     switch (action.type) {
 
-        case SET_DIALOGS :
+        case 'SET_DIALOGS' :
             return {
                 ...state,
                 dialogs: [...action.dialogs]
             };
-        case SET_MESSAGES :
+        case 'SET_MESSAGES' :
             return {
                 ...state,
                 messages: [...action.messages]
             };
-        case TOGGLE_IS_LOADING:
+        case 'TOGGLE_IS_LOADING':
             return {
                 ...state,
                 isLoading: action.isLoading
             }
-        case SET_NEWMESSAGES_COUNT :
+        case 'SET_NEWMESSAGES_COUNT' :
             return {
                 ...state,
                 newMessagesCount: action.number
             };
-        case SET_CURRENT_USER :
+        case 'SET_CURRENT_USER' :
             return {
                 ...state,
                 currentUser: action.userId
             };
-        case SEND_MESSAGE :
+        case 'SEND_MESSAGE' :
             return {
                 ...state,
-                messages: [...state.messages, ...action.message]
+                messages: [...state.messages, action.message]
             };
-        case CREATE_DIALOG :
-            if (state.dialogs.length) {
-                return {
-                    ...state,
-                    dialogs: [...state.dialogs, ...action.user]
-                };
-            } else {
-                return {
-                    ...state,
-                    dialogs: [...action.user]
-                };
-            }
+        // case 'CREATE_DIALOG' :
+        //     if (state.dialogs.length) {
+        //         return {
+        //             ...state,
+        //             dialogs: [...state.dialogs, ...action.userId]
+        //         };
+        //     } else {
+        //         return {
+        //             ...state,
+        //             dialogs: [...action.userId]
+        //         };
+        //     }
         default:
             return state;
     }
 };
 
-type setDialogsActionCreatorType = {
-    type: typeof SET_DIALOGS
-    dialogs: Array<DialogType>
+
+export const dialogsActions = {
+    setDialogs: (dialogs: Array<DialogType>) => ({type: 'SET_DIALOGS', dialogs} as const),
+    setMessages: (messages: Array<MessageType>) => ({type: 'SET_MESSAGES', messages} as const),
+    setNewMessagesCount: (number: number) => ({type: 'SET_NEWMESSAGES_COUNT', number} as const),
+    setCurrentUser: (userId: number) => ({type: 'SET_CURRENT_USER', userId} as const),
+    sendMessage: (message: MessageType) => ({type: 'SEND_MESSAGE', message} as const),
+    createDialog: (userId: number) => ({type: 'CREATE_DIALOG', userId} as const),
+    setIsLoading: (isLoading: boolean) => ({type: 'TOGGLE_IS_LOADING', isLoading} as const),
+
 }
 
-type setMessagesActionCreatorType = {
-    type: typeof SET_MESSAGES
-    messages: Array<MessageType>
-}
+type ActionsTypes = InferActionsTypes<typeof dialogsActions>
 
-type setNewMessagesCountActionCreatorType = {
-    type: typeof SET_NEWMESSAGES_COUNT
-    number: number
-}
+type DispatchType = Dispatch<ActionsTypes>
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 
-type setCurrentUserActionCreatorType = {
-    type: typeof SET_CURRENT_USER
-    userId: number
-}
 
-type sendMessageActionCreatorType = {
-    type: typeof SEND_MESSAGE
-    message: string
-}
-type createDialogActionCreatorType = {
-    type: typeof CREATE_DIALOG
-    userId: number
-}
-type setIsLoadingActionCreatorType = {
-    type: typeof TOGGLE_IS_LOADING
-    isLoading: boolean
-}
-
-export const setDialogs = (dialogs: Array<DialogType>): setDialogsActionCreatorType => ({type: SET_DIALOGS, dialogs});
-export const setMessages = (messages: Array<MessageType>): setMessagesActionCreatorType => ({type: SET_MESSAGES, messages});
-export const setNewMessagesCount = (number: number): setNewMessagesCountActionCreatorType => ({
-    type: SET_NEWMESSAGES_COUNT,
-    number
-});
-export const setCurrentUser = (userId: number): setCurrentUserActionCreatorType => ({type: SET_CURRENT_USER, userId});
-export const sendMessage = (message: string): sendMessageActionCreatorType => ({type: SEND_MESSAGE, message});
-export const createDialog = (userId: number): createDialogActionCreatorType => ({type: CREATE_DIALOG, userId});
-export const setIsLoading = (isLoading: boolean): setIsLoadingActionCreatorType => ({
-    type: TOGGLE_IS_LOADING,
-    isLoading
-});
-
-export const requestDialogs = () => async (dispatch: any) => {
+export const requestDialogs = (): ThunkType => async (dispatch, getState) => {
     let data = await dialogsAPI.getDialogs();
-    dispatch(setDialogs(data));
+    dispatch(dialogsActions.setDialogs(data));
 };
 
-export const startChatting = (userId: number) => async (dispatch: any) => {
+export const startChatting = (userId: number): ThunkType => async (dispatch, getState) => {
     let response = await dialogsAPI.startChatting(userId)
 };
 
-export const requestMessages = (userId: number) => async (dispatch: any) => {
+export const requestMessages = (userId: number): ThunkType => async (dispatch, getState) => {
     debugger
-    dispatch(setIsLoading(true));
-    dispatch(setCurrentUser(userId));
-    let response = await dialogsAPI.getDialogWithUser(userId);
-    let messages = response.data.items;
-    dispatch(setMessages(messages));
-    dispatch(setIsLoading(false))
+    dispatch(dialogsActions.setIsLoading(true));
+    dispatch(dialogsActions.setCurrentUser(userId));
+    let data = await dialogsAPI.getDialogWithUser(userId);
+    let messages = data.items;
+    dispatch(dialogsActions.setMessages(messages));
+    dispatch(dialogsActions.setIsLoading(false))
 };
 
-export const sendNewMessage = (userId: number, message: string) => async (dispatch: any) => {
+export const sendNewMessage = (userId: number, message: string): ThunkType => async (dispatch,getState) => {
 
     const response = await dialogsAPI.sendMessage(userId, message);
-    if (response.data.resultCode === 0) {
-        let response = await dialogsAPI.getDialogWithUser(userId);
-        let messages = response.data.items;
-        dispatch(setMessages(messages));
+    if (response.data.resultCode === ResultCodesEnum.success) {
+        let data = await dialogsAPI.getDialogWithUser(userId);
+        let messages = data.items;
+        dispatch(dialogsActions.setMessages(messages));
+        // @ts-ignore
         dispatch(reset('message'))
     }
 };
 
-export const requestNewMessagesCount = () => async (dispatch: any) => {
+export const requestNewMessagesCount = (): ThunkType => async (dispatch,getState) => {
 
     const response = await dialogsAPI.getNewMessagesCount();
     let messagesCount = response.data;
-    dispatch(setNewMessagesCount(messagesCount));
+    dispatch(dialogsActions.setNewMessagesCount(messagesCount));
 };
 
 export default dialogsReducer;

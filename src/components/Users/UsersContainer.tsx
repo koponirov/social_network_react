@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import React from 'react'
 import {
-    setInProgress, follow, unfollow, requestUsers, setCurrentPage, setUsers
+    usersActions, follow, unfollow, requestUsers,
 } from '../../redux/usersReducer';
 import Preloader from '../../common/Preloader/Preloader';
 import {compose} from "redux";
@@ -87,6 +87,8 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
         followingInProgress: getFollowingInProgress(state)
     }
 };
+
+const { setInProgress, setCurrentPage, setUsers } = usersActions
 
 export default compose(
     connect<MapStatePropsType,MapDispatchPropsType, OwnProps, AppStateType>(mapStateToProps, {
